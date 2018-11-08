@@ -13,7 +13,7 @@ int main()
     List *stack = createList();
     const int maxLength = 10000;
     char *line = new char[maxLength];
-    char postfixForm[maxLength];
+    char *postfixForm = new char[maxLength];
     int index = 0;
     cin.getline(line, maxLength);
     cout << "Infix form : ";
@@ -53,6 +53,8 @@ int main()
     
     print(stack, postfixForm, &index);
     deleteList(stack);
+    delete[] line;
+    delete[] postfixForm;
     return 0;
 }
 
