@@ -37,6 +37,7 @@ void stackPop(List *list)
 void deleteList(List *list)
 {
     ListElement *current = list->top;
+    
     while (current)
     {
         ListElement *nextElement = current->next;

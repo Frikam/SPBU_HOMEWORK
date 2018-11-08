@@ -9,7 +9,7 @@ int main()
     cout << "Program calculates the value of the expression in the Postfix notation" << endl;
     cout << "Enter expression : ";
     const int maxLength = 10000;
-    char line[maxLength];
+    char *line = new char[maxLength];
     cin.getline(line, maxLength);
     int firstNumber = 0;
     int secondNumber = 0;
@@ -32,5 +32,6 @@ int main()
     cout << "Answer : ";
     print(stack);
     delete(stack);
+    delete[] line;
     return 0;
 }
