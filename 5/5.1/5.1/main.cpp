@@ -42,7 +42,6 @@ void printArray(int **numbers, int num)
     }
     
     cout << endl;
-
 }
 int main()
 {
@@ -51,7 +50,6 @@ int main()
     cout << "Enter the N - ";
     int num = 0;
     cin >> num;
-    
     int **numbers = new int*[num];
 
     for (int i = 0; i < num; i++){
@@ -74,6 +72,7 @@ int main()
     for (int i = 0; i < num; ++i) {
         delete[] numbers[i];
     }
+    
     delete [] numbers;
     return 0;
 }
