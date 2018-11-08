@@ -27,7 +27,7 @@ int main()
     int *numbOfCharacters = new int[maxLength];
     fillingArrayWithZeros(numbOfCharacters, maxLength);
     
-    while(fin >> line)
+    while (fin >> line)
     {
         for (int i = 0; i < strlen(line); i++)
         {
@@ -37,7 +37,6 @@ int main()
                 if (int(line[i]) <= (IndexOfFirstLowercaseСharacterInTableAscii + numberOfСharacter) && int(line[i]) >= IndexOfFirstLowercaseСharacterInTableAscii){
                     numbOfCharacters[int(line[i])]++;
                     numbOfCharacters[int(line[i]) - DistanceBetweenUppercaseAndLowercaseInTableAscii]++;
-                    
                 }
                 if (int(line[i]) <= (IndexOfFirstUppercaseСharacterInTableAscii + numberOfСharacter) && int(line[i]) >= IndexOfFirstUppercaseСharacterInTableAscii ){
                     numbOfCharacters[int(line[i])]++;
@@ -48,6 +47,7 @@ int main()
         cout << ' ';
         fillingArrayWithZeros(numbOfCharacters, maxLength);
     }
+    
     delete [] numbOfCharacters;
     return 0;
 }
