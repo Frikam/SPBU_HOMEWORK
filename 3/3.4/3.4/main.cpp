@@ -13,20 +13,24 @@ int bullsAndCows(int number[], int randomNumber[], int numbOfDigits)
         {
             if (number[i] == randomNumber[j])
             {
-                if (i == j){
+                if (i == j)
+                {
                     bulls++;
                 }
-                else{
+                else
+                {
                     cows++;
                 }
             }
         }
     }
     
-    if (bulls == 4){
+    if (bulls == numbOfDigits)
+    {
         cout << "Congratulations you guessed the number!!!!!!";
     }
-    else{
+    else
+    {
         cout << "Quantity Of Cows :" << cows << endl << "Quantity Of bulls :" << bulls << endl;
     }
     
@@ -46,7 +50,7 @@ int powerOfNumb(int number, int power)
     return counter;
 }
 
-void enterNumb(int *number, int numbOfDigits)
+void enterNumber(int *number, int numbOfDigits)
 {
     int digits = 0;
     cin >> digits;
@@ -65,7 +69,8 @@ bool isDifferent(int *randomNumber, int numbOfDigits, int number)
     int count = 0;
     for (int i = 0; i < numbOfDigits; i++)
     {
-        if (number == randomNumber[i]){
+        if (number == randomNumber[i])
+        {
             count++;
         }
     }
@@ -85,7 +90,8 @@ void makeRandomNumber(int *randomNumber, int numbOfDigits)
         
         for (int i = 0; i < numbOfDigits; i++)
         {
-            if (isDifferent(randomNumber, numbOfDigits, randomNumber[i])){
+            if (isDifferent(randomNumber, numbOfDigits, randomNumber[i]))
+            {
                 count++;
             }
         }
@@ -95,18 +101,26 @@ void makeRandomNumber(int *randomNumber, int numbOfDigits)
 int main()
 {
     srand(time(0));
+    cout << "Enter number of digits : ";
+    int numbOfDigits = 0;
+    cin >> numbOfDigits;
     cout << "Computer made a number, try to guess it" << endl;
-    const int numbOfDigits = 4;
     int randomNumber[numbOfDigits];
     makeRandomNumber(randomNumber, numbOfDigits);
-    cout << randomNumber[0] << randomNumber[1] << randomNumber[2] << randomNumber[3] << endl;
+    
+    for (int i = 0; i < numbOfDigits; i++)
+    {
+        cout << randomNumber[i];
+    }
+    cout << endl;
+    
     int number[numbOfDigits];
     int bulls = 0;
     
-    while (bulls != 4)
+    while (bulls != numbOfDigits)
     {
         cout << "Enter your number : ";
-        enterNumb(number, numbOfDigits);
+        enterNumber(number, numbOfDigits);
         bulls = bullsAndCows(number, randomNumber, numbOfDigits);
     }
     return 0;
