@@ -9,6 +9,26 @@ BinaryTree *createTree()
     return new BinaryTree {nullptr};
 }
 
+void deleteTree(BinaryTreeNode *current)
+{
+    if (current->leftChild)
+    {
+        deleteTree(current->leftChild);
+    }
+    
+    if (current->rightChild)
+    {
+        deleteTree(current->rightChild);
+    }
+    delete current;
+}
+
+void deleteTree(BinaryTree *tree)
+{
+    BinaryTreeNode *current = tree->root;
+    deleteTree(current);
+}
+
 void add(BinaryTree *tree, int number)
 {
     BinaryTreeNode *previous = nullptr;
@@ -83,93 +103,82 @@ void exist(BinaryTree *tree, int number)
     cout << "Number not in tree" << endl;
 }
 
-void deleteElement(BinaryTree *tree, int number)
+void deleteElement(BinaryTree *tree, BinaryTreeNode *current, int number)
 {
-    BinaryTreeNode *current = tree->root;
-    BinaryTreeNode *previous = nullptr;
-
-    while (current->value != number)
+    if (current->value == number)
     {
-        if (current->value > number)
+        if (current->rightChild == nullptr && current->leftChild == nullptr)
         {
-            previous = current;
-            current = current->leftChild;
+            delete current;
+            current = nullptr;
         }
-        else if (current->value < number)
+        
+        BinaryTreeNode *node = current;
+        
+        if (current->rightChild == nullptr)
         {
-            previous = current;
+            current = current->leftChild;
+            delete node;
+        }
+        
+        else if (current->leftChild == nullptr)
+        {
             current = current->rightChild;
+            delete node;
+        }
+        
+        else
+        {
+            BinaryTreeNode *previous = current;
+            current = current->rightChild;
+            
+            while (current->leftChild)
+            {
+                previous = current;
+                current = current->leftChild;
+            }
+            
+            if (isLeftChild(previous, current->value))
+            {
+                node->value = current->value;
+                current = (current)->leftChild;
+            
+            }
+            else{
+                if (tree->root->value == number)
+                {
+                    tree->root->value = current->value;
+                    tree->root->rightChild = current->rightChild;
+                }
+                
+                else
+                {
+                    node->value = current->value;
+                    previous->rightChild = current->rightChild;
+                }
+            }
+            
+            delete current;
         }
     }
     
-    if (current->leftChild == nullptr && current->rightChild == nullptr)
-    {
-        if (tree->root->value == number)
-        {
-            tree->root = nullptr;
-        }
-        else if (isLeftChild(previous, number))
-        {
-            previous->leftChild = nullptr;
-        }
-        else
-        {
-            previous->rightChild = nullptr;
-        }
-        delete current;
-    }
-    else if (current->leftChild == nullptr)
-    {
-        if (isLeftChild(previous, number))
-        {
-            previous->leftChild->value = current->rightChild->value;
-            current->rightChild = nullptr;
-            delete current->rightChild;
-        }
-        else
-        {
-            previous->rightChild->value = current->rightChild->value;
-            current->rightChild = nullptr;
-            delete current->rightChild;
-        }
-    }
-    else if (current->rightChild == nullptr)
-    {
-        if (isLeftChild(previous, number))
-        {
-            previous->leftChild->value = current->leftChild->value;
-            current->leftChild = nullptr;
-            delete current->leftChild;
-        }
-        else
-        {
-            previous->rightChild->value = current->leftChild->value;
-            current->leftChild = nullptr;
-            delete current->leftChild;
-        }
-    }
     else
     {
-        BinaryTreeNode *node = current;
-        previous = current;
-        current = current->rightChild;
+        if (current->value > number)
+        {
+            deleteElement(tree, current->leftChild, number);
+        }
         
-        while (current->leftChild)
+        else
         {
-            previous = current;
-            current = current->leftChild;
+            deleteElement(tree ,current->rightChild, number);
         }
-        if (isLeftChild(previous, current->value))
-        {
-            node->value = current->value;
-            previous->leftChild = current->rightChild;
-        }
-        else{
-            node->value = current->value;
-            previous->rightChild = current->rightChild;
-        }
-        delete current;
     }
+}
+
+void deleteElement(BinaryTree *tree, int number)
+{
+    deleteElement(tree ,tree->root, number);
 }
 
 void printTreeAscending(BinaryTreeNode *current)
@@ -223,6 +232,7 @@ void printTreeDescending(BinaryTree *tree)
     }
     cout << endl;
 }
+
 void printTree(BinaryTreeNode *current)
 {
     cout << current->value << ' ';

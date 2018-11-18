@@ -19,5 +19,5 @@ void deleteElement(BinaryTree *tree, int number);
 void printTree(BinaryTree *tree);
 void printTreeAscending(BinaryTree *tree);
 void printTreeDescending(BinaryTree *tree);
-
+void deleteTree(BinaryTree *tree);
 

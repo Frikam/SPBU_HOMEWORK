@@ -53,5 +53,6 @@ int main()
     }
     
     cout << "You have completed the program";
+    deleteTree(tree);
     return 0;
 }
