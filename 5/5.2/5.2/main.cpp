@@ -18,10 +18,6 @@ int main()
 {
     ifstream fin;
     fin.open("input.txt");
-    int IndexOfFirstLowercaseСharacterInTableAscii = 97;
-    int IndexOfFirstUppercaseСharacterInTableAscii = 65;
-    int DistanceBetweenUppercaseAndLowercaseInTableAscii = 32;
-    int numberOfСharacter = 35;
     int maxLength = 10000;
     char line[maxLength];
     int *numbOfCharacters = new int[maxLength];
@@ -34,13 +30,13 @@ int main()
             if (numbOfCharacters[int(line[i])] == 0 ){
                 cout << line[i];
                 
-                if (int(line[i]) <= (IndexOfFirstLowercaseСharacterInTableAscii + numberOfСharacter) && int(line[i]) >= IndexOfFirstLowercaseСharacterInTableAscii){
+                if (int(line[i]) <= 'z' && int(line[i]) >= 'a'){
                     numbOfCharacters[int(line[i])]++;
-                    numbOfCharacters[int(line[i]) - DistanceBetweenUppercaseAndLowercaseInTableAscii]++;
+                    numbOfCharacters[line[i] + ('A' - 'a')]++;
                 }
-                if (int(line[i]) <= (IndexOfFirstUppercaseСharacterInTableAscii + numberOfСharacter) && int(line[i]) >= IndexOfFirstUppercaseСharacterInTableAscii ){
+                if (line[i] <= 'Z' && line[i] >= 'A'){
                     numbOfCharacters[int(line[i])]++;
-                    numbOfCharacters[int(line[i]) + DistanceBetweenUppercaseAndLowercaseInTableAscii]++;
+                    numbOfCharacters[line[i] - ('A' - 'a')]++;
                 }
             }
         }
