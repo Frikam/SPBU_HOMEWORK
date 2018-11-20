@@ -1,5 +1,7 @@
 #include <iostream>
 
+#include <string.h>
+
 #include "stack.hpp"
 
 #include "Calculator.hpp"
@@ -21,34 +23,7 @@ int main()
     
     for (int i = 0; i < strlen(line); i++)
     {
-        if (line[i] != ' ')
-        {
-            if (line[i] == '('){
-                stackPushSign(stackSign, line[i]);
-            }
-            else if (line[i] == ')'){
-                deleteUntilOpenedBracket(stackSign, postfixForm, &index);
-            }
-            else if (priorityOfSign(line[i]) == 0){
-                postfixForm[index] = line[i];
-                index++;
-            }
-            else
-            {
-                if (size(stackSign) == 0 || getFirstSign(stackSign) == '('){
-                    stackPushSign(stackSign, line[i]);
-                }
-                else{
-                    if (priorityOfSign(line[i]) > priorityOfSign(getFirstSign(stackSign))){
-                        stackPushSign(stackSign, line[i]);
-                    }
-                    else{
-                        deleteUntilOpenedBracketOrPriorityLower(stackSign, line[i], postfixForm, &index);
-                        stackPushSign(stackSign, line[i]);
-                    }
-                }
-            }
-        }
+        addElementInStacAndInArray(stackSign, line, postfixForm, i, &index);
     }
     
     saveStack(stackSign, postfixForm, &index);
@@ -58,11 +33,15 @@ int main()
     
     for (int i = 0; i < strlen(postfixForm); i++)
     {
-        if (postfixForm[i] != ' '){
-            if (isNumber(postfixForm[i]) != -1){
-                stackPushNumber(stackNumber, isNumber(postfixForm[i]));
+        if (postfixForm[i] != ' ')
+        {
+            if (postfixForm[i] >= '0' && postfixForm[i] <= '9')
+            {
+                stackPushNumber(stackNumber, postfixForm[i] - '0');
             }
-            else{
+            
+            else
+            {
                 firstNumber = getFirstNumber(stackNumber);
                 secondNumber = getSecondNumber(stackNumber);
                 calculator(stackNumber, secondNumber, firstNumber, postfixForm[i]);
