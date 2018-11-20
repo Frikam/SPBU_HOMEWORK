@@ -1,5 +1,7 @@
 #include <iostream>
 
+#include <string.h>
+
 #include "Calculator.hpp"
 
 using namespace std;
@@ -18,7 +20,7 @@ int main()
     for (int i = 0; i < strlen(line); i++)
     {
         if (line[i] != ' '){
-            if (isNumber(line[i]) != -1){
+            if (line[i] >= '0' && line[i] <= '9'){
                 stackPush(stack, isNumber(line[i]));
             }
             else{
