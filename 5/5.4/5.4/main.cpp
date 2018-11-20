@@ -21,7 +21,7 @@ int main()
     {
         if (line[i] != ' '){
             if (line[i] >= '0' && line[i] <= '9'){
-                stackPush(stack, isNumber(line[i]));
+                stackPush(stack, line[i] - '0');
             }
             else{
                 firstNumber = getFirstNumber(stack);
