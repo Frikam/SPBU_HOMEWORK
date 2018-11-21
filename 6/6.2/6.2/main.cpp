@@ -2,13 +2,13 @@
 
 using namespace std;
 
-int isNegative(int *number)
+int isNegative(int &number)
 {
-    if ((*number) > 0){
+    if (number > 0){
         return 0;
     }
     else{
-        (*number) = (*number) * -1;
+        number = number * -1;
         return 1;
     }
 }
@@ -98,7 +98,7 @@ void fromBinToDecimal(int binNumber[], int maxLength)
         answer = powerOfTwo * binNumber[i] + answer;
         powerOfTwo = powerOfTwo * 2;
     }
-
+    
     cout << answer;
 }
 
@@ -106,30 +106,29 @@ int main()
 {
     bool IsThereNegativeNumber = false;
     const int maxLength = 8;
-    int binPresentationOfOne[maxLength];
-    binPresentation(binPresentationOfOne, 1, maxLength);
+    int binPresentationOfOne[maxLength] = {0, 0, 0, 0, 0, 0, 0, 1};
     int answer[maxLength];
     cout << "The program sums two numbers and outputs them in binary form" << endl;
     cout << "Enter first number : ";
     int firstNumber = 0;
     cin >> firstNumber;
     int binPresentationOfFirstNumber[maxLength];
-    binPresentationOfFirstNumber[0] = isNegative(&firstNumber);
+    binPresentationOfFirstNumber[0] = isNegative(firstNumber);
     binPresentation(binPresentationOfFirstNumber, firstNumber, maxLength);
     
     cout << "Enter second number : ";
     int secondNumber = 0;
     cin >> secondNumber;
     int binPresentationOfSecondNumber[maxLength];
-    binPresentationOfSecondNumber[0] = isNegative(&secondNumber);
+    binPresentationOfSecondNumber[0] = isNegative(secondNumber);
     binPresentation(binPresentationOfSecondNumber, secondNumber, maxLength);
-
+    
     cout << "Binary representation of first number : ";
     printBinNumber(binPresentationOfFirstNumber, maxLength);
     
     cout << endl << "Binary representation of second number : ";
     printBinNumber(binPresentationOfSecondNumber, maxLength);
-
+    
     if (binPresentationOfFirstNumber[0] == 1){
         IsThereNegativeNumber = true;
         makeAdditionalCode(binPresentationOfFirstNumber, binPresentationOfOne, maxLength);
@@ -140,13 +139,14 @@ int main()
     }
     
     sum(binPresentationOfFirstNumber, binPresentationOfSecondNumber, answer, maxLength);
-
+    
     if ((binPresentationOfFirstNumber[0] == 1 && binPresentationOfSecondNumber[0] == 0 && firstNumber < secondNumber)||(binPresentationOfFirstNumber[0] == 0 && binPresentationOfSecondNumber[0] == 1 && firstNumber > secondNumber)){
         cout << endl << "Binary representation answer : ";
         printBinNumber(answer, maxLength);
         cout << endl << "Sum : ";
         fromBinToDecimal(answer, maxLength);
     }
+    
     else if (binPresentationOfSecondNumber[0] == 1 || binPresentationOfFirstNumber[0] == 1 ){
         makeAdditionalCode(answer, binPresentationOfOne, maxLength);
         cout << endl << "Binary representation answer : ";
@@ -155,6 +155,8 @@ int main()
         cout << '-';
         fromBinToDecimal(answer, maxLength);
     }
+    
+    
     else{
         cout << endl << "Binary representation answer : ";
         printBinNumber(answer, maxLength);
