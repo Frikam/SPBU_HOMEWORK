@@ -13,7 +13,7 @@ int isNegative(int &number)
     }
 }
 
-void binPresentation(int *binNumber, int number, int maxLength)
+void getBinForm(int *binNumber, int number, int maxLength)
 {
     int count = 0;
     int maxNumber = 128;
@@ -114,14 +114,14 @@ int main()
     cin >> firstNumber;
     int binPresentationOfFirstNumber[maxLength];
     binPresentationOfFirstNumber[0] = isNegative(firstNumber);
-    binPresentation(binPresentationOfFirstNumber, firstNumber, maxLength);
+    getBinForm(binPresentationOfFirstNumber, firstNumber, maxLength);
     
     cout << "Enter second number : ";
     int secondNumber = 0;
     cin >> secondNumber;
     int binPresentationOfSecondNumber[maxLength];
     binPresentationOfSecondNumber[0] = isNegative(secondNumber);
-    binPresentation(binPresentationOfSecondNumber, secondNumber, maxLength);
+    getBinForm(binPresentationOfSecondNumber, secondNumber, maxLength);
     
     cout << "Binary representation of first number : ";
     printBinNumber(binPresentationOfFirstNumber, maxLength);
