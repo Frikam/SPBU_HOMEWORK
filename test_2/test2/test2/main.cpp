@@ -20,7 +20,6 @@ int howManyDayInMonth(int month)
             day = 28;
             break;
         case 3:
-
             day = 31;
             break;
         case 4:
