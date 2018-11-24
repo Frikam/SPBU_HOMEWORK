@@ -1,6 +1,6 @@
 #include <iostream>
 
-#include "BinaryTree.hpp"
+#include "Tree.hpp"
 
 using namespace std;
 
@@ -14,7 +14,7 @@ int main()
     cout << "6 - print tree in descending order" << endl;
     cout << "7 - print tree in format (a b c)" << endl;
 
-    BinaryTree *tree = createTree();
+    Tree *tree = createTree();
     int whatFunction = 0;
     int value = 0;
     

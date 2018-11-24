@@ -1,15 +1,15 @@
 #include <iostream>
 
-#include "BinaryTree.hpp"
+#include "Tree.hpp"
 
 using namespace std;
 
-BinaryTree *createTree()
+Tree *createTree()
 {
-    return new BinaryTree {nullptr};
+    return new Tree {nullptr};
 }
 
-void deleteTree(BinaryTreeNode *current)
+void deleteTree(TreeNode *current)
 {
     if (current->leftChild)
     {
@@ -23,20 +23,24 @@ void deleteTree(BinaryTreeNode *current)
     delete current;
 }
 
-void deleteTree(BinaryTree *tree)
+void deleteTree(Tree *tree)
 {
-    BinaryTreeNode *current = tree->root;
+    TreeNode *current = tree->root;
+    if (!current)
+    {
+        return;
+    }
     deleteTree(current);
 }
 
-void add(BinaryTree *tree, int number)
+void add(Tree *tree, int number)
 {
-    BinaryTreeNode *previous = nullptr;
-    BinaryTreeNode *current = tree->root;
+    TreeNode *previous = nullptr;
+    TreeNode *current = tree->root;
     
     if (!current)
     {
-        tree->root = new BinaryTreeNode {number, nullptr, nullptr};
+        tree->root = new TreeNode {number, nullptr, nullptr};
         return;
     }
     
@@ -58,7 +62,7 @@ void add(BinaryTree *tree, int number)
         }
     }
     
-    current = new BinaryTreeNode {number, nullptr, nullptr};
+    current = new TreeNode {number, nullptr, nullptr};
     
     if (current->value > previous->value)
     {
@@ -69,7 +73,7 @@ void add(BinaryTree *tree, int number)
     previous->leftChild = current;
 }
 
-bool isLeftChild(BinaryTreeNode *current, int number)
+bool isLeftChild(TreeNode *current, int number)
 {
     if (current->leftChild != nullptr && current->leftChild->value == number)
     {
@@ -79,9 +83,9 @@ bool isLeftChild(BinaryTreeNode *current, int number)
     return false;
 }
 
-void exist(BinaryTree *tree, int number)
+void exist(Tree *tree, int number)
 {
-    BinaryTreeNode *current = tree->root;
+    TreeNode *current = tree->root;
     
     while (current)
     {
@@ -103,7 +107,7 @@ void exist(BinaryTree *tree, int number)
     cout << "Number not in tree" << endl;
 }
 
-void deleteElement(BinaryTree *tree, BinaryTreeNode *current, int number)
+void deleteElement(Tree *tree, TreeNode *current, int number)
 {
     if (current->value == number)
     {
@@ -113,7 +117,7 @@ void deleteElement(BinaryTree *tree, BinaryTreeNode *current, int number)
             current = nullptr;
         }
         
-        BinaryTreeNode *node = current;
+        TreeNode *node = current;
         
         if (current->rightChild == nullptr)
         {
@@ -129,7 +133,7 @@ void deleteElement(BinaryTree *tree, BinaryTreeNode *current, int number)
         
         else
         {
-            BinaryTreeNode *previous = current;
+            TreeNode *previous = current;
             current = current->rightChild;
             
             while (current->leftChild)
@@ -176,12 +180,12 @@ void deleteElement(BinaryTree *tree, BinaryTreeNode *current, int number)
     }
 }
 
-void deleteElement(BinaryTree *tree, int number)
+void deleteElement(Tree *tree, int number)
 {
     deleteElement(tree ,tree->root, number);
 }
 
-void printTreeAscending(BinaryTreeNode *current)
+void printTreeAscending(TreeNode *current)
 {
     if (current->leftChild)
     {
@@ -194,7 +198,7 @@ void printTreeAscending(BinaryTreeNode *current)
     }
 }
 
-void printTreeAscending(BinaryTree *tree)
+void printTreeAscending(Tree *tree)
 {
     if (tree->root)
     {
@@ -207,7 +211,7 @@ void printTreeAscending(BinaryTree *tree)
     cout << endl;
 }
 
-void printTreeDescending(BinaryTreeNode *current)
+void printTreeDescending(TreeNode *current)
 {
     if (current->rightChild)
     {
@@ -220,7 +224,7 @@ void printTreeDescending(BinaryTreeNode *current)
     }
 }
 
-void printTreeDescending(BinaryTree *tree)
+void printTreeDescending(Tree *tree)
 {
     if (tree->root)
     {
@@ -233,7 +237,7 @@ void printTreeDescending(BinaryTree *tree)
     cout << endl;
 }
 
-void printTree(BinaryTreeNode *current)
+void printTree(TreeNode *current)
 {
     cout << current->value << ' ';
     if (current->leftChild)
@@ -257,7 +261,7 @@ void printTree(BinaryTreeNode *current)
     }
 }
 
-void printTree(BinaryTree *tree)
+void printTree(Tree *tree)
 {
     if (tree->root)
     {
