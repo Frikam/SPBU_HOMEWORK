@@ -16,20 +16,20 @@ int main()
     cin >> mustDead;
     int deadWarriors = 0;
     
-    CyclicList *Warriors = createList();
+    CyclicList *warriors = createList();
 
     for (int i = 1; i <= numbOfWarriors; i++)
     {
         if (i == numbOfWarriors){
-            add(Warriors, i);
+            add(warriors, i);
         }
         else{
-            add(Warriors, i);
+            add(warriors, i);
         }
     }
     
     cout << "Survive warrior with index : ";
-    findAndKill(Warriors, mustDead, numbOfWarriors, deadWarriors);
-    deleteList(Warriors);
+    findAndKill(warriors, mustDead, numbOfWarriors, deadWarriors);
+    deleteList(warriors);
     return 0;
 }
