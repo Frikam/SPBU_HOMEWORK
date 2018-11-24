@@ -20,6 +20,11 @@ int height(Node *tree)
 
 void deleteTree(Node *current)
 {
+    if (!current)
+    {
+        return;
+    }
+    
     if (current->leftChild)
     {
         deleteTree(current->leftChild);
