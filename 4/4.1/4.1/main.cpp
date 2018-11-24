@@ -21,10 +21,10 @@ int main()
     for (int i = 1; i <= numbOfWarriors; i++)
     {
         if (i == numbOfWarriors){
-            add(Warriors, i, true);
+            add(Warriors, i);
         }
         else{
-            add(Warriors, i, false);
+            add(Warriors, i);
         }
     }
     

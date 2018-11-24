@@ -9,7 +9,7 @@ CyclicList *createList()
     return new CyclicList {};
 }
 
-void add(CyclicList *list, int x, bool isLast)
+void add(CyclicList *list, int x)
 {
     ListElement *current = list->first;
     
@@ -28,7 +28,7 @@ void add(CyclicList *list, int x, bool isLast)
     current->next = newElement;
 }
 void deleteElement(ListElement *current)
-{
+{    
     ListElement *nextElement = current->next;
     current->next = nextElement->next;
     delete nextElement;
@@ -41,4 +41,24 @@ void deleteList(CyclicList *list)
     delete nextElement;
     delete current;
     delete list;
+}
+
+void printElement(ListElement *current)
+{
+    cout << current->value;
+}
+
+void makeNewFirstElement(CyclicList *list, ListElement *current)
+{
+    list->first = current;
+}
+
+ListElement *getPointerOnFirstElement(CyclicList *list)
+{
+    return list->first;
+}
+
+void pointerOnNextWarrior(ListElement *&current)
+{
+    current = current->next;
 }

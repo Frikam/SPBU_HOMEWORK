@@ -7,7 +7,7 @@ using namespace std;
 void findAndKill(CyclicList *list, int mustDead, int numbOfWarriors, int deadWarriors)
 {
     int count = 1;
-    ListElement *current = list->first;
+    ListElement *current = getPointerOnFirstElement(list);
     
     while (numbOfWarriors - deadWarriors > 2)
     {
@@ -17,17 +17,19 @@ void findAndKill(CyclicList *list, int mustDead, int numbOfWarriors, int deadWar
             deadWarriors++;
         }
         else{
-            current = current->next;
+            pointerOnNextWarrior(current);
         }
         count++;
     }
     
     count = 1;
+    
     while (count % mustDead != 0 )
     {
-        current = current->next;
+        pointerOnNextWarrior(current);
         count++;
     }
-    list->first = current;
-    printf("%d\n", current->value);
+    
+    makeNewFirstElement(list, current);
+    printElement(current);
 }
