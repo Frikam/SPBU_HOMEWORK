@@ -1,20 +1,9 @@
 #pragma once
 
-struct ListElement {
-    char sign;
-    ListElement *next;
-};
+#include "stack.hpp"
 
-struct List {
-    ListElement *top;
-};
+#include "Calculator.hpp"
 
-List *createList();
-void stackPush(List *list, char sign);
-void print(List *list, char *postfixForm, int *index);
-void stackPop(List *list);
-void deleteList(List *list);
-int size(List *list);
-char getTop(List *list);
-void clearList(List *list);
-
+void deleteUntilOpenedBracketOrPriorityLower(Stack *list, char sign1, char *postfixForm, int &index);
+void deleteUntilOpenedBracket(Stack *list, char *postfixForm, int &index);
+void addElementInStacAndInArray(Stack *stackSign, char *list, char *postfixForm, int i, int &index);

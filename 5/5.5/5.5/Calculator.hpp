@@ -1,8 +1,4 @@
 #pragma once
 
+void calculate(Stack *list, int firstNumber, int secondNumber, char sign);
 int priorityOfSign(char sign);
-void deleteUntilOpenedBracketOrPriorityLower(List *list, char sign1, char *postfixForm, int *index);
-void deleteUntilOpenedBracket(List *list, char *postfixForm, int *index);
-void calculator(List *list, int firstNumber, int secondNumber, char sign);
-int isNumber(char sign);
-void addElementInStacAndInArray(List *stackSign, char *list, char *postfixForm, int i, int *index);

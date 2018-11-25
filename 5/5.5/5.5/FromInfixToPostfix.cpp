@@ -1,78 +1,67 @@
-#include "FromInfixToPostfix.hpp"
+#include "FromInfixToPostFix.hpp"
 
-#include <iostream>
-
-using namespace std;
-
-List *createList()
+void deleteUntilOpenedBracketOrPriorityLower(Stack *list, char sign1, char *postfixForm, int &index)
 {
-    return new List {nullptr};
-}
-
-void stackPush(List *list, char c)
-{
-    ListElement *current = new ListElement;
-    current->sign = c;
-    current->next = list->top;
-    list->top = current;
-
-}
-
-void print(List *list, char *postfixForm, int *index)
-{
-    ListElement *current = list->top;
-    while (current)
+    StackElement *current = list->top;
+    
+    while (current && current->sign != '(' && priorityOfSign(sign1) <= priorityOfSign(current->sign))
     {
-        postfixForm[*index] = current->sign;
-        (*index)++;
-        current = current->next;
+        postfixForm[index] = current->sign;
+        index++;
+        StackElement *nextElement = current->next;
+        list->top = current->next;
+        delete current;
+        current = nextElement;
     }
 }
 
-void stackPop(List *list)
+void deleteUntilOpenedBracket(Stack *list, char *postfixForm, int &index)
 {
-    ListElement *current = list->top;
-    list->top = current->next;
-    delete current;
-}
-
-void deleteList(List *list)
-{
-    ListElement *current = list->top;
-    while (current)
+    StackElement *current = list->top;
+    
+    while ( current->sign != '(')
     {
-        ListElement *nextElement = current->next;
+        postfixForm[index] = current->sign;
+        index++;
+        StackElement *nextElement = current->next;
+        list->top = current->next;
         delete current;
         current = nextElement;
     }
     
-    delete list;
+    StackElement *nextElement = current->next;
+    list->top = nextElement;
+    delete current;
 }
 
-int size(List *list)
+void addElementInStacAndInArray(Stack *stackSign, char *line, char *postfixForm, int i, int &index)
 {
-    ListElement *current = list->top;
-    int length = 0;
-    while (current)
+    if (line[i] != ' ')
     {
-        length++;
-        current = current->next;
-    }
-    return length;
-}
-
-char getTop(List *list)
-{
-    return list->top->sign;
-}
-
-void clearList(List *list)
-{
-    ListElement *current = list->top;
-    while (current)
-    {
-        ListElement *nextElement = current->next;
-        delete current;
-        current = nextElement;
+        if (line[i] == '('){
+            stackPushSign(stackSign, line[i]);
+        }
+        else if (line[i] == ')'){
+            deleteUntilOpenedBracket(stackSign, postfixForm, index);
+        }
+        else if (priorityOfSign(line[i]) == 0){
+            postfixForm[index] = line[i];
+            index++;
+        }
+        else
+        {
+            if (size(stackSign) == 0 || getFirstSign(stackSign) == '('){
+                stackPushSign(stackSign, line[i]);
+            }
+            else{
+                if (priorityOfSign(line[i]) > priorityOfSign(getFirstSign(stackSign))){
+                    stackPushSign(stackSign, line[i]);
+                }
+                else{
+                    deleteUntilOpenedBracketOrPriorityLower(stackSign, line[i], postfixForm, index);
+                    stackPushSign(stackSign, line[i]);
+                }
+            }
+        }
     }
 }

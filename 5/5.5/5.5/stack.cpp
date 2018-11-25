@@ -4,45 +4,63 @@
 
 using namespace std;
 
-List *createList()
+Stack *createList()
 {
-    return new List {nullptr};
+    return new Stack {nullptr};
 }
 
-void stackPushSign(List *list, char c)
+
+void stackPushNumber(Stack *list, int value)
 {
-    ListElement *current = new ListElement;
-    current->sign = c;
-    current->next = list->top;
+    StackElement *current = new StackElement {value, ' ', list->top};
     list->top = current;
-    
 }
 
-void saveStack(List *list, char *postfixForm, int *index)
+void stackPushSign(Stack *list, char sign)
 {
-    ListElement *current = list->top;
+    StackElement *current = new StackElement {0, sign, list->top};
+    list->top = current;
+}
+
+
+void saveStack(Stack *list, char *postfixForm, int &index)
+{
+    StackElement *current = list->top;
     while (current)
     {
-        postfixForm[*index] = current->sign;
-        (*index)++;
+        postfixForm[index] = current->sign;
+        index++;
         current = current->next;
     }
 }
 
-void stackPop(List *list)
+char stackPopSign(Stack *list)
 {
-    ListElement *current = list->top;
+    char sign = ' ';
+    StackElement *current = list->top;
     list->top = current->next;
+    sign = current->sign;
     delete current;
+    return sign;
 }
 
-void deleteList(List *list)
+int stackPopNumber(Stack *list)
 {
-    ListElement *current = list->top;
+    int number = 0;
+    StackElement *current = list->top;
+    list->top = current->next;
+    number = current->number;
+    delete current;
+    return number;
+}
+
+void deleteStack(Stack *list)
+{
+    StackElement *current = list->top;
     
     while (current)
     {
-        ListElement *nextElement = current->next;
+        StackElement *nextElement = current->next;
         delete current;
         current = nextElement;
     }
@@ -50,9 +68,9 @@ void deleteList(List *list)
     delete list;
 }
 
-int size(List *list)
+int size(Stack *list)
 {
-    ListElement *current = list->top;
+    StackElement *current = list->top;
     int length = 0;
     
     while (current)
@@ -63,47 +81,30 @@ int size(List *list)
     return length;
 }
 
-char getFirstSign(List *list)
+char getFirstSign(Stack *list)
 {
     return list->top->sign;
 }
 
-void clearList(List *list)
+void clearList(Stack *list)
 {
-    ListElement *current = list->top;
+    StackElement *current = list->top;
     while (current)
     {
-        ListElement *nextElement = current->next;
+        StackElement *nextElement = current->next;
         delete current;
         current = nextElement;
     }
 }
 
-void stackPushNumber(List *list, int c)
-{
-    ListElement *current = new ListElement;
-    current->number = c;
-    current->next = list->top;
-    list->top = current;
-    
-}
 
-void print(List *list)
+void print(Stack *list)
 {
-    ListElement *current = list->top;
+    StackElement *current = list->top;
     
     while (current)
     {
         printf("%d\n", current->number);
         current = current->next;
     }
-}
-
-int getFirstNumber(List *list)
-{
-    return list->top->number;
-}
-int getSecondNumber(List *list)
-{
-    return list->top->next->number;
 }
