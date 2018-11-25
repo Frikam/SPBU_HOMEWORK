@@ -20,12 +20,7 @@ int main()
 
     for (int i = 1; i <= numbOfWarriors; i++)
     {
-        if (i == numbOfWarriors){
-            add(warriors, i);
-        }
-        else{
-            add(warriors, i);
-        }
+        add(warriors, i);
     }
     
     cout << "Survive warrior with index : ";
