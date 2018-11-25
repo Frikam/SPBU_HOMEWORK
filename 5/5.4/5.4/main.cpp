@@ -15,25 +15,27 @@ int main()
     cin.getline(line, maxLength);
     int firstNumber = 0;
     int secondNumber = 0;
-    List *stack = createList();
+    Stack *stack = createList();
 
     for (int i = 0; i < strlen(line); i++)
     {
         if (line[i] != ' '){
-            if (line[i] >= '0' && line[i] <= '9'){
+            if (line[i] >= '0' && line[i] <= '9')
+            {
                 stackPush(stack, line[i] - '0');
             }
-            else{
-                firstNumber = getFirstNumber(stack);
-                secondNumber = getSecondNumber(stack);
-                calculator(stack, secondNumber, firstNumber, line[i]);
+            else
+            {
+                firstNumber = stackPop(stack);
+                secondNumber = stackPop(stack);
+                calculate(stack, secondNumber, firstNumber, line[i]);
             }
         }
     }
     
     cout << "Answer : ";
     print(stack);
-    delete(stack);
+    deleteStack(stack);
     delete[] line;
     return 0;
 }

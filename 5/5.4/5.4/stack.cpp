@@ -4,22 +4,20 @@
 
 using namespace std;
 
-List *createList()
+Stack *createList()
 {
-    return new List {nullptr};
+    return new Stack {nullptr};
 }
 
-void stackPush(List *list, int c)
+void stackPush(Stack *list, int value)
 {
-    ListElement *current = new ListElement;
-    current->number = c;
-    current->next = list->top;
+    StackElement *current = new StackElement {value, list->top};
     list->top = current;
 }
 
-void print(List *list)
+void print(Stack *list)
 {
-    ListElement *current = list->top;
+    StackElement *current = list->top;
     while (current)
     {
         cout << current->number << ' ';
@@ -27,20 +25,23 @@ void print(List *list)
     }
 }
 
-void stackPop(List *list)
+int stackPop(Stack *list)
 {
-    ListElement *current = list->top;
+    int number = 0;
+    StackElement *current = list->top;
     list->top = current->next;
+    number = current->number;
     delete current;
+    return number;
 }
 
-void deleteList(List *list)
+void deleteStack(Stack *list)
 {
-    ListElement *current = list->top;
+    StackElement *current = list->top;
     
     while (current)
     {
-        ListElement *nextElement = current->next;
+        StackElement *nextElement = current->next;
         delete current;
         current = nextElement;
     }
@@ -48,11 +49,11 @@ void deleteList(List *list)
     delete list;
 }
 
-int getFirstNumber(List *list)
+int getFirstNumber(Stack *list)
 {
     return list->top->next->number;
 }
-int getSecondNumber(List *list)
+int getSecondNumber(Stack *list)
 {
     return list->top->number;
 }

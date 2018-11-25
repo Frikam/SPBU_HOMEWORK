@@ -2,4 +2,4 @@
 
 #include "stack.hpp"
 
-void calculator(List *list, int firstNumber, int secondNumber, char sign);
+void calculate(Stack *stack, int firstNumber, int secondNumber, char sign);

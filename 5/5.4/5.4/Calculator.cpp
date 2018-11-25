@@ -1,10 +1,8 @@
 #include "stack.hpp"
 
-void calculator(List *list, int firstNumber, int secondNumber, char sign)
+void calculate(Stack *stack, int firstNumber, int secondNumber, char sign)
 {
     int answer = 0;
-    stackPop(list);
-    stackPop(list);
     
     switch (sign)
     {
@@ -21,6 +19,6 @@ void calculator(List *list, int firstNumber, int secondNumber, char sign)
             answer = firstNumber - secondNumber;
             break;
     }
-    stackPush(list, answer);
+    stackPush(stack, answer);
 }
 
