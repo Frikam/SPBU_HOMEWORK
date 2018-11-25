@@ -48,12 +48,3 @@ void deleteStack(Stack *list)
     
     delete list;
 }
-
-int getFirstNumber(Stack *list)
-{
-    return list->top->next->number;
-}
-int getSecondNumber(Stack *list)
-{
-    return list->top->number;
-}

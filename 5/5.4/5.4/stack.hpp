@@ -14,5 +14,3 @@ void stackPush(Stack *list, int c);
 void print(Stack *list);
 int stackPop(Stack *list);
 void deleteStack(Stack *list);
-int getFirstNumber(Stack *list);
-int getSecondNumber(Stack *list);
