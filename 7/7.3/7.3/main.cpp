@@ -2,6 +2,8 @@
 
 #include <string.h>
 
+#include <fstream>
+
 #include "ArithmeticTree.hpp"
 
 using namespace std;
@@ -32,9 +34,9 @@ int whatNumber (char *number, int length)
     int answer = 0;
     int tenInPower = power(length);
     
-    for (int i = length; i > 0; i--)
+    for (int i = 1; i <= length; i++)
     {
-        answer = (number[i] - '0') * tenInPower;
+        answer = answer + (number[i] - '0') * tenInPower;
         tenInPower = tenInPower / 10;
     }
     
@@ -70,13 +72,14 @@ int main()
     const int maxLength = 10000;
     char *line = new char[maxLength];
     char *digits = new char[maxLength];
+    ifstream input("input.txt");
     ArithmeticTree *tree = createTree();
 
     cout << "Enter expression : ";
-    cin.getline(line, maxLength);
-
-    while (index != strlen(line))
+    
+    while (!input.eof())
     {
+        input >> line;
         sign = line[index];
         if (TypeOfSign(sign) == 2)
         {
@@ -85,12 +88,11 @@ int main()
         
         else if (TypeOfSign(sign) != 1)
         {
-            while (TypeOfSign(sign) != 1 && index <= strlen(line))
+            while (TypeOfSign(sign) != 1)
             {
                 index++;
                 count++;
                 digits[count] = sign;
-                sign = line[index];
             }
             number = whatNumber(digits, count);
             addNumber(tree, number);
@@ -100,6 +102,7 @@ int main()
         index++;
     }
     
+    input.close();
     answer = calculator(tree);
     cout << "Expression : ";
     printLine(line);
