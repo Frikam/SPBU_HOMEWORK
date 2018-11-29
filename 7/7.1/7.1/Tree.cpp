@@ -121,14 +121,30 @@ void deleteElement(Tree *tree, TreeNode *current, int number)
         
         if (current->rightChild == nullptr)
         {
-            current = current->leftChild;
-            delete node;
+            if (tree->root->value == number)
+            {
+                tree->root = current->leftChild;
+                delete current;
+            }
+            else
+            {
+                current = current->leftChild;
+                delete node;
+            }
         }
         
         else if (current->leftChild == nullptr)
         {
-            current = current->rightChild;
-            delete node;
+            if (tree->root->value == number)
+            {
+                tree->root = current->rightChild;
+                delete current;
+            }
+            else
+            {
+                current = current->rightChild;
+                delete node;
+            }
         }
         
         else
