@@ -8,6 +8,22 @@
 
 using namespace std;
 
+void inputFile(char *line, ifstream &input)
+{
+    int count = 0;
+    char sign = 'a';
+    
+    while(!input.eof())
+    {
+        input.get(sign);
+        if (sign != '\n')
+        {
+            line[count] = sign;
+            count++;
+        }
+    }
+}
+
 void printLine(char line[])
 {
     for (int i = 0; i < strlen(line); i++)
@@ -61,7 +77,6 @@ int TypeOfSign (char sign)
     return 0;
 }
 
-
 int main()
 {
     int number = 0;
@@ -75,11 +90,11 @@ int main()
     ifstream input("input.txt");
     ArithmeticTree *tree = createTree();
 
-    cout << "Enter expression : ";
+    inputFile(line, input);
+    int length = strlen(line);
     
-    while (!input.eof())
+    while (index != length)
     {
-        input >> line;
         sign = line[index];
         if (TypeOfSign(sign) == 2)
         {
@@ -93,6 +108,7 @@ int main()
                 index++;
                 count++;
                 digits[count] = sign;
+                sign = line[index];
             }
             number = whatNumber(digits, count);
             addNumber(tree, number);
@@ -102,7 +118,6 @@ int main()
         index++;
     }
     
-    input.close();
     answer = calculator(tree);
     cout << "Expression : ";
     printLine(line);
@@ -110,5 +125,6 @@ int main()
     delete[] digits;
     delete[] line;
     deleteTree(tree);
+    input.close();
     return 0;
 }
