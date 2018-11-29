@@ -6,119 +6,68 @@
 
 using namespace std;
 
-void addSign(String *string, char sign)
-{
-    Sign *current = string->firstSign;
-    
-    if (!current)
-    {
-        string->firstSign = new Sign {sign, nullptr};
-    }
-    else
-    {
-        while (current->next)
-        {
-            current = current->next;
-        }
-        current->next = new Sign {sign, nullptr};
-    }
-
-}
-
 String *createString(char word[])
 {
-    String *string = new String {nullptr};
-    for (int i = 0; i < strlen(word); i++)
+    String *newString = new String {};
+    newString->length = strlen(word);
+    newString->word = new char [newString->length];
+    for (int i = 0; i < newString->length; i++)
     {
-        addSign(string, word[i]);
+        newString->word[i] = word[i];
     }
     
-    return string;
+    return newString;
 }
 
 String *clone(String *string)
 {
-    String *clonedWord = new String {nullptr};
-    Sign *current = string->firstSign;
-    cout << "Cloned word : ";
-    
-    while (current)
-    {
-        cout << current->sign;
-        addSign(clonedWord, current->sign);
-        current = current->next;
-    }
-    
-    cout << endl;
+    String *clonedWord = createString(string->word);
     return clonedWord;
 }
 
 bool isEqual(String *firstWord, String *secondWord)
 {
-    Sign *firstPointer = firstWord->firstSign;
-    Sign *secondPointer = secondWord->firstSign;
-    
-    while(firstPointer)
+    if (firstWord->length == secondWord->length)
     {
-        if (secondPointer->sign != firstPointer->sign)
+        for (int i = 0; i < firstWord->length; i++)
         {
-            cout << "String isn't equal" << endl;
-            return false;
+            if (firstWord->word[i] != secondWord->word[i])
+            {
+                return false;
+            }
         }
-        
-        secondPointer = secondPointer->next;
-        firstPointer = firstPointer->next;
     }
     
-    if (secondPointer)
+    else
     {
-        cout << "String isn't equal" << endl;
         return false;
     }
     
-    cout << "String is equal" << endl;
     return true;
 }
 
 int getSize(String *string)
 {
-    int size = 0;
-    Sign *current = string->firstSign;
-
-    while (current)
-    {
-        size++;
-        current = current->next;
-    }
-    
-    cout << "Size of string : " << size << endl;
-    return size;
+    return string->length;
 }
 
 bool isEmpty(String *string)
 {
-    if (string->firstSign)
+    if (string->length == 0)
     {
-        cout << "String isn't empty" << endl;
-        return false;
+        return true;
     }
     
-    cout << "String is empty" << endl;
-    return true;
+    return false;
 }
 
 char *representation(String *string)
 {
-    const int maxLength = 10000;
-    int index = 0;
-    char *line = new char [maxLength];
-    Sign *current = string->firstSign;
-
-    while (current)
+    char *line = new char [string->length];
+    
+    for (int i = 0; i < string->length; i++)
     {
-        line[index] = current->sign;
-        current = current->next;
-        index++;
+        line[i] = string->word[i];
     }
     
     return line;
@@ -126,56 +75,37 @@ char *representation(String *string)
 
 void concatenation(String *firstWord, String *secondWord)
 {
-    Sign *firstPointer = firstWord->firstSign;
-    Sign *secondPointer = secondWord->firstSign;
-    cout << "New string : ";
+    firstWord->length = firstWord->length + secondWord->length;
+    char *newWord = new char [firstWord->length];
     
-    while (firstPointer->next)
+    for (int i = 0; i < firstWord->length - secondWord->length; i++)
     {
-        cout << firstPointer->sign;
-        firstPointer = firstPointer->next;
+        newWord[i] = firstWord->word[i];
     }
     
-    cout << firstPointer->sign;
-    
-    while (secondPointer)
+    for (int i = 0; i < secondWord->length; i++)
     {
-        cout << secondPointer->sign;
-        firstPointer->next = new Sign {secondPointer->sign, nullptr};
-        firstPointer = firstPointer->next;
-        secondPointer = secondPointer->next;
+        newWord[i + firstWord->length - secondWord->length] = secondWord->word[i];
     }
     
-    cout << endl;
+    firstWord->word = newWord;
 }
 
 String *substring(String *string, int index)
 {
-    String *word = new String {nullptr};
-    Sign *current = string->firstSign;
-    int count = 0;
-    cout << "Substring : ";
-
-    while (count != index)
+    String *word = new String {};
+    word->length = index + 1;
+    word->word = new char [index + 1];
+    for (int i = 0; i <= index; i++)
     {
-        cout << current->sign;
-        addSign(word, current->sign);
-        current = current->next;
-        count++;
+        word->word[i] = string->word[i];
     }
     
-    cout << endl;
     return word;
 }
 
 void deleteString(String *string)
 {
-    Sign *current = string->firstSign;
-    
-    while (current)
-    {
-        Sign *nextElement = current->next;
-        delete current;
-        current = nextElement;
-    }
+    delete string->word;
+    delete string;
 }

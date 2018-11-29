@@ -20,20 +20,14 @@ int main()
 
     cout << "Count length of word" << endl;
     int size = getSize(line);
+    cout << size << endl;
     
     cout << "Сhecks word emptiness" << endl;
-    cout << isEmpty(line);
+    cout << isEmpty(line) << endl;
     
     cout << "Check equal of word" << endl;
-    bool Equal = isEqual(line, secondLine);
-
-    
-    cout << "Produces the concatenation : " << endl;
-    concatenation(line, secondLine);
-    
-    cout << "Copies the string" << endl;
-    String *newString = clone(line);
-    
+    bool equal = isEqual(line, secondLine);
+    cout << equal << endl;
     
     cout << "Take a substring" << endl;
     cout << "Enter index : ";
@@ -41,11 +35,13 @@ int main()
     cin >> index;
     String *string = substring(line, index);
     
-    cout << "Сonverts from string to char*" << endl;
+    concatenation(line, secondLine);
+    
+    String *newString = clone(line);
+    
     char *newWord = new char [maxLength];
     newWord = representation(line);
     
-    cout << "Delete string" << endl;
     deleteString(line);
     deleteString(secondLine);
     deleteString(string);

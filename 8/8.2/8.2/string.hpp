@@ -1,19 +1,13 @@
 #pragma once
 
-struct Sign
-{
-    char sign;
-    Sign *next;
-};
-
 struct String
 {
-    Sign *firstSign;
+    int length;
+    char *word;
 };
 
 String *createString(char word[]);
 String *clone(String *string);
-int getSize(String *firstWord);
 void addSign(String *string, char sign);
 bool isEqual(String *firstWord, String *secondWord);
 int getSize(String *string);
