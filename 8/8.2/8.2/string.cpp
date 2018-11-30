@@ -104,7 +104,7 @@ String *substring(String *string, int index)
     return word;
 }
 
-void deleteString(String *&string)
+void deleteString(String *string)
 {
     delete[] string->word;
     delete string;
