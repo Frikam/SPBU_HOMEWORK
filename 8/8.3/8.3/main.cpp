@@ -23,7 +23,6 @@ int main()
 
     HashTable *hashTable = createHashTable();
     
-
     while(!input.eof())
     {
         input >> word;
@@ -42,10 +41,8 @@ int main()
             String *wordWithoutSymbol = substring(newString, i);
             addString(hashTable, wordWithoutSymbol);
         }
-        
     }
     
-    //print(hashTable);
     cout << "Load factor : ";
     cout << getLoadFactor(hashTable) << endl;
     cout << "Average number of sample : ";

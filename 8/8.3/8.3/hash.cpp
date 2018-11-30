@@ -61,8 +61,6 @@ void addString(HashTable *hashTable, String *word)
     HashElement *newElement = new HashElement {1, 1, word};
     hashTable->table[index] = newElement;
     hashTable->size++;
-    //printElement(hashTable->table[index]->string);
-    //cout << ' ' << index << endl;
 }
 
 int numbOfElements(HashTable *hashTable)
@@ -98,7 +96,6 @@ double getAverageNumberOfSample(HashTable *hashTable)
 int getMaxNumberOfSamples (HashTable *hashTable)
 {
     int answer = 0;
-    int index = 0;
     
     for (int i = 0; i < hashTable->maxLength; i++)
     {
