@@ -1,6 +1,6 @@
 #include <iostream>
 
-#include "AvmTtree.hpp"
+#include "AvlTree.hpp"
 
 using namespace std;
 

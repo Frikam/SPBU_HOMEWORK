@@ -1,6 +1,6 @@
 #include <iostream>
 
-#include "AvmTtree.hpp"
+#include "AvlTree.hpp"
 
 using namespace std;
 
@@ -165,7 +165,7 @@ bool isLeftChild(Node *current, int number)
     return false;
 }
 
-void deleteElement(Node *current, int number)
+void deleteElement(Tree *tree, Node *current, int number)
 {
     if (current->value ==   number)
     {
@@ -209,7 +209,7 @@ void deleteElement(Node *current, int number)
             
             else{
                 node->value = current->value;
-                previous->rightChild = current->rightChild;
+                node->rightChild = current->rightChild;
             }
             
             updateHeight(node);
@@ -223,19 +223,20 @@ void deleteElement(Node *current, int number)
     {
         if (current->value > number)
         {
-            deleteElement(current->leftChild, number);
+            deleteElement(tree, current->leftChild, number);
         }
         
         else
         {
-            deleteElement(current->rightChild, number);
+            deleteElement(tree, current->rightChild, number);
         }
     }
 }
 
 void deleteElement(Tree *tree, int number)
 {
-    deleteElement(tree->root, number);
+    deleteElement(tree, tree->root, number);
+    balance(tree->root);
 }
 
 void printTreeAscending(Node *current)
