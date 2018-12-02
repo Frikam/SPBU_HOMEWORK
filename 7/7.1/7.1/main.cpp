@@ -1,6 +1,6 @@
 #include <iostream>
 
-#include "Tree.hpp"
+#include "Set.hpp"
 
 using namespace std;
 
@@ -14,7 +14,7 @@ int main()
     cout << "6 - print tree in descending order" << endl;
     cout << "7 - print tree in format (a b c)" << endl;
 
-    Tree *tree = createTree();
+    Set *set = createSet();
     int whatFunction = 0;
     int value = 0;
     
@@ -28,31 +28,31 @@ int main()
             case (2):
                 cout << "Enter value : ";
                 cin >> value;
-                add(tree, value);
+                add(set, value);
                 break;
             case (3):
                 cout << "Enter value : ";
                 cin >> value;
-                deleteElement(tree, value);
+                    deleteElement(set, value);
                 break;
             case (4):
                 cout << "Enter value : ";
                 cin >> value;
-                exist(tree, value);
+                exist(set, value);
                 break;
             case (5):
-                printTreeAscending(tree);
+                printSetAscending(set);
                 break;
             case (6):
-                printTreeDescending(tree);
+                printSetDescending(set);
                 break;
             case (7):
-                printTree(tree);
+                printSet(set);
                 break;
         }
     }
     
     cout << "You have completed the program";
-    deleteTree(tree);
+    deleteSet(set);
     return 0;
 }
