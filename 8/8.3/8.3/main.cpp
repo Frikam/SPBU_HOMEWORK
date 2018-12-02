@@ -8,10 +8,10 @@
 
 using namespace std;
 
-bool isLetter(char symbol)
+bool isLetter(char sign)
 {
-    return !(symbol == ' ' || symbol == '?' || symbol == '!' || symbol == ','
-             || symbol == ';' || symbol == '.' || symbol == '-' || symbol == '\0' || symbol == ':' || symbol == '"');
+    return !(sign == ' ' || sign == '?' || sign == '!' || sign == ','
+             || sign == ';' || sign == '.' || sign == '-' || sign == '\0' || sign == ':' || sign == '"');
 }
 
 int main()

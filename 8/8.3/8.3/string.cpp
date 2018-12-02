@@ -11,7 +11,6 @@ String *createString(char word[])
     String *newString = new String;
     newString->length = strlen(word);
     newString->word = word;
-    
     return newString;
 }
 
@@ -92,6 +91,7 @@ String *substring(String *string, int index)
     String *word = new String {};
     word->length = index + 1;
     word->word = new char [index + 1];
+    
     for (int i = 0; i <= index; i++)
     {
         word->word[i] = string->word[i];
