@@ -11,6 +11,7 @@ String *createString(char word[])
     String *newString = new String {};
     newString->length = strlen(word);
     newString->word = new char [newString->length];
+    
     for (int i = 0; i < newString->length; i++)
     {
         newString->word[i] = word[i];
@@ -25,7 +26,7 @@ String *clone(String *string)
     return clonedWord;
 }
 
-bool isEqual(String *firstWord, String *secondWord)
+bool areEqual(String *firstWord, String *secondWord)
 {
     if (firstWord->length == secondWord->length)
     {
@@ -51,7 +52,7 @@ int getSize(String *string)
     return string->length;
 }
 
-bool isEmpty(String *string)
+bool areEmpty(String *string)
 {
     if (string->length == 0)
     {
@@ -73,7 +74,7 @@ char *representation(String *string)
     return line;
 }
 
-void concatenation(String *firstWord, String *secondWord)
+void concatenate(String *firstWord, String *secondWord)
 {
     firstWord->length = firstWord->length + secondWord->length;
     char *newWord = new char [firstWord->length];
@@ -88,6 +89,7 @@ void concatenation(String *firstWord, String *secondWord)
         newWord[i + firstWord->length - secondWord->length] = secondWord->word[i];
     }
     
+    delete[] firstWord->word;
     firstWord->word = newWord;
 }
 

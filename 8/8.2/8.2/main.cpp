@@ -1,11 +1,12 @@
 #include <iostream>
 
 #include "string.hpp"
+
 using namespace std;
 
 int main()
 {
-    int maxLength = 1000; 
+    const int maxLength = 1000; 
     char *word = new char [maxLength];
     char *secondWord = new char [maxLength];
     
@@ -23,10 +24,10 @@ int main()
     cout << size << endl;
     
     cout << "Сhecks word emptiness" << endl;
-    cout << isEmpty(line) << endl;
+    cout << areEmpty(line) << endl;
     
     cout << "Check equal of word" << endl;
-    bool equal = isEqual(line, secondLine);
+    bool equal = areEqual(line, secondLine);
     cout << equal << endl;
     
     cout << "Take a substring" << endl;
@@ -35,7 +36,7 @@ int main()
     cin >> index;
     String *string = substring(line, index);
     
-    concatenation(line, secondLine);
+    concatenate(line, secondLine);
     
     String *newString = clone(line);
     
@@ -45,9 +46,11 @@ int main()
     deleteString(line);
     deleteString(secondLine);
     deleteString(string);
+    deleteString (newString);
     
     delete[] word;
     delete[] secondWord;
     delete[] newWord;
+    
     return 0;
 }
