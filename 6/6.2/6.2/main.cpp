@@ -4,10 +4,13 @@ using namespace std;
 
 int isNegative(int &number)
 {
-    if (number > 0){
+    if (number > 0)
+    {
         return 0;
     }
-    else{
+    
+    else
+    {
         number = number * -1;
         return 1;
     }
@@ -20,10 +23,13 @@ void getBinForm(int *binNumber, int number, int maxLength)
     
     for (int i = 1; i < maxNumber; i = i * 2)
     {
-        if (number & i){
+        if (number & i)
+        {
             binNumber[maxLength - 1 - count] = 1;
         }
-        else{
+        
+        else
+        {
             binNumber[maxLength - 1 - count] = 0;
         }
         count++;
@@ -41,6 +47,7 @@ void printBinNumber(int binNumber[], int maxLength)
 void sum(int *firstNumb, int *secondNumb, int *answer, int maxLength)
 {
     int memory = 0;
+    
     for (int i = maxLength - 1; i >= 0; i--)
     {
         if (memory == 0)
@@ -50,22 +57,31 @@ void sum(int *firstNumb, int *secondNumb, int *answer, int maxLength)
                 memory = 1;
                 answer[i] = 0;
             }
-            else{
+            
+            else
+            {
                 answer[i] = firstNumb[i] + secondNumb[i];
             }
         }
-        else{
+        
+        else
+        {
             if (firstNumb[i] + secondNumb[i] == 2)
             {
                 memory = 1;
                 answer[i] = 1;
             }
-            else{
-                if (firstNumb[i] + secondNumb[i] == 1){
+            
+            else
+            {
+                if (firstNumb[i] + secondNumb[i] == 1)
+                {
                     answer[i] = 0;
                     memory = 1;
                 }
-                else{
+                
+                else
+                {
                     answer[i] = 1;
                     memory = 0;
                 }
@@ -78,10 +94,13 @@ void makeAdditionalCode(int *binNumber, int *binPresentationOfOne, int maxLength
 {
     for (int i = 1; i < maxLength; i++)
     {
-        if (binNumber[i] == 1){
+        if (binNumber[i] == 1)
+        {
             binNumber[i] = 0;
         }
-        else{
+        
+        else
+        {
             binNumber[i] = 1;
         }
     }
@@ -129,25 +148,29 @@ int main()
     cout << endl << "Binary representation of second number : ";
     printBinNumber(binPresentationOfSecondNumber, maxLength);
     
-    if (binPresentationOfFirstNumber[0] == 1){
+    if (binPresentationOfFirstNumber[0] == 1)
+    {
         IsThereNegativeNumber = true;
         makeAdditionalCode(binPresentationOfFirstNumber, binPresentationOfOne, maxLength);
     }
-    if (binPresentationOfSecondNumber[0] == 1){
+    if (binPresentationOfSecondNumber[0] == 1)
+    {
         IsThereNegativeNumber = true;
         makeAdditionalCode(binPresentationOfSecondNumber, binPresentationOfOne, maxLength);
     }
     
     sum(binPresentationOfFirstNumber, binPresentationOfSecondNumber, answer, maxLength);
     
-    if ((binPresentationOfFirstNumber[0] == 1 && binPresentationOfSecondNumber[0] == 0 && firstNumber < secondNumber)||(binPresentationOfFirstNumber[0] == 0 && binPresentationOfSecondNumber[0] == 1 && firstNumber > secondNumber)){
+    if ((binPresentationOfFirstNumber[0] == 1 && binPresentationOfSecondNumber[0] == 0 && firstNumber < secondNumber)||(binPresentationOfFirstNumber[0] == 0 && binPresentationOfSecondNumber[0] == 1 && firstNumber > secondNumber))
+    {
         cout << endl << "Binary representation answer : ";
         printBinNumber(answer, maxLength);
         cout << endl << "Sum : ";
         fromBinToDecimal(answer, maxLength);
     }
     
-    else if (binPresentationOfSecondNumber[0] == 1 || binPresentationOfFirstNumber[0] == 1 ){
+    else if (binPresentationOfSecondNumber[0] == 1 || binPresentationOfFirstNumber[0] == 1 )
+    {
         makeAdditionalCode(answer, binPresentationOfOne, maxLength);
         cout << endl << "Binary representation answer : ";
         printBinNumber(answer, maxLength);
@@ -157,7 +180,8 @@ int main()
     }
     
     
-    else{
+    else
+    {
         cout << endl << "Binary representation answer : ";
         printBinNumber(answer, maxLength);
         cout << endl << "Sum : ";
