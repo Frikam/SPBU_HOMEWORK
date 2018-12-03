@@ -165,9 +165,9 @@ bool isLeftChild(Node *current, int number)
     return false;
 }
 
-void deleteElement(Tree *tree, Node *current, int number)
+void deleteElement(Tree *tree, Node *&current, int number)
 {
-    if (current->value ==   number)
+    if (current->value == number)
     {
         if (current->rightChild == nullptr && current->leftChild == nullptr)
         {
