@@ -16,6 +16,7 @@ using namespace std;
 
 int main()
 {
+    cout << "The program displays the number of the student and the number of the student from whom he wrote off" << endl;
     const int maxLength = 10000;
     int *list = new int [maxLength] {};
     int numberOfStudents = 0;
@@ -46,7 +47,7 @@ int main()
         }
         else
         {
-            cout << "Number of student : " << i << "The number of the student whose written off : " << list[i] << endl;
+            cout << "Number of student : " << i << ", The number of the student whose written off : " << list[i] << endl;
         }
     }
     
