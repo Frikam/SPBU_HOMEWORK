@@ -118,7 +118,7 @@ int main()
         index++;
     }
     
-    answer = calculator(tree);
+    answer = calculate(tree);
     cout << "Expression : ";
     printLine(line);
     cout << "Aswer : " << answer;

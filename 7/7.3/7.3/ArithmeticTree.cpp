@@ -10,6 +10,11 @@ void addNumber(ArithmeticTree *tree, int number)
     ArithmeticTreeNode *current = tree->root;
     ArithmeticTreeNode *previous = tree->root;
 
+    if (current->rightChild)
+    {
+        current = current->rightChild;
+    }
+    
     while(current->leftChild)
     {
         previous = current;
@@ -42,9 +47,30 @@ void addSign(ArithmeticTree *tree, char character)
         tree->root = new ArithmeticTreeNode {character, 0, nullptr, nullptr};
     }
     
+    else if (!current->rightChild)
+    {
+        while (current)
+        {
+            previous = current;
+            current = current->leftChild;
+        }
+        
+        current = new ArithmeticTreeNode {character, 0, nullptr, nullptr};
+
+        if (previous->value == 0)
+        {
+            previous->leftChild = current;
+            return;
+        }
+        
+        tree->root->rightChild = current;
+    }
+    
     else
     {
-        while(current)
+        current = current->rightChild;
+        
+        while (current)
         {
             previous = current;
             current = current->leftChild;
@@ -72,13 +98,28 @@ int calculateExpression(ArithmeticTreeNode *current, int number)
     return 0;
 }
 
-int calculator(ArithmeticTreeNode *current, int answer)
+int calculateAnswer(ArithmeticTreeNode *current, int leftChild, int rightChild)
+{
+    switch (current->sign)
+    {
+        case '*':
+            return leftChild * rightChild;
+        case '+':
+            return leftChild + rightChild;
+        case '-':
+            return leftChild - rightChild;
+        case '/':
+            return leftChild / rightChild;
+    }
+    return 0;
+}
+
+int calculateChild(ArithmeticTreeNode *current, int answer)
 {
     if (current->leftChild->leftChild)
     {
-        answer = answer + calculateExpression(current ,calculator(current->leftChild, answer));
+        answer = answer + calculateExpression(current ,calculateChild(current->leftChild, answer));
     }
-    
     else
     {
         return calculateExpression(current, current->leftChild->value);
@@ -87,10 +128,18 @@ int calculator(ArithmeticTreeNode *current, int answer)
     return answer;
 }
 
-int calculator(ArithmeticTree *tree)
+
+int calculate(ArithmeticTreeNode *current, int answer)
+{
+    int leftChild = calculateChild(current->leftChild, 0);
+    int rightChild = calculateChild(current->rightChild, 0);
+    return calculateAnswer(current, leftChild, rightChild);
+}
+
+int calculate(ArithmeticTree *tree)
 {
     int answer = 0;
-    return calculator(tree->root, answer);
+    return calculate(tree->root, answer);
 }
 
 void deleteTree(ArithmeticTreeNode *current)
