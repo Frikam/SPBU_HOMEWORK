@@ -7,8 +7,8 @@ using namespace std;
 int main()
 {
     const int maxLength = 1000; 
-    char *word = new char [maxLength];
-    char *secondWord = new char [maxLength];
+    char *word = new char[maxLength];
+    char *secondWord = new char[maxLength];
     
     cout << "Enter first word : ";
     cin >> word;
@@ -24,7 +24,7 @@ int main()
     cout << size << endl;
     
     cout << "Сhecks word emptiness" << endl;
-    cout << areEmpty(line) << endl;
+    cout << isEmpty(line) << endl;
     
     cout << "Check equal of word" << endl;
     bool equal = areEqual(line, secondLine);
@@ -40,7 +40,7 @@ int main()
     
     String *newString = clone(line);
     
-    char *newWord = new char [maxLength];
+    char *newWord = new char[maxLength];
     newWord = representation(line);
     
     deleteString(line);

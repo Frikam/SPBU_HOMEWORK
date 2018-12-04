@@ -10,7 +10,7 @@ String *createString(char word[])
 {
     String *newString = new String {};
     newString->length = strlen(word);
-    newString->word = new char [newString->length];
+    newString->word = new char[newString->length];
     
     for (int i = 0; i < newString->length; i++)
     {
@@ -38,7 +38,6 @@ bool areEqual(String *firstWord, String *secondWord)
             }
         }
     }
-    
     else
     {
         return false;
@@ -52,19 +51,14 @@ int getSize(String *string)
     return string->length;
 }
 
-bool areEmpty(String *string)
+bool isEmpty(String *string)
 {
-    if (string->length == 0)
-    {
-        return true;
-    }
-    
-    return false;
+    return string->length == 0;
 }
 
 char *representation(String *string)
 {
-    char *line = new char [string->length];
+    char *line = new char[string->length];
     
     for (int i = 0; i < string->length; i++)
     {
@@ -77,7 +71,7 @@ char *representation(String *string)
 void concatenate(String *firstWord, String *secondWord)
 {
     firstWord->length = firstWord->length + secondWord->length;
-    char *newWord = new char [firstWord->length];
+    char *newWord = new char[firstWord->length];
     
     for (int i = 0; i < firstWord->length - secondWord->length; i++)
     {

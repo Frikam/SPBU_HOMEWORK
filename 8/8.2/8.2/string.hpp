@@ -11,7 +11,7 @@ String *clone(String *string);
 void addSign(String *string, char sign);
 bool areEqual(String *firstWord, String *secondWord);
 int getSize(String *string);
-bool areEmpty(String *string);
+bool isEmpty(String *string);
 char *representation(String *string);
 void concatenate(String *firstWord, String *secondWord);
 String *substring(String *string, int index);
