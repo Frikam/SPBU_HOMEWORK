@@ -192,30 +192,29 @@ void deleteElement(Tree *tree, Node *&current, int number)
         
         else
         {
-            Node *previous = current;
-            current = current->rightChild;
+            Node *previous = node;
+            node = node->rightChild;
             
-            while (current->leftChild)
+            while (node->leftChild)
             {
-                previous = current;
-                current = current->leftChild;
+                previous = node;
+                node = node->leftChild;
             }
             
-            if (isLeftChild(previous, current->value))
+            if (isLeftChild(previous, node->value))
             {
-                node->value = current->value;
-                previous->leftChild = current->rightChild;
+                current->value = node->value;
+                previous->leftChild = node->rightChild;
             }
             
             else{
-                node->value = current->value;
-                node->rightChild = current->rightChild;
+                current->value = node->value;
+                current->rightChild = node->rightChild;
             }
             
             updateHeight(node);
             balance(node);
-            delete current;
-            current = nullptr;
+            delete node;
         }
     }
     
