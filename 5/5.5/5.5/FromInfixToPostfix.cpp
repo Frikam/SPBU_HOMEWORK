@@ -34,7 +34,7 @@ void deleteUntilOpenedBracket(Stack *list, char *postfixForm, int &index)
     delete current;
 }
 
-void addElementInStacAndInArray(Stack *stackSign, char *line, char *postfixForm, int i, int &index)
+void addElementInStack(Stack *stackSign, char *line, char *postfixForm, int i, int &index)
 {
     if (line[i] != ' ')
     {

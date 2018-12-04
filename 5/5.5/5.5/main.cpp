@@ -19,13 +19,11 @@ int main()
     char *line = new char[maxLength];
     char *postfixForm = new char[maxLength];
     int index = 0;
-    int firstNumber = 0;
-    int secondNumber = 0;
     cin.getline(line, maxLength);
     
     for (int i = 0; i < strlen(line); i++)
     {
-        addElementInStacAndInArray(stackSign, line, postfixForm, i, index);
+        addElementInStack(stackSign, line, postfixForm, i, index);
     }
     
     saveStack(stackSign, postfixForm, index);
@@ -33,23 +31,7 @@ int main()
     
     Stack *stackNumber = createList();
     
-    for (int i = 0; i < strlen(postfixForm); i++)
-    {
-        if (postfixForm[i] != ' ')
-        {
-            if (postfixForm[i] >= '0' && postfixForm[i] <= '9')
-            {
-                stackPushNumber(stackNumber, postfixForm[i] - '0');
-            }
-            
-            else
-            {
-                firstNumber = stackPopNumber(stackNumber);
-                secondNumber = stackPopNumber(stackNumber);
-                calculate(stackNumber, secondNumber, firstNumber, postfixForm[i]);
-            }
-        }
-    }
+    calculateAnswer(stackNumber, postfixForm);
     
     cout << "Answer : ";
     print(stackNumber);
