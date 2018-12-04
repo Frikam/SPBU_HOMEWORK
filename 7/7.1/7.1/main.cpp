@@ -33,7 +33,7 @@ int main()
             case (3):
                 cout << "Enter value : ";
                 cin >> value;
-                    deleteElement(set, value);
+                deleteElement(set, value);
                 break;
             case (4):
                 cout << "Enter value : ";
