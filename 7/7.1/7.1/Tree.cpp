@@ -20,6 +20,7 @@ void deleteTree(TreeNode *current)
     {
         deleteTree(current->rightChild);
     }
+    
     delete current;
 }
 
