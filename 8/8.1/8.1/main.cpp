@@ -18,15 +18,15 @@ int main()
 {
     cout << "The program displays the number of the student and the number of the student from whom he wrote off" << endl;
     const int maxLength = 10000;
-    int *list = new int [maxLength] {};
+    int *list = new int[maxLength] {};
     int numberOfStudents = 0;
     int number = 0;
     cout << "Enter number of students : ";
     cin >> numberOfStudents;
-    
+
     for (int i = 4; i <= numberOfStudents; i++)
     {
-        cout << "The number of the student whose written off : ";
+        cout << "Enter the number of student who has plagiated for : ";
         cin >> number;
         list[i] = number;
     }
@@ -47,7 +47,7 @@ int main()
         }
         else
         {
-            cout << "Number of student : " << i << ", The number of the student whose written off : " << list[i] << endl;
+            cout << "Number of student : " << i << " The number of student who has plagiated for : " << list[i] << endl;
         }
     }
     
