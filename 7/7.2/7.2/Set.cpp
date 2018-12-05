@@ -13,6 +13,7 @@ void addElement(Set *set, int number)
 void deleteSet(Set *set)
 {
     deleteTree(set->tree);
+    delete[] set;
 }
 
 void exist(Set *set, int number)
