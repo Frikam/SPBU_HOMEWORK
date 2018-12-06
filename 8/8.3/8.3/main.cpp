@@ -52,7 +52,6 @@ int main()
         }
     }
     
-    
     cout << "Load factor : ";
     cout << getLoadFactor(hashTable) << endl;
     cout << "Average number of sample : ";
