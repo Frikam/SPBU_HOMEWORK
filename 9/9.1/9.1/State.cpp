@@ -13,13 +13,13 @@ void readState(Graph *graph, ifstream &input)
     for (int i = 0; i < numberOfState; i++)
     {
         input >> stateNumber;
-        graph->state[i] = new int[graph->numberOfSity];
+        graph->state[i] = new int[graph->numberOfCity];
         graph->state[i][0] = stateNumber - 1;
-        graph->sity[stateNumber - 1][0] = 0;
+        graph->city[stateNumber - 1][0] = 0;
         
-        for (int j = 1; j < graph->numberOfSity; j++)
+        for (int j = 1; j < graph->numberOfCity; j++)
         {
-            graph->sity[stateNumber - 1][j] = 0;
+            graph->city[stateNumber - 1][j] = 0;
             graph->state[i][j] = -1;
         }
         
@@ -29,45 +29,49 @@ void readState(Graph *graph, ifstream &input)
 void addSityInState(Graph *graph, int index)
 {
     int minWay = 10000;
-    int sity = 0;
+    int sity = -1;
     
-    for (int j = 0; j < graph->numberOfSity; j++)
+    for (int j = 0; j < graph->numberOfCity; j++)
     {
         int sityInState = graph->state[index][j];
         
         if (sityInState != -1)
         {
-            for (int i = 0; i < graph->numberOfSity; i++)
+            for (int i = 0; i < graph->numberOfCity; i++)
             {
-                if (minWay > graph->sity[i][sityInState] && graph->sity[i][sityInState] != 0)
+                if (minWay > graph->city[i][sityInState] && graph->city[i][sityInState] != 0)
                 {
-                    minWay = graph->sity[i][sityInState];
+                    minWay = graph->city[i][sityInState];
                     sity = i;
                 }
             }
         }
     }
     
-    for (int i = 0; i < graph->numberOfSity; i++)
+    
+    if (sity != -1)
     {
-        graph->sity[sity][i] = 0;
+        for (int i = 0; i < graph->numberOfCity; i++)
+        {
+            graph->city[sity][i] = 0;
+        }
+        
+        int count = 0;
+        
+        while (graph->state[index][count] != -1)
+        {
+            count++;
+        }
+        
+        graph->state[index][count] = sity;
     }
-    
-    int count = 0;
-    
-    while (graph->state[index][count] != -1)
-    {
-        count++;
-    }
-    
-    graph->state[index][count] = sity;
 }
 
 void addSityToState(Graph *graph)
 {
     int index = 0;
     
-    while (index <= graph->numberOfSity - 1 - graph->numberOfState)
+    while (index <= graph->numberOfCity - 1 - graph->numberOfState)
     {
         addSityInState(graph, index % (graph->numberOfState));
         index++;
@@ -80,7 +84,7 @@ void printStates(Graph *graph)
     {
         cout << endl << "Number of state : " << graph->state[i][0] + 1 << endl;
         cout << "Numbers of sity : ";
-        for (int j = 1; j < graph->numberOfSity; j++)
+        for (int j = 1; j < graph->numberOfCity; j++)
         {
             if (graph->state[i][j] != -1)
             {

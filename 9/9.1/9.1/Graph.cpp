@@ -6,18 +6,18 @@
 
 using namespace std;
 
-Graph *createGraph(int numberOfSity)
+Graph *createGraph(int numberOfCity)
 {
     Graph *graph = new Graph {};
-    graph->numberOfSity = numberOfSity;
-    graph->sity = new int *[numberOfSity];
+    graph->numberOfCity = numberOfCity;
+    graph->city = new int *[numberOfCity];
     
-    for (int i = 0; i < numberOfSity; i++)
+    for (int i = 0; i < numberOfCity; i++)
     {
-        graph->sity[i] = new int[numberOfSity];
-        for (int j = 0; j < numberOfSity; j++)
+        graph->city[i] = new int[numberOfCity];
+        for (int j = 0; j < numberOfCity; j++)
         {
-            graph->sity[i][j] = 0;
+            graph->city[i][j] = 0;
         }
     }
     
@@ -29,9 +29,9 @@ Graph *readGraph(ifstream &input)
     int firstSity = 0;
     int secondSity = 0;
     int length = 0;
-    int  numberOfSity = 0;
-    input >> numberOfSity;
-    Graph *graph = createGraph(numberOfSity);
+    int  numberOfCity = 0;
+    input >> numberOfCity;
+    Graph *graph = createGraph(numberOfCity);
     
     int numberOfRoad = 0;
     input >> numberOfRoad;
@@ -41,8 +41,8 @@ Graph *readGraph(ifstream &input)
         input >> firstSity;
         input >> secondSity;
         input >> length;
-        graph->sity[firstSity - 1][secondSity - 1] = length;
-        graph->sity[secondSity - 1][firstSity - 1] = length;
+        graph->city[firstSity - 1][secondSity - 1] = length;
+        graph->city[secondSity - 1][firstSity - 1] = length;
     }
     
     return graph;
@@ -50,11 +50,11 @@ Graph *readGraph(ifstream &input)
 
 void printMatrix(Graph *graph)
 {
-    for (int i = 0; i < graph->numberOfSity; i++)
+    for (int i = 0; i < graph->numberOfCity; i++)
     {
-        for (int j = 0; j < graph->numberOfSity; j++)
+        for (int j = 0; j < graph->numberOfCity; j++)
         {
-            cout << graph->sity[i][j] << ' ';
+            cout << graph->city[i][j] << ' ';
         }
         
         cout << endl;
@@ -63,12 +63,12 @@ void printMatrix(Graph *graph)
 
 void deleteGraph(Graph *graph)
 {
-    for (int i = 0; i < graph->numberOfSity; i++)
+    for (int i = 0; i < graph->numberOfCity; i++)
     {
-        delete[] graph->sity[i];
+        delete[] graph->city[i];
     }
     
-    delete[] graph->sity;
+    delete[] graph->city;
     
     for (int i = 0; i < graph->numberOfState; i++)
     {

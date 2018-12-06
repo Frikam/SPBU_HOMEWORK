@@ -6,8 +6,8 @@ using namespace std;
 
 struct Graph
 {
-    int numberOfSity;
-    int **sity;
+    int numberOfCity;
+    int **city;
     int numberOfState;
     int **state;
 };
