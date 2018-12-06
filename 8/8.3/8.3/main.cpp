@@ -8,10 +8,9 @@
 
 using namespace std;
 
-bool isLetter(char sign)
+bool isSign(char sign)
 {
-    return !(sign == ' ' || sign == '?' || sign == '!' || sign == ','
-             || sign == ';' || sign == '.' || sign == '-' || sign == '\0' || sign == ':' || sign == '"');
+    return ((sign >= 'a' && sign <= 'z') || (sign >= 'A' && sign <= 'Z'));
 }
 
 int main()
@@ -20,7 +19,8 @@ int main()
     const int length = 10000;
     ifstream input("input.txt");
     char *word = new char [length];
-
+    String *newString = nullptr;
+    String *wordWithoutSymbol = nullptr;
     HashTable *hashTable = createHashTable();
     
     while(!input.eof())
@@ -28,20 +28,30 @@ int main()
         input >> word;
         if (!input.eof())
         {
-            String *newString = createString(word);
-
+            newString = createString(word);
             int i = 0;
             for (i = 0; i < newString->length; i++)
             {
-                if (!isLetter(newString->word[i]))
+                if (!isSign(newString->word[i]))
                 {
                     break;
                 }
             }
-            String *wordWithoutSymbol = substring(newString, i);
-            addString(hashTable, wordWithoutSymbol);
+            
+            if (i != 0)
+            {
+                wordWithoutSymbol = substring(newString, i - 1);
+                if (wordInHashTable(hashTable, wordWithoutSymbol))
+                {
+                    cout << "Word : '";
+                    printElement(wordWithoutSymbol);
+                    cout << "' already in hashTable" << endl;
+                }
+                addString(hashTable, wordWithoutSymbol);
+            }
         }
     }
+    
     
     cout << "Load factor : ";
     cout << getLoadFactor(hashTable) << endl;
@@ -57,6 +67,9 @@ int main()
     cout << "Number of empty elements : ";
     cout << emptyElements(hashTable) << endl;
     
+    deleteString(newString);
+    delete[] word;
+    deleteHashTable(hashTable);
     input.close();
     return 0;
 }

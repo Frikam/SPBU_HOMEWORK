@@ -27,3 +27,5 @@ int getMaxNumberOfSamples(HashTable *hashTable);
 double getAverageNumberOfSample(HashTable *hashTable);
 void print(HashTable *hashTable);
 void printElementsWithMaxTest(HashTable *hashTable, int numeber);
+void deleteHashTable(HashTable *hashTable);
+bool wordInHashTable(HashTable *hashTable, String *word);

@@ -6,10 +6,10 @@ struct String
     char *word;
 };
 
-String *createString(char word[]);
+String *createString(char *word);
 String *clone(String *string);
 void addSign(String *string, char sign);
-bool isEqual(String *firstWord, String *secondWord);
+bool areEqual(String *firstWord, String *secondWord);
 long long getSize(String *string);
 bool isEmpty(String *string);
 char *representation(String *string);

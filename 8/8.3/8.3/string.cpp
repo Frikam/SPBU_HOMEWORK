@@ -6,11 +6,17 @@
 
 using namespace std;
 
-String *createString(char word[])
+String *createString(char *word)
 {
     String *newString = new String;
     newString->length = strlen(word);
-    newString->word = word;
+    newString->word = new char [newString->length];
+    
+    for (int i = 0; i < newString->length; i++)
+    {
+        newString->word[i] = word[i];
+    }
+    
     return newString;
 }
 
@@ -20,7 +26,7 @@ String *clone(String *string)
     return clonedWord;
 }
 
-bool isEqual(String *firstWord, String *secondWord)
+bool areEqual(String *firstWord, String *secondWord)
 {
     if (firstWord->length == secondWord->length)
     {

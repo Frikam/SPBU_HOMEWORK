@@ -46,18 +46,20 @@ int getHash(String *string, int mod)
 
 void addString(HashTable *hashTable, String *word)
 {
-    int step = 1;
-    int index = getHash(word, hashTable->maxLength);
-    
+    int step = 0;
+    int hashNumber = getHash(word, hashTable->maxLength);
+    int index = hashNumber;
+
     while (hashTable->table[index])
     {
-        if (isEqual(hashTable->table[index]->string, word))
+        if (areEqual(hashTable->table[index]->string, word))
         {
             hashTable->table[index]->size++;
             hashTable->size++;
             return;
         }
-        index = (index + step) % hashTable->maxLength;
+        index = (hashNumber + step * step) % hashTable->maxLength;
+        step++;
     }
     
     HashElement *newElement = new HashElement {1, 1, word};
@@ -95,7 +97,7 @@ double getAverageNumberOfSample(HashTable *hashTable)
     return double (answer) / double (hashTable->size);
 }
 
-int getMaxNumberOfSamples (HashTable *hashTable)
+int getMaxNumberOfSamples(HashTable *hashTable)
 {
     int answer = 0;
     
@@ -135,4 +137,31 @@ void printElementsWithMaxTest(HashTable *hashTable, int answer)
     }
     
     cout << endl;
+}
+
+void deleteHashTable(HashTable *hashTable)
+{
+    for (int i = 0; i < hashTable->maxLength; i++)
+    {
+        if (hashTable->table[i] && hashTable->table[i]->string)
+        {
+            deleteString(hashTable->table[i]->string);
+        }
+        
+        delete[] hashTable->table[i];
+    }
+    
+    delete[] hashTable->table;
+}
+
+bool wordInHashTable(HashTable *hashTable, String *word)
+{
+    for (int i = 0; i < hashTable->maxLength; i++)
+    {
+        if (hashTable->table[i] && areEqual(hashTable->table[i]->string, word))
+        {
+            return true;
+        }
+    }
+    return false;
 }
