@@ -90,7 +90,6 @@ int getMaxNumberOfSamples(HashTable *hashTable)
     
     for (int i = 0; i < hashTable->maxLength; i++)
     {
-        
         if (hashTable->table[i] && hashTable->table[i]->countOfTest > answer)
         {
             answer = hashTable->table[i]->countOfTest;
@@ -122,7 +121,6 @@ void printElementsWithMaxTest(HashTable *hashTable, int answer)
             cout << ' ';
         }
     }
-    
     cout << endl;
 }
 
@@ -134,10 +132,8 @@ void deleteHashTable(HashTable *hashTable)
         {
             deleteString(hashTable->table[i]->string);
         }
-        
         delete[] hashTable->table[i];
     }
-    
     delete[] hashTable->table;
 }
 
