@@ -17,19 +17,6 @@ HashTable* createHashTable()
     return hashTable;
 }
 
-HashTable* createHashTable1()
-{
-    HashTable* table = new HashTable;
-    table->table = new HashElement*[table->size];
-    
-    for (int i = 0; i < table->size; i++)
-    {
-        table->table[i] = nullptr;
-    }
-    
-    return table;
-}
-
 int getHash(String *string, int mod)
 {
     int index = 0;
