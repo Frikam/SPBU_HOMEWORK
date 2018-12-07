@@ -66,21 +66,3 @@ int size(List *list)
     }
     return length;
 }
-
-void removeElement(List *list, int number)
-{
-    ListElement *previous = nullptr;
-    ListElement *current = list->first;
-    
-    if (current->value == number)
-    {
-        list->first = current->next;
-        delete current;
-    }
-    
-    while (current->value != number)
-    {
-        previous = current;
-        current = current->next;
-    }
-}
