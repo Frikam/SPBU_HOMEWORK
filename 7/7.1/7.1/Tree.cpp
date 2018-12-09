@@ -124,13 +124,13 @@ void deleteElement(TreeNode *&current, int number)
         if (current->rightChild == nullptr)
         {
             current = current->leftChild;
-            delete node;
+            delete current;
         }
         
         else if (current->leftChild == nullptr)
         {
             current = current->rightChild;
-            delete node;
+            delete current;
         }
         
         else
@@ -231,39 +231,39 @@ void printTreeDescending(Tree *tree)
     cout << endl;
 }
 
-void printTree(TreeNode *current)
+void printTree(TreeNode *node)
 {
-    cout << current->value << ' ';
-    if (current->leftChild)
+    cout << "(" << node->value << " ";
+    if (node->leftChild)
     {
-        cout << '(';
-        printTree(current->leftChild);
+        printTree(node->leftChild);
     }
     else
     {
-        cout << " null";
+        cout << "null ";
     }
-    
-    if (current->rightChild)
+    if (node->rightChild)
     {
-        cout << '(';
-        printTree(current->rightChild);
+        printTree(node->rightChild);
     }
     else
     {
-        cout << " null) ";
+        cout << "null";
     }
+    cout << ")";
 }
+
 
 void printTree(Tree *tree)
 {
-    if (tree->root)
+    TreeNode *current = tree->root;
+    if (current)
     {
-        printTree(tree->root);
+        printTree(current);
+        cout << endl;
     }
     else
     {
-        cout << "Tree is empty" << endl;
+        cout << "No elements!" << endl;
     }
-    cout << endl;
 }
