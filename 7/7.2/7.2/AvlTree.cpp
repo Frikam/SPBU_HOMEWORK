@@ -289,39 +289,40 @@ void printTreeDescending(Tree *tree)
     }
     cout << endl;
 }
-void printTree(Node *current)
+
+void printTree(Node *node)
 {
-    cout << current->value << ' ';
-    if (current->leftChild)
+    cout << "(" << node->value << " ";
+    if (node->leftChild)
     {
-        cout << '(';
-        printTree(current->leftChild);
+        printTree(node->leftChild);
     }
     else
     {
-        cout << " null";
+        cout << "null ";
     }
-    
-    if (current->rightChild)
+    if (node->rightChild)
     {
-        cout << '(';
-        printTree(current->rightChild);
+        printTree(node->rightChild);
     }
     else
     {
-        cout << " null) ";
+        cout << "null";
     }
+    cout << ")";
 }
+
 
 void printTree(Tree *tree)
 {
-    if (tree->root)
+    Node *current = tree->root;
+    if (current)
     {
-        printTree(tree->root);
+        printTree(current);
+        cout << endl;
     }
     else
     {
-        cout << "Tree is empty" << endl;
+        cout << "No elements!" << endl;
     }
-    cout << endl;
 }
