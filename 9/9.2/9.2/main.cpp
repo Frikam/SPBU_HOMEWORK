@@ -8,14 +8,13 @@
 
 using namespace std;
 
-
-
 int main()
 {
     const int maxLength = 10000;
     int count = 0;
     char sign = '0';
     ifstream input("input.txt");
+    ofstream output("output.txt");
     char *text = new char[maxLength];
     HuffmanTree *tree = createHuffmanTree();
     
@@ -35,22 +34,22 @@ int main()
     
     encode(tree);
     
-    cout << "Frequency of the symbols : " << endl;
-    printFrequencyofSign(tree);
+    output << "Frequency of the symbols : " << endl;
+    printFrequencyofSign(tree, output);
     
-    cout << endl << "Tree : ";
-    printTree(tree);
+    output << endl << "Tree : ";
+    printTree(tree, output);
     
-    cout << endl << "Code of the symbols : ";
+    output << endl << "Code of the symbols : ";
     
     for (int i = 0; i < tree->size; i++)
     {
-        cout << endl << tree->tree[i]->sign << ' ';
-        printCode(tree->tree[i]);
+        output << endl << tree->tree[i]->sign << ' ';
+        printCode(tree->tree[i], output);
 
     }
     
-    cout << endl << "Encoded text : ";
+    output << endl << endl << "Encoded text : ";
     
     for (int i = 0; i < count; i++)
     {
@@ -58,7 +57,7 @@ int main()
         {
             if (tree->tree[j]->sign == text[i])
             {
-                printCode(tree->tree[j]);
+                printCode(tree->tree[j], output);
             }
         }
     }

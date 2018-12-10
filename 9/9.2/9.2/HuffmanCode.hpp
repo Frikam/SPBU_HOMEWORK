@@ -1,6 +1,10 @@
 #pragma once
 
+#include <fstream>
+
 #include "Tree.hpp"
+
+using namespace std;
 
 struct HuffmanNode
 {
@@ -21,9 +25,9 @@ struct HuffmanTree
 HuffmanTree *createHuffmanTree();
 void deleteHuffmanTree(HuffmanTree *tree);
 void addSign(HuffmanTree *tree, char sign);
-void printFrequencyofSign(HuffmanTree *tree);
+void printFrequencyofSign(HuffmanTree *tree, ofstream &output);
 void addInBinTree(HuffmanTree *tree, Tree *binTree);
 void encode(HuffmanTree *tree);
-void printCode(HuffmanNode *node);
-void printTree(HuffmanTree *tree);
+void printCode(HuffmanNode *node, ofstream &output);
+void printTree(HuffmanTree *tree, ofstream &output);
 void deleteHuffmanTree(HuffmanTree *tree);

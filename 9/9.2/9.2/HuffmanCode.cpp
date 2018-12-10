@@ -57,33 +57,11 @@ void addInBinTree(HuffmanTree *tree, Tree *binTree)
     }
 }
 
-void printFrequencyofSign(HuffmanTree *tree)
+void printFrequencyofSign(HuffmanTree *tree, ofstream &output)
 {
     for (int i = 0; i < tree->size; i++)
     {
-        cout << tree->tree[i]->value << ' ' << tree->tree[i]->sign << endl;
-    }
-}
-
-void dfs(HuffmanNode *node)
-{
-    if (node)
-    {
-        if (node->sign != '%')
-        {
-            cout << ' ' << node->sign << endl;
-        }
-        
-        if (node->left)
-        {
-            cout << '0';
-            dfs(node->left);
-        }
-        if (node->right)
-        {
-            cout << '1';
-            dfs(node->right);
-        }
+        output << tree->tree[i]->value << ' ' << tree->tree[i]->sign << endl;
     }
 }
 
@@ -115,7 +93,7 @@ void makeNewParent(HuffmanNode *current, HuffmanNode *newNode, bool isLeft)
     current->parent = newNode;
 }
 
-void printCode(HuffmanNode *node)
+void printCode(HuffmanNode *node, ofstream &output)
 {
     bool isLeft = false;
     
@@ -126,15 +104,15 @@ void printCode(HuffmanNode *node)
             isLeft = true;
         }
         
-        printCode(node->parent);
+        printCode(node->parent, output);
         
         if (isLeft)
         {
-            cout << '0';
+            output << '0';
         }
         else
         {
-            cout << '1';
+            output << '1';
         }
     }
 }
@@ -183,29 +161,29 @@ void encode(HuffmanTree *tree)
     deleteTree(binTree);
 }
 
-void printTree(HuffmanNode *node)
+void printTree(HuffmanNode *node, ofstream &output)
 {
-    cout << "(" << node->value << " ";
+    output << "(" << node->value << " ";
     if (node->left)
     {
-        printTree(node->left);
+        printTree(node->left, output);
     }
     else
     {
-        cout << "null ";
+        output << "null ";
     }
     if (node->right)
     {
-        printTree(node->right);
+        printTree(node->right, output);
     }
     else
     {
-        cout << "null";
+        output << "null";
     }
-    cout << ")";
+    output << ")";
 }
 
-void printTree(HuffmanTree *tree)
+void printTree(HuffmanTree *tree, ofstream &output)
 {
     HuffmanNode *current = tree->tree[0];
     while (current->parent)
@@ -213,8 +191,8 @@ void printTree(HuffmanTree *tree)
         current = current->parent;
     }
     
-    printTree(current);
-    cout << endl;
+    printTree(current, output);
+    output << endl;
 }
 
 void deleteTree(HuffmanNode *current)
