@@ -3,6 +3,7 @@
 struct TreeNode
 {
     int value;
+    char sign;
     TreeNode *leftChild;
     TreeNode *rightChild;
 };
@@ -13,7 +14,7 @@ struct Tree
 };
 
 Tree *createTree();
-void add(Tree *tree, int number);
+void add(Tree *tree, int number, char sign);
 void exist(Tree *tree, int number);
 void deleteElement(Tree *tree, int number);
 void printTree(Tree *tree);

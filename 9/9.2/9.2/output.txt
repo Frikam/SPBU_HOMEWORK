@@ -7,15 +7,15 @@ Frequency of the symbols :
 1 r
 1 !
 
-Tree : (15 (7 (3 null null)(4 null null))(8 (4 (2 null null)(2 null null))(4 (2 null null)(2 (1 null null)(1 null null)))))
+Tree : (15 (7 (3 b null null)(4 e null null))(8 (4 (2 p null null)(2   null null))(4 (2 o null null)(2 (1 r null null)(1 ! null null)))))
 
 Code of the symbols : 
 b 00
 e 01
 p 100
   101
-o 100
-r 1010
-! 1011
+o 110
+r 1110
+! 1111
 
-Encoded text : 0001011001010010010010010100010110101011
+Encoded text : 0001011001010011011010010100010111101111

@@ -53,7 +53,7 @@ void addInBinTree(HuffmanTree *tree, Tree *binTree)
 {
     for (int i = 0; i < tree->size; i++)
     {
-        add(binTree, tree->tree[i]->value);
+        add(binTree, tree->tree[i]->value, tree->tree[i]->sign);
     }
 }
 
@@ -99,7 +99,8 @@ void printCode(HuffmanNode *node, ofstream &output)
     
     if (node->parent)
     {
-        if (node->parent->left->value == node->value && node->parent->left->sign == node->sign)
+        node->parent->sign = node->sign;
+        if (node->parent->left->sign == node->sign)
         {
             isLeft = true;
         }
@@ -132,7 +133,7 @@ void encode(HuffmanTree *tree)
         bool rightUsed = false;
         firstMin = takeMin(binTree);
         secondMin = takeMin(binTree);
-        add(binTree, firstMin + secondMin);
+        add(binTree, firstMin + secondMin, '#');
         HuffmanNode *newNode = new HuffmanNode;
         newNode->sign = '%';
         newNode->value = firstMin + secondMin;
@@ -164,6 +165,12 @@ void encode(HuffmanTree *tree)
 void printTree(HuffmanNode *node, ofstream &output)
 {
     output << "(" << node->value << " ";
+    
+    if (!node->left && !node->right)
+    {
+        output << node->sign << ' ';
+    }
+    
     if (node->left)
     {
         printTree(node->left, output);

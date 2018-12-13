@@ -34,14 +34,14 @@ void deleteTree(Tree *tree)
     deleteTree(current);
 }
 
-void add(Tree *tree, int number)
+void add(Tree *tree, int number, char sign)
 {
     TreeNode *previous = nullptr;
     TreeNode *current = tree->root;
     
     if (!current)
     {
-        tree->root = new TreeNode {number, nullptr, nullptr};
+        tree->root = new TreeNode {number, sign, nullptr, nullptr};
         return;
     }
     
@@ -59,7 +59,7 @@ void add(Tree *tree, int number)
         }
     }
     
-    current = new TreeNode {number, nullptr, nullptr};
+    current = new TreeNode {number, sign, nullptr, nullptr};
     
     if (current->value > previous->value)
     {
@@ -230,6 +230,7 @@ void printTreeDescending(Tree *tree)
 void printTree(TreeNode *node)
 {
     cout << "(" << node->value << " ";
+    
     if (node->leftChild)
     {
         printTree(node->leftChild);
