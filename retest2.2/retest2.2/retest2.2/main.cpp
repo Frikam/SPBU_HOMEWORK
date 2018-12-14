@@ -22,7 +22,10 @@ int main()
     cout << "List before sorting : ";
     print(list);
 
-    sort(list, length);
+    if (length != 1)
+    {
+        sort(list, length);
+    }
     
     cout << "List after sorting : ";
     print(list);
