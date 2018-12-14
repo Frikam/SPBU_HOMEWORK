@@ -12,23 +12,30 @@ int main()
     cin >> length;
     int number = 0;
     
-    for (int i = 0; i < length; i++)
+    if (length > 0)
     {
-        cout << "Enter number : ";
-        cin >> number;
-        add(list, number);
+        for (int i = 0; i < length; i++)
+        {
+            cout << "Enter number : ";
+            cin >> number;
+            add(list, number);
+        }
+        
+        cout << "List before sorting : ";
+        print(list);
+        
+        if (length != 1)
+        {
+            sort(list, length);
+        }
+        
+        cout << "List after sorting : ";
+        print(list);
     }
-    
-    cout << "List before sorting : ";
-    print(list);
-
-    if (length != 1)
+    else
     {
-        sort(list, length);
+        cout << "List is empty";
     }
-    
-    cout << "List after sorting : ";
-    print(list);
     
     deleteList(list);
     return 0;
