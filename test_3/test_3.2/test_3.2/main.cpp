@@ -4,7 +4,6 @@ using namespace std;
 
 int main()
 {
-    int min = 0;
     cout << "Array NxM" << endl;
     cout << "Enter N : ";
     int n = 0;
