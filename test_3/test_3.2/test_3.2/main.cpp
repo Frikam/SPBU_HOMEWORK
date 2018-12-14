@@ -49,6 +49,11 @@ int main()
         }
     }
     
+    for (int i = 0; i < n; i++)
+    {
+        delete[] array[i];
+    }
+    
     delete[] array;
     delete[] maxInColumn;
     delete[] minInline;
