@@ -59,13 +59,13 @@ int size(List *list)
 void sort(List *list, int length)
 {
     ListElement *current = list->first;
-    ListElement *pointer = list->first;
+    ListElement *pointer = list->first->next;
     ListElement *pointerOnMin = list->first;
     int min = current->value;
     
     for (int j = 0; j < length - 1; j++)
     {
-        for (int i = j; i < length; i++)
+        for (int i = j + 1; i < length; i++)
         {
             if (min > pointer->value)
             {
@@ -79,8 +79,9 @@ void sort(List *list, int length)
         pointerOnMin->value = current->value;
         current->value = min;
         current = current->next;
+        
         pointerOnMin = current;
-        pointer = current;
-        min = pointer->value;
+        pointer = current->next;
+        min = current->value;
     }
 }
