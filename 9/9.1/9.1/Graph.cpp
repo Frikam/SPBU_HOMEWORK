@@ -76,4 +76,5 @@ void deleteGraph(Graph *graph)
     }
     
     delete[] graph->state;
+    delete graph;
 }

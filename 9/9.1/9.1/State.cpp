@@ -48,7 +48,6 @@ void addSityInState(Graph *graph, int index)
         }
     }
     
-    
     if (sity != -1)
     {
         for (int i = 0; i < graph->numberOfCity; i++)
