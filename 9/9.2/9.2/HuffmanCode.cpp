@@ -100,6 +100,7 @@ void printCode(HuffmanNode *node, ofstream &output)
     if (node->parent)
     {
         node->parent->sign = node->sign;
+        
         if (node->parent->left->sign == node->sign)
         {
             isLeft = true;
@@ -225,5 +226,12 @@ void deleteHuffmanTree(HuffmanTree *tree)
     {
         return;
     }
+    
+    while (current->parent)
+    {
+        current = current->parent;
+    }
+    
     deleteTree(current);
+    delete tree;
 }
