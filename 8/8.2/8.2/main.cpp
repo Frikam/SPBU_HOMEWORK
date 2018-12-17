@@ -15,11 +15,11 @@ int main()
     cout << "Enter second word : ";
     cin >> secondWord;
     
-    cout << "Create string";
+    cout << "Create string" << endl;
     String *line = createString(word);
     String *secondLine = createString(secondWord);
 
-    cout << "Count length of word" << endl;
+    cout << "Count length of word : ";
     int size = getSize(line);
     cout << size << endl;
     
@@ -40,8 +40,7 @@ int main()
     
     String *newString = clone(line);
     
-    char *newWord = new char[maxLength];
-    newWord = representation(line);
+    char *newWord = representation(line);
     
     deleteString(line);
     deleteString(secondLine);
