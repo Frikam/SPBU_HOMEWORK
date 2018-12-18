@@ -20,7 +20,6 @@ int main()
     ifstream input("input.txt");
     char *word = new char [length];
     String *newString = nullptr;
-    String *wordWithoutSymbol = nullptr;
     HashTable *hashTable = createHashTable();
     
     while(!input.eof())
@@ -40,7 +39,7 @@ int main()
             
             if (i != 0)
             {
-                wordWithoutSymbol = substring(newString, i - 1);
+                String *wordWithoutSymbol = substring(newString, i - 1);
                 if (wordInHashTable(hashTable, wordWithoutSymbol))
                 {
                     cout << "Word : '";

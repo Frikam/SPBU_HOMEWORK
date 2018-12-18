@@ -132,19 +132,27 @@ void deleteHashTable(HashTable *hashTable)
         {
             deleteString(hashTable->table[i]->string);
         }
-        delete[] hashTable->table[i];
+        delete hashTable->table[i];
     }
     delete[] hashTable->table;
 }
 
 bool wordInHashTable(HashTable *hashTable, String *word)
 {
-    for (int i = 0; i < hashTable->maxLength; i++)
+    int hash = getHash(word, hashTable->maxLength);
+    int step = 0;
+    int index = hash;
+    int count = 0;
+    
+    while (hashTable->table[index] && count != hashTable->maxLength)
     {
-        if (hashTable->table[i] && areEqual(hashTable->table[i]->string, word))
+        if (areEqual(hashTable->table[index]->string, word))
         {
             return true;
         }
+        index = (hash + step * step) % hashTable->maxLength;
+        step++;
+        count++;
     }
     return false;
 }
