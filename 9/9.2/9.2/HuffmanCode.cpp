@@ -6,10 +6,12 @@
 
 using namespace std;
 
+int const maxLength = 1000;
+
 HuffmanTree *createHuffmanTree()
 {
     HuffmanTree *tree = new HuffmanTree;
-    tree->size = 1000;
+    tree->size = maxLength;
     tree->tree = new HuffmanNode *[tree->size];
     for (int i = 0; i < tree->size; i++)
     {
@@ -30,7 +32,7 @@ void addSign(HuffmanTree *tree, char sign)
     
     if (!tree->tree[index])
     {
-        if (tree->size == 1000)
+        if (tree->size == maxLength)
         {
             tree->size = 0;
         }
