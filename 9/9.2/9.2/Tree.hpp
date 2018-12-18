@@ -22,3 +22,4 @@ void printTreeAscending(Tree *tree);
 void printTreeDescending(Tree *tree);
 void deleteTree(Tree *tree);
 int takeMin(Tree *tree);
+void deleteElement3(TreeNode *&node);

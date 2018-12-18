@@ -104,74 +104,70 @@ void exist(Tree *tree, int number)
     cout << "Number not in tree" << endl;
 }
 
-void deleteElement(TreeNode *&current, int number)
+TreeNode *specifyLeftChild(TreeNode *&node)
 {
-    if (current->value == number)
+    if (!node->leftChild)
     {
-        if (current->rightChild == nullptr && current->leftChild == nullptr)
-        {
-            delete current;
-            current = nullptr;
-            return;
-        }
-        
-        TreeNode *node = current;
-
-        if (current->rightChild == nullptr)
-        {
-            current = current->leftChild;
-            delete node;
-        }
-        
-        else if (current->leftChild == nullptr)
-        {
-            current = current->rightChild;
-            delete node;
-        }
-        
-        else
-        {
-            TreeNode *previous = current;
-            node = node->rightChild;
-            
-            while (node->leftChild)
-            {
-                previous = node;
-                node = node->leftChild;
-            }
-            
-            if (isLeftChild(previous, node->value))
-            {
-                current->value = node->value;
-                previous->leftChild = (node)->leftChild;
-            }
-            
-            else
-            {
-                current->value = node->value;
-                previous->rightChild = node->rightChild;
-            }
-            
-            delete node;
-        }
+        return node;
     }
-    
     else
     {
-        if (current->value >= number)
+        return specifyLeftChild(node->leftChild);
+    }
+    return 0;
+}
+
+void deleteElement(TreeNode *&node, int value)
+{
+    if (node)
+    {
+        if (value == node->value)
         {
-            deleteElement(current->leftChild, number);
+            TreeNode *deletedElement = node;
+            if ((node->leftChild) && (node->rightChild))
+            {
+                deletedElement = specifyLeftChild(node->rightChild);
+                node->value = deletedElement->value;
+                deleteElement(node->rightChild, deletedElement->value);
+                return;
+            }
+            else
+            {
+                if (!((node->leftChild) || (node->rightChild)))
+                {
+                    node = nullptr;
+                }
+                else
+                {
+                    if (node->leftChild)
+                    {
+                        node = deletedElement->leftChild;
+                    }
+                    else
+                    {
+                        node = deletedElement->rightChild;
+                    }
+                }
+            }
+            delete deletedElement;
         }
         else
         {
-            deleteElement(current->rightChild, number);
+            if (value > node->value)
+            {
+                deleteElement(node->rightChild, value);
+            }
+            else
+            {
+                deleteElement(node->leftChild, value);
+            }
         }
     }
 }
 
-void deleteElement(Tree *tree, int number)
+void deleteElement(Tree *tree, int value)
 {
-    deleteElement(tree->root, number);
+    deleteElement(tree->root, value);
 }
 
 void printTreeAscending(TreeNode *current)

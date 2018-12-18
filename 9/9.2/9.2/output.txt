@@ -1,0 +1,31 @@
+Frequency of the symbols : 
+3 b
+5 e
+2 p
+2  
+2 o
+1 r
+1 !
+2 t
+2 s
+3 .
+1 a
+1 d
+
+Tree : (25 (10 (5 (2 (1 a null null)(1 d null null))(3 b null null))(5 e null null))(15 (7 (3 . null null)(4 (2 p null null)(2   null null)))(8 (4 (2 o null null)(2 (1 r null null)(1 ! null null)))(4 (2 t null null)(2 s null null)))))
+
+Code of the symbols : 
+b 001
+e 01
+p 1010
+  1011
+o 1100
+r 11010
+! 11011
+t 1110
+s 1111
+. 100
+a 0000
+d 0001
+
+Encoded text : 00101011010101100111001100101010110010101110101101111100111111110100100100000011110001

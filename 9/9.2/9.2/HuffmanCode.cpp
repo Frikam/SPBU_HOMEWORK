@@ -33,19 +33,12 @@ void addSign(HuffmanTree *tree, char sign)
     if (!tree->tree[index])
     {
         tree->size++;
-        tree->tree[index] = new HuffmanNode;
-        tree->tree[index]->parent = nullptr;
-        tree->tree[index]->sign = sign;
-        tree->tree[index]->value = 1;
-        tree->tree[index]->left = nullptr;
-        tree->tree[index]->right = nullptr;
+        tree->tree[index] = new HuffmanNode {nullptr, nullptr, nullptr, sign, 1};
     }
     else
     {
         tree->tree[index]->value++;
     }
-    
-    //cout << tree->tree[index]->sign << ' ' << tree->tree[index]->value << endl;
 }
 
 void addInBinTree(HuffmanTree *tree, Tree *binTree)
@@ -120,7 +113,6 @@ void printCode(HuffmanNode *node, ofstream &output)
 
 void buildTree(HuffmanTree *tree)
 {
-    HuffmanNode *mainNode;
     Tree *binTree = createTree();
     addInBinTree(tree, binTree);
     int index = tree->size;
@@ -131,7 +123,6 @@ void buildTree(HuffmanTree *tree)
     {
         bool leftUsed = false;
         bool rightUsed = false;
-        printTree(binTree);
         firstMin = takeMin(binTree);
         secondMin = takeMin(binTree);
         add(binTree, firstMin + secondMin, '#');
@@ -157,7 +148,6 @@ void buildTree(HuffmanTree *tree)
         }
         
         index--;
-        mainNode = newNode;
     }
     
     deleteTree(binTree);
