@@ -38,5 +38,5 @@ void printSetAscending(Set *set)
 
 void deleteElement(Set *set, int number)
 {
-    deleteElement(set->tree, number);
+    deleteElement(set->tree->root, number);
 }
