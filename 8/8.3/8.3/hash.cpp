@@ -135,6 +135,7 @@ void deleteHashTable(HashTable *hashTable)
         delete hashTable->table[i];
     }
     delete[] hashTable->table;
+    delete hashTable;
 }
 
 bool wordInHashTable(HashTable *hashTable, String *word)
