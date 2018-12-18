@@ -11,9 +11,9 @@ int const maxLength = 1000;
 HuffmanTree *createHuffmanTree()
 {
     HuffmanTree *tree = new HuffmanTree;
-    tree->size = maxLength;
+    tree->size = 0;
     tree->tree = new HuffmanNode *[tree->size];
-    for (int i = 0; i < tree->size; i++)
+    for (int i = 0; i < maxLength; i++)
     {
         tree->tree[i] = nullptr;
     }
@@ -31,12 +31,7 @@ void addSign(HuffmanTree *tree, char sign)
     }
     
     if (!tree->tree[index])
-    {
-        if (tree->size == maxLength)
-        {
-            tree->size = 0;
-        }
-        
+    {        
         tree->size++;
         tree->tree[index] = new HuffmanNode;
         tree->tree[index]->parent = nullptr;
