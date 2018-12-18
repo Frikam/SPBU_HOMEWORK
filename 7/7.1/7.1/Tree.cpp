@@ -108,52 +108,75 @@ void exist(Tree *tree, int number)
     cout << "Number not in tree" << endl;
 }
 
-
-void deleteElement(TreeNode *&node)
+void deleteElement(TreeNode *&current, int number)
 {
-    TreeNode *removing = node;
-
-    if (!node->leftChild && !node->rightChild)
+    if (current->value == number)
     {
-        delete removing;
-        node = nullptr;
+        if (current->rightChild == nullptr && current->leftChild == nullptr)
+        {
+            delete current;
+            current = nullptr;
+            return;
+        }
+        
+        TreeNode *node = current;
+        
+        if (current->rightChild == nullptr)
+        {
+            current = current->leftChild;
+            delete current;
+        }
+        
+        else if (current->leftChild == nullptr)
+        {
+            current = current->rightChild;
+            delete current;
+        }
+        
+        else
+        {
+            TreeNode *previous = current;
+            node = node->rightChild;
+            
+            while (node->leftChild)
+            {
+                previous = current;
+                node = node->leftChild;
+            }
+            
+            if (isLeftChild(previous, current->value))
+            {
+                current->value = node->value;
+                previous = (node)->leftChild;
+            }
+            
+            else
+            {
+                current->value = node->value;
+                previous->rightChild = node->rightChild;
+            }
+            
+            delete current;
+        }
     }
-    else if (!node->leftChild && node->rightChild)
-    {
-        node = node->rightChild;
-        delete removing;
-    }
-    else if(node->leftChild && !node->rightChild)
-    {
-        node = node->leftChild;
-        delete removing;
-    }
+    
     else
     {
-        TreeNode **minimalInRightSubtree = &node->rightChild;
-        while ((*minimalInRightSubtree)->leftChild)
+        if (current->value > number)
         {
-            *minimalInRightSubtree = (*minimalInRightSubtree)->leftChild;
+            deleteElement(current->leftChild, number);
         }
-        node->value = (*minimalInRightSubtree)->value;
-        deleteElement(*minimalInRightSubtree);
+        
+        else
+        {
+            deleteElement(current->rightChild, number);
+        }
     }
 }
 
-void deleteElement(TreeNode *&node, int number)
+void deleteElement(Tree *tree, int number)
 {
-    if (node->value > number)
-    {
-        deleteElement(node->leftChild, number);
-    }
-    else if (node->value < number)
-    {
-        deleteElement(node->rightChild, number);
-    }
-    else
-    {
-        deleteElement(node);
-    }
+    deleteElement(tree->root, number);
 }
 
 void printTreeAscending(TreeNode *current)
