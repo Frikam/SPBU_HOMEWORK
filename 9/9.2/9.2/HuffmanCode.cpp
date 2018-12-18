@@ -119,7 +119,7 @@ void printCode(HuffmanNode *node, ofstream &output)
     }
 }
 
-void encode(HuffmanTree *tree)
+void buildTree(HuffmanTree *tree)
 {
     HuffmanNode *mainNode;
     Tree *binTree = createTree();

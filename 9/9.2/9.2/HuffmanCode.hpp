@@ -27,7 +27,7 @@ void deleteHuffmanTree(HuffmanTree *tree);
 void addSign(HuffmanTree *tree, char sign);
 void printFrequencyofSign(HuffmanTree *tree, ofstream &output);
 void addInBinTree(HuffmanTree *tree, Tree *binTree);
-void encode(HuffmanTree *tree);
+void buildTree(HuffmanTree *tree);
 void printCode(HuffmanNode *node, ofstream &output);
 void printTree(HuffmanTree *tree, ofstream &output);
 void deleteHuffmanTree(HuffmanTree *tree);

@@ -20,19 +20,16 @@ int main()
     
     while (!input.eof())
     {
-        if (!input.eof())
+        input.get(sign);
+        text[count] = sign;
+        if (sign != '\n')
         {
-            input.get(sign);
-            text[count] = sign;
-            if (sign != '\n')
-            {
-                addSign(tree, sign);
-            }
-            count++;
+            addSign(tree, sign);
         }
+        count++;
     }
     
-    encode(tree);
+    buildTree(tree);
     
     output << "Frequency of the symbols : " << endl;
     printFrequencyofSign(tree, output);
