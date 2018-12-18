@@ -66,8 +66,8 @@ int main()
     cout << "Number of empty elements : ";
     cout << emptyElements(hashTable) << endl;
     
-    deleteString(newString);
     delete[] word;
+    deleteString(newString);
     deleteHashTable(hashTable);
     input.close();
     return 0;
