@@ -116,7 +116,7 @@ void deleteElement(TreeNode *&current, int number)
         }
         
         TreeNode *node = current;
-        
+
         if (current->rightChild == nullptr)
         {
             current = current->leftChild;
@@ -136,14 +136,14 @@ void deleteElement(TreeNode *&current, int number)
             
             while (node->leftChild)
             {
-                previous = current;
+                previous = node;
                 node = node->leftChild;
             }
             
             if (isLeftChild(previous, node->value))
             {
                 current->value = node->value;
-                previous = (node)->leftChild;
+                previous->leftChild = (node)->leftChild;
             }
             
             else
@@ -162,7 +162,6 @@ void deleteElement(TreeNode *&current, int number)
         {
             deleteElement(current->leftChild, number);
         }
-        
         else
         {
             deleteElement(current->rightChild, number);
