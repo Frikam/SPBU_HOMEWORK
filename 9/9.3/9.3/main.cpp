@@ -64,7 +64,7 @@ int main()
                 {
                     listPop(list);
                 }
-                previousSign = ')';
+                previousSign = sign;
             }
             
             fin.get(sign);
