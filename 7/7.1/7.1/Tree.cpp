@@ -32,6 +32,7 @@ void deleteTree(Tree *tree)
         return;
     }
     deleteTree(current);
+    delete tree;
 }
 
 void add(Tree *tree, int number)
