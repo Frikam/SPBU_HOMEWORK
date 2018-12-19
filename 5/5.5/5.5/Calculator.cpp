@@ -1,6 +1,28 @@
 #include <string.h>
 
+#include <iostream>
+
 #include "stack.hpp"
+
+#include "FromInfixToPostfix.hpp"
+
+#include "Calculator.hpp"
+
+using namespace std;
+
+void infixToPostfix(char *line, char *postfixForm)
+{
+    int index = 0;
+    Stack *stackSign = createList();
+
+    for (int i = 0; i < strlen(line); i++)
+    {
+        addElementInStack(stackSign, line, postfixForm, i, index);
+    }
+    
+    saveStack(stackSign, postfixForm, index);
+    deleteStack(stackSign);
+}
 
 void calculate(Stack *list, int firstNumber, int secondNumber, char sign)
 {
@@ -63,4 +85,15 @@ void calculateAnswer(Stack *stackNumber,char *postfixForm)
             }
         }
     }
+}
+
+void calculateAnswer(char *postfixForm)
+{
+    Stack *stackNumber = createList();
+    
+    calculateAnswer(stackNumber, postfixForm);
+    
+    cout << "Answer : ";
+    print(stackNumber);
+    deleteStack(stackNumber);
 }

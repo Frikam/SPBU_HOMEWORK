@@ -1,4 +1,4 @@
-#include "FromInfixToPostFix.hpp"
+#include "FromInfixToPostfix.hpp"
 
 void deleteUntilOpenedBracketOrPriorityLower(Stack *list, char sign1, char *postfixForm, int &index)
 {
