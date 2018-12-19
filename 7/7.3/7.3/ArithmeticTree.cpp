@@ -161,4 +161,5 @@ void deleteTree(ArithmeticTree *tree)
 {
     ArithmeticTreeNode *current = tree->root;
     deleteTree(current);
+    delete tree;
 }
