@@ -1,8 +1,10 @@
 #include <iostream>
 
+#include <string.h>
+
 using namespace std;
 
-long long const maxLength = 10000000000000;
+long long const mod = 10000000000000;
 
 void countHashOfString(char *string, long length, int *hashOfString)
 {
@@ -11,11 +13,11 @@ void countHashOfString(char *string, long length, int *hashOfString)
     
     for (int i = 0; i < length; i++)
     {
-        hashOfString[i] = (string[i] - 'a' + 1) * number % maxLength;
+        hashOfString[i] = (string[i] - 'a' + 1) * number % mod;
         
         if (i != 0)
         {
-            hashOfString[i] = (hashOfString[i] + hashOfString[i - 1]) % maxLength;
+            hashOfString[i] = (hashOfString[i] + hashOfString[i - 1]) % mod;
         }
         
         number = number * power;
@@ -30,7 +32,7 @@ int getHashOfSubstring(char *substring, long length)
     
     for (int i = 0; i < length; i++)
     {
-        answer = (answer + ((substring[i] - 'a' + 1) * number) % maxLength) % maxLength;
+        answer = (answer + ((substring[i] - 'a' + 1) * number) % mod) % mod;
         number = number * power;
     }
     
@@ -54,6 +56,7 @@ bool isEqual(char *string, int index, char *substring)
 
 int main()
 {
+    int const maxLength = 1000;
     int count = 0;
     int number = 1;
     int power = 5;
@@ -79,7 +82,7 @@ int main()
             hash -= hashOfString[i - 1];
         }
         
-        if (hash == (hashOfSubstring * number) % maxLength && isEqual(string, i, substring))
+        if (hash == (hashOfSubstring * number) % mod && isEqual(string, i, substring))
         {
             cout << "Index of entries : " << i << endl;
             count++;
