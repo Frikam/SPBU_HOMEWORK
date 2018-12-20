@@ -17,9 +17,10 @@ void deleteQueue(Queue *queue)
     
     delete queue;
 }
-void add(Queue *queue, int x, int y)
+
+void add(Queue *queue, int x, int y, int x1, int y1)
 {
-    queue->first = new QueueElement {x, y, queue->first};
+    queue->first = new QueueElement {x, y, x1, y1, queue->first};
 }
 
 void remove(Queue *queue, int x, int y)

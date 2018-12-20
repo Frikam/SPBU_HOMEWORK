@@ -22,26 +22,35 @@ int main()
     int x2 = 0;
     int y2 = 0;
     fin >> x2 >> y2;
-    bool **array = new bool *[n];
-    int **rightWay = new int *[n];
-    cout << "Map : ";
+    int **array = new int *[n];
+    bool **isUsed = new bool *[n];
+    Coordinate **rightWay = new Coordinate *[n];
+    cout << "Map : " << endl;
     
     for (int i = 0; i < n; i++)
     {
-        cout << endl;
-        array[i] = new bool [m];
-        rightWay[i] = new int [m];
+        rightWay[i] = new Coordinate [m];
+        array[i] = new int [m];
+        isUsed[i] = new bool [m];
         for (int j = 0; j < m; j++)
         {
-            rightWay[i][j] = 0;
+            rightWay[i][j] = *new Coordinate {0, 0};
+            isUsed[i][j] = false;
             fin >> array[i][j];
             cout << array[i][j] << ' ';
         }
+        cout << endl;
+
     }
     
-    Map *map = createMap(x2, y2, n, m, array);
-    aStar(map, rightWay, x1, y1);
+    Map *map = createMap(y2, x2, n, m, array);
+    aStar(map, isUsed, y1, x1, rightWay);
     deleteMap(map);
+    for (int i = 0; i < n; i++)
+    {
+        delete[] isUsed[i];
+    }
+    delete[] isUsed;
     fin.close();
     return 0;
 }

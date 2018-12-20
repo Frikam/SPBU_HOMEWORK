@@ -1,6 +1,6 @@
 #include "Map.hpp"
 
-Map *createMap(int x, int y, int sizeX, int sizeY, bool **map)
+Map *createMap(int x, int y, int sizeX, int sizeY, int **map)
 {
     return new Map {x, y, sizeX, sizeY, map};
 }
@@ -11,6 +11,6 @@ void deleteMap(Map *map)
     {
         delete[] map->map[i];
     }
-    
+    delete[] map->map;
     delete map;
 }
