@@ -53,7 +53,7 @@ void aStar(Map *map, bool **isUsed, int currentX, int currentY, Coordinate **rig
             {
                 if (map->map[i][j] == -1)
                 {
-                    cout << '#' << ' ';
+                    cout << '.' << ' ';
                 }
                 else
                 {
