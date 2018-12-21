@@ -31,6 +31,14 @@ bool isRightNode(bool *city, int n)
     return true;
 }
 
+void printNode(bool *city, int n)
+{
+    for (int i = 0; i < n; i++)
+    {
+        cout << city[i] << ' ';
+    }
+}
+
 void refreshArray(bool *city, int n)
 {
     for (int i = 0; i < n; i++)
@@ -48,7 +56,7 @@ void bypass(int **graph, bool *city, int index, int m, int n, int currentCity)
             int numberOfCity = findAnotherCity(graph, n, i);
             if (!city[numberOfCity])
             {
-                city[i] = true;
+                city[numberOfCity] = true;
                 bypass(graph, city, numberOfCity, m, n, currentCity);
             }
         }
