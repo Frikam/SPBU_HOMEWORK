@@ -19,7 +19,6 @@ int main()
     const int length = 10000;
     ifstream input("input.txt");
     char *word = new char [length];
-    //String *newString = nullptr;
     HashTable *hashTable = createHashTable();
     
     while(!input.eof())
