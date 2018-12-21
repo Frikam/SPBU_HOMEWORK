@@ -19,7 +19,7 @@ int main()
     const int length = 10000;
     ifstream input("input.txt");
     char *word = new char [length];
-    String *newString = nullptr;
+    //String *newString = nullptr;
     HashTable *hashTable = createHashTable();
     
     while(!input.eof())
@@ -27,7 +27,7 @@ int main()
         input >> word;
         if (!input.eof())
         {
-            newString = createString(word);
+            String *newString = createString(word);
             int i = 0;
             for (i = 0; i < newString->length; i++)
             {
@@ -47,7 +47,9 @@ int main()
                     cout << "' already in hashTable" << endl;
                 }
                 addString(hashTable, wordWithoutSymbol);
+                //deleteString(wordWithoutSymbol);
             }
+            deleteString(newString);
         }
     }
     
@@ -66,7 +68,6 @@ int main()
     cout << emptyElements(hashTable) << endl;
     
     delete[] word;
-    deleteString(newString);
     deleteHashTable(hashTable);
     input.close();
     return 0;
