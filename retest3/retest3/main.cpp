@@ -101,5 +101,6 @@ int main()
     
     delete[] graph;
     delete[] city;
+    fin.close();
     return 0;
 }
