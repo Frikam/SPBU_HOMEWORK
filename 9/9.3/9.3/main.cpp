@@ -86,5 +86,6 @@ int main()
     delete[] text;
     deleteTree(tree);
     deleteList(list);
+    fin.close();
     return 0;
 }
