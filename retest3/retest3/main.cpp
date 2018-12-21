@@ -31,11 +31,11 @@ bool isRightNode(bool *city, int n)
     return true;
 }
 
-void refreshArray(bool *sity, int n)
+void refreshArray(bool *city, int n)
 {
     for (int i = 0; i < n; i++)
     {
-        sity[i] = false;
+        city[i] = false;
     }
 }
 
