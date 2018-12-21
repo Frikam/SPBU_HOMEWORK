@@ -2,6 +2,8 @@
 
 #include <string.h>
 
+#include <fstream>
+
 using namespace std;
 
 int findAnotherCity(int **graph, int n, int index)
@@ -70,13 +72,12 @@ void findNode(int **graph, bool *city, int n, int m)
 
 int main()
 {
-    cout << "Enter N : ";
+    ifstream fin("input.txt");
     int n = 0;
-    cin >> n;
+    fin >> n;
     
-    cout << "Enter M : ";
     int m = 0;
-    cin >> m;
+    fin >> m;
     
     bool *city = new bool [n];
     
@@ -84,11 +85,10 @@ int main()
    
     for (int i = 0; i < n; i++)
     {
-        cout << "Enter line : ";
         graph[i] = new int [m];
         for (int j = 0; j < m; j++)
         {
-            cin >> graph[i][j];
+            fin >> graph[i][j];
         }
     }
     
