@@ -81,9 +81,10 @@ int main()
     bool *city = new bool [n];
     
     int **graph = new int *[n];
-    
+   
     for (int i = 0; i < n; i++)
     {
+        cout << "Enter line : ";
         graph[i] = new int [m];
         for (int j = 0; j < m; j++)
         {
