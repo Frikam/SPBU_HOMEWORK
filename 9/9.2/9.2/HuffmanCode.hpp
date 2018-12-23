@@ -30,3 +30,4 @@ void buildTree(HuffmanTree *tree);
 void printCode(HuffmanNode *node, ofstream &output);
 void printTree(HuffmanTree *tree, ofstream &output);
 void deleteHuffmanTree(HuffmanTree *tree);
+void readFile(HuffmanTree *tree, char *text, ifstream &input, int &count);

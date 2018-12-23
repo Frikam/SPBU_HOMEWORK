@@ -12,22 +12,12 @@ int main()
 {
     const int maxLength = 10000;
     int count = 0;
-    char sign = '0';
     ifstream input("input.txt");
     ofstream output("output.txt");
     char *text = new char[maxLength];
     HuffmanTree *tree = createHuffmanTree();
     
-    while (!input.eof())
-    {
-        input.get(sign);
-        if (!input.eof())
-        {
-            text[count] = sign;
-            addSign(tree, sign);
-            count++;
-        }
-    }
+    readFile(tree, text, input, count);
     
     buildTree(tree);
     

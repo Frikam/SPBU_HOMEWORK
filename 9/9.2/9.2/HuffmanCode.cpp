@@ -8,6 +8,21 @@ using namespace std;
 
 int const maxLength = 1000;
 
+void readFile(HuffmanTree *tree, char *text, ifstream &input, int &count)
+{
+    char sign = '0';
+    while (!input.eof())
+    {
+        input.get(sign);
+        if (!input.eof())
+        {
+            text[count] = sign;
+            addSign(tree, sign);
+            count++;
+        }
+    }
+}
+
 HuffmanTree *createHuffmanTree()
 {
     HuffmanTree *tree = new HuffmanTree;
@@ -214,6 +229,8 @@ void deleteHuffmanTree(HuffmanTree *tree)
     
     if (!current)
     {
+        delete[] tree->tree;
+        delete tree;
         return;
     }
     
