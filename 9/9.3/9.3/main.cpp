@@ -22,6 +22,11 @@ int main()
     Tree *tree = createTree();
     fin.get(sign);
 
+    while (sign != '(')
+    {
+        fin.get(sign);
+    }
+    
     while (sign != '\n')
     {
         if (sign == '(')
@@ -69,6 +74,11 @@ int main()
             
             fin.get(sign);
         }
+    }
+    
+    while (sign != 'a')
+    {
+        
     }
     
     count = 0;

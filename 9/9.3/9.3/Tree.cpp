@@ -31,9 +31,11 @@ void deleteTree(Tree *tree)
     TreeNode *current = tree->root;
     if (!current)
     {
+        delete tree;
         return;
     }
     deleteTree(current);
+    delete tree;
 }
 
 void add(Tree *tree, int number, List *list)
