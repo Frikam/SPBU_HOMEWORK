@@ -15,6 +15,7 @@ Frequency of the symbols :
 1 d
 
 Tree : (28 (11 (5 e null null)(6 (3 
+
  null null)(3 . null null)))(17 (8 (4 (2 p null null)(2   null null))(4 (2 o null null)(2 (1 r null null)(1 ! null null))))(9 (4 (2 t null null)(2 s null null))(5 (2 (1 a null null)(1 d null null))(3 b null null)))))
 
 Code of the symbols : 

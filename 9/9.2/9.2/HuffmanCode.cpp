@@ -174,6 +174,10 @@ void printTree(HuffmanNode *node, ofstream &output)
     
     if (!node->left && !node->right)
     {
+        if (node->sign == '\n')
+        {
+            output << node->sign;
+        }
         output << node->sign << ' ';
     }
     
