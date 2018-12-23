@@ -73,12 +73,9 @@ int main()
     
     while (!fin.eof())
     {
-        if (!fin.eof())
-        {
-            fin >> sign;
-            text[count] = sign;
-            count++;
-        }
+        fin >> sign;
+        text[count] = sign;
+        count++;
     }
 
     decodeText(text, tree);

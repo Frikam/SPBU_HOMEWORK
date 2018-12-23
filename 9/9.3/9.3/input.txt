@@ -1,3 +1,4 @@
-(15 (7 (3 b null null)(4 e null null))(8 (4 (2 p null null)(2   null null))(4 (2 o null null)(2 (1 r null null)(1 ! null null)))))
+(25 (10 (5 (2 (1 a null null)(1 d null null))(3 b null null))(5 e null null))(15 (7 (3 . null null)(4 (2 p null null)(2   null null)))(8 (4 (2 o null null)(2 (1 r null null)(1 ! null null)))(4 (2 t null null)(2 s null null)))))
 
-0001011001010011011010010100010111101111
+00101011010101100111001100101010110010101110101101111100111111110100100100000011110001
+

@@ -85,7 +85,6 @@ void add(Tree *tree, int number, List *list)
 
 void addSign(Tree *tree, List *list, char sign)
 {
-    TreeNode *previous = nullptr;
     TreeNode *current = tree->root;
     ListElement *pointer = list->top;
     
