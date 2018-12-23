@@ -125,13 +125,13 @@ void deleteElement(TreeNode *&current, int number)
         if (current->rightChild == nullptr)
         {
             current = current->leftChild;
-            delete current;
+            delete node;
         }
         
         else if (current->leftChild == nullptr)
         {
             current = current->rightChild;
-            delete current;
+            delete node;
         }
         
         else
