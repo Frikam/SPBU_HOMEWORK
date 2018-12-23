@@ -43,6 +43,7 @@ void addString(HashTable *hashTable, String *word)
         {
             hashTable->table[index]->size++;
             hashTable->size++;
+            deleteString(word);
             return;
         }
         index = (hashNumber + step * step) % hashTable->maxLength;
