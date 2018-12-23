@@ -49,8 +49,10 @@ int main()
     for (int i = 0; i < n; i++)
     {
         delete[] isUsed[i];
+        delete[] rightWay[i];
     }
     delete[] isUsed;
+    delete[] rightWay;
     fin.close();
     return 0;
 }
