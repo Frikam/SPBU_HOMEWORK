@@ -29,6 +29,7 @@ void deleteTree(Tree *tree)
     TreeNode *current = tree->root;
     if (!current)
     {
+        delete tree;
         return;
     }
     deleteTree(current);
