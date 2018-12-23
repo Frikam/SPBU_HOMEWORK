@@ -62,6 +62,7 @@ void add(Tree *tree, int number)
         else
         {
             cout << "That number is already in tree" << endl;
+            return;
         }
     }
     
