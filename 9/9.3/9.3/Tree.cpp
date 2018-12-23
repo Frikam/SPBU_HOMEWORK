@@ -1,14 +1,93 @@
-#include <iostream>
-
-#include <string.h>
-
 #include "Tree.hpp"
-
-using namespace std;
 
 Tree *createTree()
 {
     return new Tree {nullptr};
+}
+
+void buildTree(List *list,Tree *tree, char *text, ifstream &fin)
+{
+    int count = 0;
+    bool isFirstSign = true;
+    int number = 0;
+    char previousSign = ' ';
+    char sign = ' ';
+    
+    fin.get(sign);
+    
+    while (sign != '(')
+    {
+        fin.get(sign);
+    }
+    
+    while (sign != '\n')
+    {
+        if (sign == '(')
+        {
+            if (previousSign == ')')
+            {
+                listPush(list, 1);
+            }
+            else if (!isFirstSign)
+            {
+                listPush(list, 0);
+            }
+            
+            fin >> number;
+            
+            add(tree, number, list);
+            isFirstSign = false;
+            
+            fin.get(sign);
+            fin.get(sign);
+            
+            if (sign != '(')
+            {
+                previousSign = sign;
+                fin.get(sign);
+                
+                if (sign != 'u')
+                {
+                    addSign(tree, list, previousSign);
+                }
+            }
+            
+            previousSign = '(';
+        }
+        else
+        {
+            if (sign == ')')
+            {
+                if (list->top)
+                {
+                    listPop(list);
+                }
+                previousSign = sign;
+            }
+            
+            fin.get(sign);
+        }
+    }
+    
+    while (count != 2)
+    {
+        fin >> sign;
+        if (sign == ':')
+        {
+            count++;
+        }
+    }
+    
+    count = 0;
+    while (!fin.eof())
+    {
+        fin >> sign;
+        if (!fin.eof())
+        {
+            text[count] = sign;
+            count++;
+        }
+    }
 }
 
 void deleteTree(TreeNode *current)
@@ -157,29 +236,5 @@ void printTree(Tree *tree)
     else
     {
         cout << "No elements!" << endl;
-    }
-}
-
-void decodeText(char *text, Tree *tree)
-{
-    TreeNode *current = tree->root;
-    long length = strlen(text);
-    
-    for (int i = 0 ; i < length; i++)
-    {
-        if (text[i] == '0')
-        {
-            current = current->leftChild;
-        }
-        else
-        {
-            current = current->rightChild;
-        }
-        
-        if (current->sign != '#')
-        {
-            cout << current->sign;
-            current = tree->root;
-        }
     }
 }

@@ -1,6 +1,14 @@
 #pragma once
 
+#include <iostream>
+
+#include <string.h>
+
+#include <fstream>
+
 #include "List.hpp"
+
+using namespace std;
 
 struct TreeNode
 {
@@ -20,4 +28,4 @@ void add(Tree *tree, int number, List *list);
 void deleteElement(Tree *tree, int number);
 void deleteTree(Tree *tree);
 void addSign(Tree *tree, List *list, char sign);
-void decodeText(char *text, Tree *tree);
+void buildTree(List *list,Tree *tree, char *text, ifstream &fin);
