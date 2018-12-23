@@ -22,10 +22,7 @@ int main()
     {
         input.get(sign);
         text[count] = sign;
-        if (sign != '\n')
-        {
-            addSign(tree, sign);
-        }
+        addSign(tree, sign);
         count++;
     }
     
