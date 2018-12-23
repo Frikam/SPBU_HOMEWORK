@@ -38,7 +38,7 @@ int main()
             
             if (i != 0)
             {
-                String *wordWithoutSymbol = substring(newString, i - 1);
+                String *wordWithoutSymbol = substring(newString, i);
                 if (wordInHashTable(hashTable, wordWithoutSymbol))
                 {
                     cout << "Word : '";
@@ -46,7 +46,6 @@ int main()
                     cout << "' already in hashTable" << endl;
                 }
                 addString(hashTable, wordWithoutSymbol);
-                //deleteString(wordWithoutSymbol);
             }
             deleteString(newString);
         }

@@ -14,7 +14,7 @@ long long getSize(String *string);
 bool isEmpty(String *string);
 char *representation(String *string);
 void concatenation(String *firstWord, String *secondWord);
-String *substring(String *string, int index);
+String *substring(String *baseString, int lastPosition);
 void deleteString(String *string);
 void printElement(String *string);
 

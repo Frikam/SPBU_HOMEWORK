@@ -92,18 +92,17 @@ void concatenation(String *firstWord, String *secondWord)
     firstWord->word = newWord;
 }
 
-String *substring(String *string, int index)
+String *substring(String *baseString, int lastPosition)
 {
-    String *word = new String {};
-    word->length = index + 1;
-    word->word = new char [index + 1];
-    
-    for (int i = 0; i <= index; i++)
+    int j = 0;
+    char *charSubstring = new char[lastPosition];
+    for (int i  = 0; i < lastPosition; i++)
     {
-        word->word[i] = string->word[i];
+        charSubstring[j] = baseString->word[i];
+        j++;
     }
-    
-    return word;
+    String* substring = new String {lastPosition, charSubstring};
+    return substring;
 }
 
 void deleteString(String *string)
