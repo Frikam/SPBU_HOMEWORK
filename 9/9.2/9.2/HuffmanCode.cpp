@@ -223,5 +223,6 @@ void deleteHuffmanTree(HuffmanTree *tree)
     }
     
     deleteTree(current);
+    delete[] tree->tree;
     delete tree;
 }

@@ -1,31 +1,45 @@
 Frequency of the symbols : 
-3 b
-5 e
-2 p
-2  
-2 o
+1 I
+1 '
+2 m
+5  
+2 a
+4 n
+1 E
+1 g
+1 l
+2 i
+1 s
+1 h
+1 N
+1 e
+1 w
+1 Y
+1 o
 1 r
-1 !
-2 t
-2 s
-3 .
-1 a
-1 d
+1 k
 
-Tree : (25 (10 (5 (2 (1 a null null)(1 d null null))(3 b null null))(5 e null null))(15 (7 (3 . null null)(4 (2 p null null)(2   null null)))(8 (4 (2 o null null)(2 (1 r null null)(1 ! null null)))(4 (2 t null null)(2 s null null)))))
+Tree : (29 (13 (5   null null)(8 (4 (2 (1 I null null)(1 ' null null))(2 m null null))(4 (2 a null null)(2 (1 E null null)(1 g null null)))))(16 (8 (4 n null null)(4 (2 (1 l null null)(1 s null null))(2 i null null)))(8 (4 (2 (1 h null null)(1 N null null))(2 (1 e null null)(1 w null null)))(4 (2 (1 Y null null)(1 o null null))(2 (1 r null null)(1 k null null))))))
 
 Code of the symbols : 
-b 001
-e 01
-p 1010
-  1011
-o 1100
-r 11010
-! 11011
-t 1110
-s 1111
-. 100
-a 0000
-d 0001
+I 01000
+' 01001
+m 0101
+  00
+a 0110
+n 100
+E 01110
+g 01111
+l 10100
+i 1011
+s 10101
+h 11000
+N 11001
+e 11010
+w 11011
+Y 11100
+o 11101
+r 11110
+k 11111
 
-Encoded text : 00101011010101100111001100101010110010101110101101111100111111110100100100000011110001
+Encoded text : 01000010010101000110100000111010001111101001011101011100001010110100001011100001100111010110110011100111011111011111

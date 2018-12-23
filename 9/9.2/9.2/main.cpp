@@ -21,15 +21,12 @@ int main()
     while (!input.eof())
     {
         input.get(sign);
-        if (!input.eof())
+        text[count] = sign;
+        if (sign != '\n')
         {
-            text[count] = sign;
-            if (sign != '\n')
-            {
-                addSign(tree, sign);
-            }
-            count++;
+            addSign(tree, sign);
         }
+        count++;
     }
     
     buildTree(tree);
