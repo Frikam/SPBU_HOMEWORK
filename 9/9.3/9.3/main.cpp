@@ -71,11 +71,15 @@ int main()
         }
     }
     
+    count = 0;
     while (!fin.eof())
     {
         fin >> sign;
-        text[count] = sign;
-        count++;
+        if (!fin.eof())
+        {
+            text[count] = sign;
+            count++;
+        }
     }
 
     decodeText(text, tree);
