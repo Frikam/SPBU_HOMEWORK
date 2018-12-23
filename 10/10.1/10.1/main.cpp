@@ -34,7 +34,7 @@ int main()
         isUsed[i] = new bool [m];
         for (int j = 0; j < m; j++)
         {
-            rightWay[i][j] = *new Coordinate {0, 0};
+            rightWay[i][j] = {0, 0};
             isUsed[i][j] = false;
             fin >> array[i][j];
             cout << array[i][j] << ' ';
