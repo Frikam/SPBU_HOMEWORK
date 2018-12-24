@@ -7,7 +7,7 @@ Map *createMap(int x, int y, int sizeX, int sizeY, int **map)
 
 void deleteMap(Map *map)
 {
-    for (int i = 0; i < map->y; i++)
+    for (int i = 0; i < map->sizeX; i++)
     {
         delete[] map->map[i];
     }

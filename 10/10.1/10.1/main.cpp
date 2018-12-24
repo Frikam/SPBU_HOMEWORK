@@ -43,8 +43,8 @@ int main()
 
     }
     
-    Map *map = createMap(y2, x2, n, m, array);
-    aStar(map, isUsed, y1, x1, rightWay);
+    Map *map = createMap(x2, y2, n, m, array);
+    aStar(map, isUsed, x1, y1, rightWay);
     deleteMap(map);
     for (int i = 0; i < n; i++)
     {
