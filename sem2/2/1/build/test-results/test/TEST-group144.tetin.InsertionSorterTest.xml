@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="group144.tetin.InsertionSorterTest" tests="4" skipped="0" failures="0" errors="0" timestamp="2019-02-28T10:21:45" hostname="Macbook-Pro.Dlink" time="0.013">
+  <properties/>
+  <testcase name="sortSorted()" classname="group144.tetin.InsertionSorterTest" time="0.009"/>
+  <testcase name="sortReversed()" classname="group144.tetin.InsertionSorterTest" time="0.0"/>
+  <testcase name="sortEmpty()" classname="group144.tetin.InsertionSorterTest" time="0.001"/>
+  <testcase name="sortRandomly()" classname="group144.tetin.InsertionSorterTest" time="0.001"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
