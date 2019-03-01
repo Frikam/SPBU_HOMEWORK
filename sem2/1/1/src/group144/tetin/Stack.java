@@ -1,6 +1,8 @@
 package group144.tetin;
 
 
+import java.util.EmptyStackException;
+
 public class Stack {
 
     private class StackElement{
@@ -29,8 +31,12 @@ public class Stack {
      * Delete element from head
      */
 
-    public int pop(){
+    public int pop() throws EmptyStackException {
+        if (size == 0){
+            throw new EmptyStackException();
+        }
         int result = head.value;
+        head = head.next;
         size-=1;
         return result;
     }
