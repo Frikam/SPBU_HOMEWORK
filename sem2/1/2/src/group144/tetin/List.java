@@ -24,23 +24,22 @@ public class List {
         return length == 0;
     }
 
-    // add element in list
-    public void add(int value){
-        if (head == null){
+    //*add element in list*/
+    public void push(int value){
+        if (head == null) {
             head = new Node(value);
+            return;
         }
-        else{
-            Node pointer = head;
-            while(pointer.next != null){
-                pointer = pointer.next;
-            }
-            pointer.next = new Node(value);
-
+        
+        Node pointer = head;
+        while(pointer.next != null){
+            pointer = pointer.next;
         }
+        pointer.next = new Node(value);
         length++;
     }
 
-    // delete last element from list
+    //*delete last element from list*/
     public int pop(){
         if (length == 0){
             System.out.println("List is empty");
@@ -53,16 +52,15 @@ public class List {
             head = null;
             return result;
         }
-        else {
-            Node pointer = head;
-            while(pointer.next.next != null){
-                pointer = pointer.next;
-            }
-            int result = pointer.next.value;
-            pointer.next = null;
-            length--;
-            return result;
+
+        Node pointer = head;
+        while(pointer.next.next != null){
+            pointer = pointer.next;
         }
+        int result = pointer.next.value;
+        pointer.next = null;
+        length--;
+        return result;
     }
 
 
