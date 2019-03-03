@@ -18,18 +18,14 @@ public class Stack {
     private StackElement head = null;
     private int size = 0;
 
-    /*
-     * Add element in head
-     */
+    /**Add element in head*/
 
-    public void add(int value){
+    public void push(int value){
         head = new StackElement(value, head);
         size+=1;
     }
 
-    /*
-     * Delete element from head
-     */
+    /**Delete element from head*/
 
     public int pop() throws EmptyStackException {
         if (size == 0){
