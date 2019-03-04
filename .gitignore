@@ -15,3 +15,4 @@ uiDesigner.xml
 build/
 /settings.gradle
 *.MF
+*.name
