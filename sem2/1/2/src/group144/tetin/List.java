@@ -1,7 +1,7 @@
 package group144.tetin;
 
 public class List {
-    private class Node{
+    private class Node {
         int value;
         Node next;
 
@@ -15,7 +15,7 @@ public class List {
     private Node head;
     private int length = 0;
 
-    List(){
+    List() {
         head = null;
         int length = 0;
     }
@@ -30,9 +30,9 @@ public class List {
             head = new Node(value);
             return;
         }
-        
+
         Node pointer = head;
-        while(pointer.next != null){
+        while (pointer.next != null) {
             pointer = pointer.next;
         }
         pointer.next = new Node(value);
