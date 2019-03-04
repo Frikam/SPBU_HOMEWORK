@@ -1,16 +1,6 @@
 package group144.tetin;
 
 public class List {
-    private class Node {
-        int value;
-        Node next;
-
-        Node(int value){
-            this.value = value;
-            this.next = null;
-        }
-
-    }
 
     private Node head;
     private int length = 0;
@@ -76,5 +66,16 @@ public class List {
 
     public int getLength(){
         return length;
+    }
+
+    private class Node {
+        int value;
+        Node next;
+
+        Node(int value){
+            this.value = value;
+            this.next = null;
+        }
+
     }
 }
