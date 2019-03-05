@@ -1,7 +1,7 @@
 package group144.tetin;
 
 public class Main {
-    public static void main(String[] args){
+    public static void main(String[] args) {
         List list = new List();
         list.push(1);
         list.printList();
