@@ -3,14 +3,14 @@ package group144.tetin;
 import java.util.List;
 
 public class Calculator {
-    public int calculate(String string){
+    public int calculate(String string) {
         Stack<Integer> stack = new ListStack<>();
         String[] array = string.split(" ");
-        for (String expression : array){
-            if (isNumber(expression)){
+        for (String expression : array) {
+            if (isNumber(expression)) {
                 stack.push(Integer.parseInt(expression));
             }
-            else{
+            else {
                 Integer firstNumber = stack.pop();
                 Integer secondNumber = stack.pop();
                 stack.push(calculate(secondNumber, firstNumber, expression));
@@ -19,9 +19,8 @@ public class Calculator {
         return stack.pop();
     }
 
-    private Integer calculate(Integer firstNumber, Integer secondNumber, String symbol){
-        switch (symbol)
-        {
+    private Integer calculate(Integer firstNumber, Integer secondNumber, String symbol) {
+        switch (symbol) {
             case "*":
                 return firstNumber * secondNumber;
             case "/":
@@ -37,9 +36,9 @@ public class Calculator {
     private boolean isNumber(String expression){
         int length = expression.length();
         char symbol;
-        for (int i = 1; i < length; i++){
+        for (int i = 1; i < length; i++) {
             symbol = expression.charAt(i);
-            if (!(Character.isDigit(symbol))){
+            if (!(Character.isDigit(symbol))) {
                 return false;
             }
         }

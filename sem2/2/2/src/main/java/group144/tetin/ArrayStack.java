@@ -14,10 +14,10 @@ public class ArrayStack<ElementType> implements Stack<ElementType> {
 
     @Override
     public ElementType pop() {
-        if (isEmpty()){
+        if (isEmpty()) {
             return null;
         }
-        else{
+        else {
             ElementType result = array[--currentPosition];
             return result;
         }

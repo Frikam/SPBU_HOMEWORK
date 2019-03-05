@@ -3,7 +3,7 @@ package group144.tetin;
 import java.util.Scanner;
 
 public class Main {
-    public static void main(String[] args){
+    public static void main(String[] args) {
         System.out.println("Program calculate your expression");
         System.out.print("Enter expression in postfix form : ");
         Scanner in = new Scanner(System.in);

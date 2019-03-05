@@ -1,17 +1,6 @@
 package group144.tetin;
 
-
 public class ListStack <ElementType> implements Stack<ElementType> {
-
-    private class Node{
-        private ElementType value;
-        private Node next;
-
-        Node(ElementType value, Node next){
-            this.value = value;
-            this.next = next;
-        }
-    }
 
     private int size = 0;
     private Node head = null;
@@ -20,12 +9,11 @@ public class ListStack <ElementType> implements Stack<ElementType> {
     public void push(ElementType value) {
         head = new Node(value, head);
         size++;
-
     }
 
     @Override
     public ElementType pop() {
-        if (isEmpty()){
+        if (isEmpty()) {
             return null;
         }
         ElementType result = head.value;
@@ -42,5 +30,15 @@ public class ListStack <ElementType> implements Stack<ElementType> {
     @Override
     public int getSize() {
         return size;
+    }
+
+    private class Node {
+        private ElementType value;
+        private Node next;
+
+        Node(ElementType value, Node next){
+            this.value = value;
+            this.next = next;
+        }
     }
 }
