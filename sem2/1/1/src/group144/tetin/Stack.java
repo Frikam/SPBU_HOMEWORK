@@ -8,13 +8,13 @@ public class Stack {
     private int size = 0;
 
     /**Add element in head*/
-    public void push(int value){
+    public void push (int value){
         head = new StackElement(value, head);
         size += 1;
     }
 
     /**Delete element from head*/
-    public int pop() {
+    public int pop () {
         if (size == 0){
             System.out.println("Stack is empty");
             return 0;
@@ -22,23 +22,19 @@ public class Stack {
 
         int result = head.value;
         head = head.next;
-        size-=1;
+        size -= 1;
         return result;
     }
 
-    public boolean isEmpty(){
+    public boolean isEmpty (){
         return size == 0;
     }
 
-    public int getSize(){
-        return size;
-    }
-
-    private class StackElement{
+    private class StackElement {
         int value;
         StackElement next;
 
-        StackElement(int value, StackElement next){
+        StackElement (int value, StackElement next) {
             this.value = value;
             this.next = next;
         }
