@@ -8,14 +8,14 @@ public class Stack {
     private int size = 0;
 
     /**Add element in head*/
-    public void push (int value){
+    public void push(int value){
         head = new StackElement(value, head);
         size += 1;
     }
 
     /**Delete element from head*/
-    public int pop () {
-        if (size == 0){
+    public int pop() {
+        if (size == 0) {
             System.out.println("Stack is empty");
             return 0;
         }
@@ -26,7 +26,7 @@ public class Stack {
         return result;
     }
 
-    public boolean isEmpty (){
+    public boolean isEmpty () {
         return size == 0;
     }
 
@@ -34,7 +34,7 @@ public class Stack {
         int value;
         StackElement next;
 
-        StackElement (int value, StackElement next) {
+        StackElement(int value, StackElement next) {
             this.value = value;
             this.next = next;
         }
