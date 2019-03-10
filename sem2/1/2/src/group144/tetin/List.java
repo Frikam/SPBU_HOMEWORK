@@ -4,12 +4,7 @@ public class List {
     private Node head;
     private int length = 0;
 
-    List() {
-        head = null;
-        int length = 0;
-    }
-
-    public boolean isEmpty(){
+    public boolean isEmpty() {
         return length == 0;
     }
 
@@ -30,12 +25,12 @@ public class List {
 
     //*delete last element from list*/
     public int pop() {
-        if (length == 0){
+        if (length == 0) {
             System.out.println("List is empty");
             return -1;
         }
 
-        if (length == 1){
+        if (length == 1) {
             length--;
             int result = head.value;
             head = null;
@@ -53,7 +48,7 @@ public class List {
     }
 
 
-    public void printList(){
+    public void printList() {
         Node pointer = head;
         while (pointer != null) {
             System.out.print(pointer.value + " ");
@@ -63,7 +58,7 @@ public class List {
 
     }
 
-    public int getLength(){
+    public int getLength() {
         return length;
     }
 
