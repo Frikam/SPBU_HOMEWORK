@@ -35,7 +35,7 @@ public class BogoSorter implements Sorter {
         return true;
     }
 
-    private void swap(int a, int b, int[] array){
+    private void swap(int a, int b, int[] array) {
         int tmp = array[a];
         array[a] = array[b];
         array[b] = tmp;

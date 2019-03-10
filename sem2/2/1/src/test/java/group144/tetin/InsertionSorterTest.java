@@ -6,7 +6,7 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class InsertionSorterTest {
     @Test
-    public void sortReversed(){
+    public void sortReversed() {
         int[] array = {5, 4, 3, 2, 1};
         int[] sortedArray = {1, 2, 3, 4, 5};
         Sorter sorter = new InsertionSorter();
@@ -15,7 +15,7 @@ class InsertionSorterTest {
     }
 
     @Test
-    public void sortSorted(){
+    public void sortSorted() {
         int[] array = {1, 2, 3, 4, 5};
         int[] sortedArray = {1, 2, 3, 4, 5};
         Sorter sorter = new InsertionSorter();
@@ -24,7 +24,7 @@ class InsertionSorterTest {
     }
 
     @Test
-    public void sortRandomly(){
+    public void sortRandomly() {
         int[] array = {4, 5, 3, 1, 2};
         int[] sortedArray = {1, 2, 3, 4, 5};
         Sorter sorter = new InsertionSorter();
