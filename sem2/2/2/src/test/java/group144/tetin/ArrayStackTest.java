@@ -7,7 +7,7 @@ import static org.junit.Assert.*;
 public class ArrayStackTest {
 
     @Test
-    public void popTest(){
+    public void popTest() {
         Stack<Integer> stack = new ListStack<>();
         stack.push(1);
         stack.push(2);
@@ -16,7 +16,7 @@ public class ArrayStackTest {
     }
 
     @Test
-    public void getSizeTest(){
+    public void getSizeTest() {
         Stack<Integer> stack = new ListStack<>();
         stack.push(1);
         stack.push(2);
@@ -27,7 +27,7 @@ public class ArrayStackTest {
     }
 
     @Test
-    public void isEmptyTest(){
+    public void isEmptyTest() {
         Stack<Integer> stack = new ListStack<>();
         assertEquals(true, stack.isEmpty());
         stack.push(1);
