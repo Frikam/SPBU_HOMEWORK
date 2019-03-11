@@ -1,5 +1,7 @@
 package group144.tetin;
 
+
+/** Class presents Insertion sort */
 public class InsertionSorter implements Sorter{
     @Override
     public void sort(int[] array) {

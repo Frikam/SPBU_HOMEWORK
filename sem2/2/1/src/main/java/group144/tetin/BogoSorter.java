@@ -2,6 +2,8 @@ package group144.tetin;
 
 import java.util.Random;
 
+
+/** Class presents Bogo sort */
 public class BogoSorter implements Sorter {
     @Override
     public void sort(int[] array) {

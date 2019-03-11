@@ -1,5 +1,6 @@
 package group144.tetin;
 
+/** Class presents Bubble sort */
 public class BubbleSorter implements Sorter {
 
     @Override
