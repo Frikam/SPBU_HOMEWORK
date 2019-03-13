@@ -1,6 +1,7 @@
 package group144.tetin;
 
-public class List {
+/** Singly connected list */
+ public class List {
     private Node head;
     private int length = 0;
 
@@ -8,7 +9,7 @@ public class List {
         return length == 0;
     }
 
-    //*add element in list*/
+    /** Add element in list */
     public void push(int value) {
         if (head == null) {
             head = new Node(value);
@@ -23,7 +24,7 @@ public class List {
         length++;
     }
 
-    //*delete last element from list*/
+    /** Delete last element from list */
     public int pop() {
         if (length == 0) {
             System.out.println("List is empty");
@@ -49,7 +50,7 @@ public class List {
 
 
     public void printList() {
-        Node pointer = head;
+        Node p  ointer = head;
         while (pointer != null) {
             System.out.print(pointer.value + " ");
             pointer = pointer.next;
@@ -63,8 +64,8 @@ public class List {
     }
 
     private class Node {
-        int value;
-        Node next;
+        private int value;
+        private Node next;
 
         Node(int value){
             this.value = value;
