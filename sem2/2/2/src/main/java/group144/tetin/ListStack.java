@@ -1,12 +1,12 @@
 package group144.tetin;
 
-/** Stack realization with list **/
+/** Stack realization with list */
 public class ListStack <ElementType> implements Stack<ElementType> {
 
     private int size = 0;
     private Node head = null;
 
-    /** Push front **/
+    /** Push front */
 
     @Override
     public void push(ElementType value) {
@@ -14,7 +14,7 @@ public class ListStack <ElementType> implements Stack<ElementType> {
         size++;
     }
 
-    /** Pop front **/
+    /** Pop front */
     @Override
     public ElementType pop() {
         if (isEmpty()) {

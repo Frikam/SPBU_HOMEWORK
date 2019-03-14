@@ -1,6 +1,6 @@
 package group144.tetin;
 
-/** Calculate using the sorting station algorithm **/
+/** Calculate using the sorting station algorithm */
 public class Calculator {
     public int calculate(String string) {
         Stack<Integer> stack = new ListStack<>();
@@ -18,7 +18,7 @@ public class Calculator {
         return stack.pop();
     }
 
-    /** Calculate expression **/
+    /** Calculate expression */
     private Integer calculate(Integer firstNumber, Integer secondNumber, String symbol) {
         switch (symbol) {
             case "*":
@@ -33,7 +33,7 @@ public class Calculator {
         return 0;
     }
 
-    /** Checks if a string is a number **/
+    /** Checks if a string is a number */
     private boolean isNumber(String expression){
         int length = expression.length();
         char symbol;

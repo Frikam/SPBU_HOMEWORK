@@ -1,20 +1,20 @@
 package group144.tetin;
 
-/** Stack realization with array **/
+/** Stack realization with array */
 public class ArrayStack<ElementType> implements Stack<ElementType> {
     private int size = 0;
     private int maxLength = 1000;
     private int currentPosition = 0;
     private ElementType[] array = (ElementType[]) new Object [maxLength];
 
-    /** Push back **/
+    /** Push back */
     @Override
     public void push(ElementType value) {
         array[currentPosition] = value;
         currentPosition++;
     }
 
-    /** Pop back **/
+    /** Pop back */
     @Override
     public ElementType pop() {
         if (isEmpty()) {
