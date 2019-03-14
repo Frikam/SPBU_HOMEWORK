@@ -1,19 +1,18 @@
 package group144.tetin;
 
-import java.util.EmptyStackException;
-
+/** Stack realization based on list */
 public class Stack {
 
     private StackElement head = null;
     private int size = 0;
 
-    /**Add element in head*/
+    /** Add element in head */
     public void push(int value){
         head = new StackElement(value, head);
         size += 1;
     }
 
-    /**Delete element from head*/
+    /** Delete element from head */
     public int pop() {
         if (size == 0) {
             System.out.println("Stack is empty");
