@@ -50,7 +50,7 @@ package group144.tetin;
 
 
     public void printList() {
-        Node p  ointer = head;
+        Node pointer = head;
         while (pointer != null) {
             System.out.print(pointer.value + " ");
             pointer = pointer.next;
