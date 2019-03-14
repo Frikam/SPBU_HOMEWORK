@@ -1,6 +1,7 @@
 package group144.tetin;
 
-public class OutputInConsole extends SpriralOutputter {
+/** Class represent spiral writer output to the console */
+public class OutputInConsole extends SpriralOutputter implements SpiralWriter {
     @Override
     public String printSpiral(int[][] matrix) {
         String result = getPrintSpiral(matrix);

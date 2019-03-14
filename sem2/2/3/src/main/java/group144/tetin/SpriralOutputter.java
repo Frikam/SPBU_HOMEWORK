@@ -1,7 +1,8 @@
 package group144.tetin;
 
-abstract class SpriralOutputter implements SpiralWriter {
-    public String getPrintSpiral(int[][] matrix) {
+/** Class represents spiral writer as string */
+abstract class SpriralOutputter {
+    protected String getPrintSpiral(int[][] matrix){
         String answer = "";
         int num = matrix.length;
         int step = 0;
