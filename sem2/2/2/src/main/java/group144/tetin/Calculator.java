@@ -2,7 +2,7 @@ package group144.tetin;
 
 /** Calculate using the sorting station algorithm */
 public class Calculator {
-    public int calculate(String string) {
+    public int calculate(String string) throws EmptyStackException {
         Stack<Integer> stack = new ListStack<>();
         String[] array = string.split(" ");
         for (String expression : array) {
@@ -15,7 +15,17 @@ public class Calculator {
                 stack.push(calculate(secondNumber, firstNumber, expression));
             }
         }
-        return stack.pop();
+
+        int answer = 0;
+
+        try{
+            answer = stack.pop();
+        }
+        catch (EmptyStackException e){
+            throw e;
+        }
+
+        return answer;
     }
 
     /** Calculate expression */

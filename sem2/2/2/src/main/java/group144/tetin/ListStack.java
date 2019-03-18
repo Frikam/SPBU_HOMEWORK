@@ -16,9 +16,9 @@ public class ListStack <ElementType> implements Stack<ElementType> {
 
     /** Pop front */
     @Override
-    public ElementType pop() {
+    public ElementType pop() throws EmptyStackException {
         if (isEmpty()) {
-            return null;
+            throw new EmptyStackException();
         }
         ElementType result = head.value;
         head = head.next;

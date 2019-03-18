@@ -6,7 +6,7 @@ import static org.junit.Assert.*;
 
 public class ListStackTest {
     @Test
-    public void popTest(){
+    public void popTest() throws EmptyStackException{
         Stack<Integer> stack = new ListStack<>();
         stack.push(1);
         stack.push(2);
@@ -15,7 +15,7 @@ public class ListStackTest {
     }
 
     @Test
-    public void getSizeTest(){
+    public void getSizeTest() throws EmptyStackException{
         Stack<Integer> stack = new ListStack<>();
         stack.push(1);
         stack.push(2);
@@ -26,7 +26,7 @@ public class ListStackTest {
     }
 
     @Test
-    public void isEmptyTest(){
+    public void isEmptyTest() throws EmptyStackException{
         Stack<Integer> stack = new ListStack<>();
         assertEquals(true, stack.isEmpty());
         stack.push(1);
@@ -34,7 +34,7 @@ public class ListStackTest {
     }
 
     @Test
-    public void popFromEmptyTest() {
+    public void popFromEmptyTest() throws EmptyStackException{
         Stack<Integer> stack = new ListStack<>();
         stack.push(1);
         assertTrue(stack.pop().equals(1));
