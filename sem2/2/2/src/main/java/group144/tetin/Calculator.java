@@ -1,8 +1,9 @@
 package group144.tetin;
 
-/** Calculate using the sorting station algorithm */
+/** A class represent calculator */
 public class Calculator {
-    public int calculate(String string) throws EmptyStackException {
+    /** Calculate using the sorting station algorithm */
+    public int calculate(String string) throws EmptyStackException, WrongExpressionException {
         Stack<Integer> stack = new ListStack<>();
         String[] array = string.split(" ");
         for (String expression : array) {
@@ -29,7 +30,7 @@ public class Calculator {
     }
 
     /** Calculate expression */
-    private Integer calculate(Integer firstNumber, Integer secondNumber, String symbol) {
+    private Integer calculate(Integer firstNumber, Integer secondNumber, String symbol) throws WrongExpressionException {
         switch (symbol) {
             case "*":
                 return firstNumber * secondNumber;
@@ -39,8 +40,9 @@ public class Calculator {
                 return firstNumber + secondNumber;
             case "-":
                 return firstNumber - secondNumber;
+            default:
+                throw new WrongExpressionException();
         }
-        return 0;
     }
 
     /** Checks if a string is a number */

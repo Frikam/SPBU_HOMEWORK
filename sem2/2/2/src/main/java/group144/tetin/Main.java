@@ -3,7 +3,7 @@ package group144.tetin;
 import java.util.Scanner;
 
 public class Main {
-    public static void main(String[] args) throws EmptyStackException {
+    public static void main(String[] args) {
         System.out.println("Program calculate your expression");
         System.out.print("Enter expression in postfix form : ");
         Scanner in = new Scanner(System.in);
@@ -12,8 +12,9 @@ public class Main {
         try {
             System.out.println("Answer : " + calculator.calculate(string));
         } catch (EmptyStackException e) {
-            System.out.println("Wrong expression");
-            throw e;
+            System.out.println("Wrong expression!");
+        } catch (WrongExpressionException e) {
+            System.out.println("Wrong expression!");
         }
     }
 }

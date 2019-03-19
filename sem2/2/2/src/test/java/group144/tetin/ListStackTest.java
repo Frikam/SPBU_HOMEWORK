@@ -10,8 +10,12 @@ public class ListStackTest {
         Stack<Integer> stack = new ListStack<>();
         stack.push(1);
         stack.push(2);
-        assertTrue(stack.pop().equals(2));
-        assertTrue(stack.pop().equals(1));
+        try {
+            assertTrue(stack.pop().equals(2));
+            assertTrue(stack.pop().equals(1));
+        } catch (EmptyStackException e){
+            System.out.print("You cant pop from empty stack!");
+        }
     }
 
     @Test
@@ -20,9 +24,13 @@ public class ListStackTest {
         stack.push(1);
         stack.push(2);
         assertEquals(2, stack.getSize());
-        stack.pop();
-        stack.pop();
-        assertEquals(0, stack.getSize());
+        try {
+            stack.pop();
+            stack.pop();
+            assertEquals(0, stack.getSize());
+        } catch (EmptyStackException e){
+            System.out.print("You cant pop from empty stack!");
+        }
     }
 
     @Test
@@ -36,8 +44,11 @@ public class ListStackTest {
     @Test
     public void popFromEmptyTest() throws EmptyStackException{
         Stack<Integer> stack = new ListStack<>();
-        stack.push(1);
-        assertTrue(stack.pop().equals(1));
-        stack.pop();
+        stack.push(1);        try {
+            assertTrue(stack.pop().equals(1));
+            stack.pop();
+        } catch (EmptyStackException e) {
+            System.out.print("You cant pop from empty stack!");
+        }
     }
 }
