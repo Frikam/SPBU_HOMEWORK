@@ -3,6 +3,7 @@ package group144.tetin;
 import java.io.PrintStream;
 import java.util.Scanner;
 
+/** A class that represent operator from Arithmetic tree */
 public class OperatorNode implements Node {
     private char operation;
     private Node left;
@@ -17,7 +18,7 @@ public class OperatorNode implements Node {
             left = new OperatorNode(scanner, scanner.next());
         }
 
-        if (scanner.hasNext()) { // "1)"
+        if (scanner.hasNext()) {
             expression = scanner.next();
             if (isNumber(expression)) {
                 right = new OperandNode(expression);
@@ -34,7 +35,7 @@ public class OperatorNode implements Node {
         char symbol;
         for (int i = 1; i < length; i++) {
             symbol = expression.charAt(i);
-            if (!(Character.isDigit(symbol)) &&  symbol != ')') {
+            if (!(Character.isDigit(symbol)) &&  symbol != ')') { // "1)"
                 return false;
             }
         }
@@ -42,6 +43,7 @@ public class OperatorNode implements Node {
         return symbol == '-' && length > 1 || Character.isDigit(symbol);
     }
 
+    /** A method that calculate expression Node */
     @Override
     public int calculate() {
         switch (operation) {
@@ -58,6 +60,7 @@ public class OperatorNode implements Node {
         }
     }
 
+    /** A method that calculate result of arithmetic tree */
     @Override
     public void print(PrintStream stream) {
         stream.print('(');

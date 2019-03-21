@@ -2,6 +2,7 @@ package group144.tetin;
 
 import java.io.PrintStream;
 
+/** A class that represent operand from Arithmetic tree */
 public class OperandNode implements Node {
     private int value;
 
@@ -13,11 +14,13 @@ public class OperandNode implements Node {
         }
     }
 
+    /** A method that return Node number  */
     @Override
     public int calculate() {
         return value;
     }
 
+    /** A method that prints Node number  */
     @Override
     public void print(PrintStream stream) {
         stream.print(value);

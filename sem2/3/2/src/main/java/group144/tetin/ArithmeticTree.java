@@ -4,6 +4,7 @@ import java.io.PrintStream;
 
 import java.util.Scanner;
 
+/** A class represent Arithmetic tree */
 public class ArithmeticTree {
     private Node head;
 
@@ -11,10 +12,12 @@ public class ArithmeticTree {
         head = new OperatorNode(scanner, scanner.next());
     }
 
+    /** A method that prints arithmetic tree */
     public void print(PrintStream stream) {
         head.print(stream);
     }
 
+    /** A method that calculate result of arithmetic tree */
     public int calculate() {
         return head.calculate();
     }

@@ -11,7 +11,7 @@ public class Main {
         try {
             Scanner in = new Scanner(new File("input.txt"));
             ArithmeticTree tree = new ArithmeticTree(in);
-            System.out.println("Arithmetic tree:");
+            System.out.print("Arithmetic tree: ");
             tree.print(System.out);
             System.out.print("\n" + "Result: ");
             System.out.println(tree.calculate());
