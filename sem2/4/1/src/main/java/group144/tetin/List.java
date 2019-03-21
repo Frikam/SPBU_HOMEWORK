@@ -1,9 +1,11 @@
 package group144.tetin;
 
+/** A class that represent linked test */
 public class List<ElementType> {
     private Node head = null;
     private int size = 0;
 
+    /** Add element in head */
     void add(ElementType value) throws AlreadyInListException {
         if (size == 0) {
             head = new Node(value);
@@ -16,7 +18,8 @@ public class List<ElementType> {
         }
     }
 
-    void add(ElementType value, int index) throws AlreadyInListException, WrongIndexException  {
+    /** Add element to list with certain index */
+    void add(ElementType value, int index) throws AlreadyInListException {
         if (size == 0 || index == 0) {
             head = new Node(value, head.next);
             size++;
@@ -25,11 +28,8 @@ public class List<ElementType> {
         else {
             Node current = head;
             int count = 0;
-            if (index >= size) {
-                throw new WrongIndexException();
-            }
 
-            while(count + 1 != index) {
+            while(count + 1 != index || count == size) { // if index more than size, add element to end
                 count++;
                 current = current.next;
             }
@@ -39,9 +39,14 @@ public class List<ElementType> {
         }
     }
 
-    void remove(ElementType value) throws EmptyListException {
+    /** Delete element from list with certain value */
+    void remove(ElementType value) throws EmptyListException, ElementNotFoundException {
         if (size == 0) {
             throw new EmptyListException();
+        }
+
+        if (!ElementInList(value)){
+            throw new ElementNotFoundException();
         }
 
         if (size == 1) {
@@ -51,9 +56,10 @@ public class List<ElementType> {
         }
 
         Node current = head;
-        Node previous = null;
+        Node previous = head;
+        previous.next = head; // if we delete element from head
 
-        while (current != value) {
+        while (current.value != value) {
             previous = current;
             current = current.next;
         }
@@ -62,47 +68,7 @@ public class List<ElementType> {
         size--;
     }
 
-    void remove(ElementType value, int index) throws EmptyListException {
-        if (size == 0) {
-            throw new EmptyListException();
-        }
-
-        size--;
-
-        if (size == 1){
-            head = null;
-            return;
-        }
-
-        Node current = head;
-        int count = 0;
-
-        while(count + 1 != index) {
-            count++;
-            current = current.next;
-        }
-
-        if (size == index - 1){
-            current.next = null;
-            return;
-        }
-
-        current.next = current.next.next;
-    }
-
-    public boolean ElementInList(ElementType element) {
-        Node current = head;
-
-        while(current != null) {
-            if (current.value.equals(element)) {
-                return false;
-            }
-            current = current.next;
-        }
-
-        return true;
-    }
-
+    /** Print list */
     public String printList() {
         Node current = head;
         String result = "";
@@ -116,6 +82,18 @@ public class List<ElementType> {
         return result;
     }
 
+    protected boolean ElementInList(ElementType element) {
+        Node current = head;
+
+        while(current != null) {
+            if (current.value.equals(element)) {
+                return true;
+            }
+            current = current.next;
+        }
+
+        return false;
+    }
 
     private class Node {
         ElementType value;

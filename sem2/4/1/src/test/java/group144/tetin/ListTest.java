@@ -16,27 +16,41 @@ class ListTest {
     }
 
     @Test
-    void addElementWithIndex() throws AlreadyInListException, WrongIndexException {
+    void addElementWithIndex() throws AlreadyInListException {
         List<Integer> list = new List<>();
         list.add(1);
+        list.add(3);
         list.add(2, 1);
-        assertEquals("1 2 ", list.printList());
+        assertEquals("3 2 1 ", list.printList());
 
     }
 
     @Test
-    void remove() {
+    void remove() throws AlreadyInListException, EmptyListException, ElementNotFoundException {
+        List<Integer> list = new List<>();
+        list.add(1);
+        list.add(3);
+        list.add(2);
+        list.remove(3);
+        assertEquals("2 1 ", list.printList());
     }
 
     @Test
-    void remove1() {
+    void removeNonExistentElement() throws AlreadyInListException, EmptyListException, ElementNotFoundException {
+        List<Integer> list = new List<>();
+        list.add(1);
+        list.add(3);
+        list.add(2);
+        assertThrows(ElementNotFoundException.class, () -> list.remove(5));
     }
 
     @Test
-    void elementInList() {
-    }
-
-    @Test
-    void printList() {
+    void removeElementWithIndex() throws AlreadyInListException, EmptyListException, ElementNotFoundException {
+        List<Integer> list = new List<>();
+        list.add(1);
+        list.add(3);
+        list.add(2);
+        list.remove(3);
+        assertEquals("2 1 ", list.printList());
     }
 }
