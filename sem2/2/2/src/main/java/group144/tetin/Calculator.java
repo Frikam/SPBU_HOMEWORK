@@ -3,7 +3,7 @@ package group144.tetin;
 /** A class represent calculator */
 public class Calculator {
     /** Calculate using the sorting station algorithm */
-    public int calculate(String string) throws EmptyStackException, WrongExpressionException {
+    public static int calculate(String string) throws WrongExpressionException {
         Stack<Integer> stack = new ListStack<>();
         String[] array = string.split(" ");
         for (String expression : array) {
@@ -11,26 +11,31 @@ public class Calculator {
                 stack.push(Integer.parseInt(expression));
             }
             else {
-                Integer firstNumber = stack.pop();
-                Integer secondNumber = stack.pop();
-                stack.push(calculate(secondNumber, firstNumber, expression));
+                try {
+                    Integer firstNumber = stack.pop();
+                    Integer secondNumber = stack.pop();
+                    stack.push(calculate(secondNumber, firstNumber, expression));
+                }
+                catch (EmptyStackException e) {
+                    throw new WrongExpressionException();
+                }
             }
         }
 
-        int answer = 0;
+        int answer;
 
         try{
             answer = stack.pop();
         }
         catch (EmptyStackException e){
-            throw e;
+            throw new WrongExpressionException();
         }
 
         return answer;
     }
 
     /** Calculate expression */
-    private Integer calculate(Integer firstNumber, Integer secondNumber, String symbol) throws WrongExpressionException {
+    private static Integer calculate(Integer firstNumber, Integer secondNumber, String symbol) throws WrongExpressionException {
         switch (symbol) {
             case "*":
                 return firstNumber * secondNumber;
@@ -46,7 +51,7 @@ public class Calculator {
     }
 
     /** Checks if a string is a number */
-    private boolean isNumber(String expression){
+    private static boolean isNumber(String expression){
         int length = expression.length();
         char symbol;
         for (int i = 1; i < length; i++) {

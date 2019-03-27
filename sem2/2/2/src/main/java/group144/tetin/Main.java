@@ -11,8 +11,6 @@ public class Main {
         Calculator calculator = new Calculator();
         try {
             System.out.println("Answer : " + calculator.calculate(string));
-        } catch (EmptyStackException e) {
-            System.out.println("Wrong expression!");
         } catch (WrongExpressionException e) {
             System.out.println("Wrong expression!");
         }
