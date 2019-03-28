@@ -7,7 +7,7 @@ public class Stack {
     private int size = 0;
 
     /** Add element in head */
-    public void push(int value){
+    public void push(int value) {
         head = new StackElement(value, head);
         size += 1;
     }
