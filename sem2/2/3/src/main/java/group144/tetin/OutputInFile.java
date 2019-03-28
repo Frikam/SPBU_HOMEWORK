@@ -5,7 +5,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 /** Class represent spiral writer output to the file */
-public class OutputInFile extends SpriralOutputter implements SpiralWriter{
+public class OutputInFile extends SpriralOutputter implements SpiralWriter {
     @Override
     public String printSpiral(int[][] matrix) {
         String result = getPrintSpiral(matrix);
