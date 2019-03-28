@@ -93,7 +93,7 @@ public class Main {
     }
 
     /** A method where you choose hash function */
-    public static HashFunction chooseHashFunction(Scanner in){
+    public static HashFunction chooseHashFunction(Scanner in) {
         System.out.println("1 - choose polynomial hash function");
         System.out.println("2 - choose symbols multiplication hash function");
         System.out.println("3 - choose symbols multiplication hash function");
@@ -113,7 +113,7 @@ public class Main {
     }
 
     /** A method that adds all words from a file to hash table */
-    public static void readFile(HashTable hashTable){
+    public static void readFile(HashTable hashTable) {
         try {
             Scanner file = new Scanner (new File("input.txt"));
 
