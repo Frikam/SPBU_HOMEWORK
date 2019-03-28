@@ -67,7 +67,7 @@ package group144.tetin;
         private int value;
         private Node next;
 
-        Node(int value){
+        Node(int value) {
             this.value = value;
             this.next = null;
         }
