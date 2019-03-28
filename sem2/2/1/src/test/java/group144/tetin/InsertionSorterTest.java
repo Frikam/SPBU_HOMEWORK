@@ -34,7 +34,7 @@ class InsertionSorterTest {
 
 
     @Test
-    public void sortEmpty(){
+    public void sortEmpty() {
         int[] array = {};
         int[] sortedArray = {};
         Sorter sorter = new InsertionSorter();
