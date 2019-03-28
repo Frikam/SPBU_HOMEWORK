@@ -9,7 +9,7 @@ public class Stack {
     /** Add element in head */
     public void push(int value) {
         head = new StackElement(value, head);
-        size += 1;
+        size ++;
     }
 
     /** Delete element from head */
@@ -21,7 +21,7 @@ public class Stack {
 
         int result = head.value;
         head = head.next;
-        size -= 1;
+        size --;
         return result;
     }
 
