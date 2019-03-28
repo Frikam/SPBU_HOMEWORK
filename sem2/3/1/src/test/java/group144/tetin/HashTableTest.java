@@ -26,7 +26,7 @@ public class HashTableTest {
     }
 
     @Test(expected = NoSuchElementException.class)
-    public void deleteExceptionTest()    {
+    public void deleteExceptionTest() {
         HashTable hashTable = new HashTable(200, new PolynomialHash());
         hashTable.add("Spb");
         hashTable.add("Berserk");
