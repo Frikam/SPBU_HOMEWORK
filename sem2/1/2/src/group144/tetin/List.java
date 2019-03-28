@@ -39,7 +39,7 @@ package group144.tetin;
         }
 
         Node pointer = head;
-        while(pointer.next.next != null) {
+        while (pointer.next.next != null) {
             pointer = pointer.next;
         }
         int result = pointer.next.value;
