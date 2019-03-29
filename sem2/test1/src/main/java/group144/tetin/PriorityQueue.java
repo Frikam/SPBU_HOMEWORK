@@ -49,12 +49,12 @@ public class PriorityQueue<T> {
         private T value;
         private int priority;
 
-        PriorityQueueNode (T value, int priority) {
+        PriorityQueueNode(T value, int priority) {
             this.priority = priority;
             this.value = value;
         }
 
-        PriorityQueueNode (T value, int priority, PriorityQueueNode next) {
+        PriorityQueueNode(T value, int priority, PriorityQueueNode next) {
             this.priority = priority;
             this.value = value;
             this.next = next;
