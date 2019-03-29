@@ -1,6 +1,8 @@
 package group144.tetin;
 
-/** A class that represent priority queue with elements in order their priority */
+/** A class that represent priority queue with elements in order their priority
+ * @param <T> Type of elements
+ * */
 public class PriorityQueue<T> {
     private PriorityQueueNode head;
 
@@ -27,7 +29,9 @@ public class PriorityQueue<T> {
         previous.next = new PriorityQueueNode(value, priority, previous.next);
     }
 
-    /** A method that remove element from queue with max priority */
+    /** A method that remove element from queue with max priority
+     * @return the value with max priority
+     * */
     public T dequeue() throws EmptyPriorityQueueException {
         if (isEmpty()) {
             throw new EmptyPriorityQueueException();
