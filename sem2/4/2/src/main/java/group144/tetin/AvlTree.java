@@ -4,25 +4,30 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Iterator;
 
+/** A class that represent avl tree with collection interface */
 public class AvlTree<T extends Comparable<T>> implements Collection<T> {
     private int size = 0;
     private Node root = null;
 
+    /** A method that return size of avl tree */
     @Override
     public int size() {
         return size;
     }
 
+    /** A method that checks avl tree is empty or no */
     @Override
     public boolean isEmpty() {
         return size == 0;
     }
 
+    /** A method that check object in avl tree or no */
     @Override
     public boolean contains(Object o) {
         return !isEmpty() && root.contains((T) o);
     }
 
+    /** A method that turns a avl tree into an array */
     @Override
     public Object[] toArray() {
         ArrayList<T> elements = new ArrayList<>();
@@ -31,6 +36,7 @@ public class AvlTree<T extends Comparable<T>> implements Collection<T> {
         return elements.toArray();
     }
 
+    /** A method that turns a avl tree into an array */
     @Override
     public <T1> T1[] toArray(T1[] array) {
         ArrayList<T1> arrayList = new ArrayList<>();
@@ -41,6 +47,7 @@ public class AvlTree<T extends Comparable<T>> implements Collection<T> {
         return arrayList.toArray(array);
     }
 
+    /** A method that checks all elements from the collection are contained in the avl tree or no */
     @Override
     public boolean containsAll(Collection<?> collection) {
         boolean result = true;
@@ -52,6 +59,7 @@ public class AvlTree<T extends Comparable<T>> implements Collection<T> {
         return result;
     }
 
+    /** A method that adds all elements from collection in avl tree */
     @Override
     public boolean addAll(Collection<? extends T> collection) {
         for (T i : collection) {
@@ -60,6 +68,7 @@ public class AvlTree<T extends Comparable<T>> implements Collection<T> {
         return !collection.isEmpty();
     }
 
+    /** A method that deletes all elements from collection from avl tree */
     @Override
     public boolean removeAll(Collection<?> collection) {
         boolean result = false;
@@ -69,6 +78,7 @@ public class AvlTree<T extends Comparable<T>> implements Collection<T> {
         return result;
     }
 
+    /** A method that deletes elements which doesn't contain in a collection from avl tree */
     @Override
     public boolean retainAll(Collection<?> collection) {
         boolean result = false;
@@ -81,6 +91,7 @@ public class AvlTree<T extends Comparable<T>> implements Collection<T> {
         return result;
     }
 
+    /** A method that removes all elements from avl tree */
     @Override
     public void clear() {
         root = null;
@@ -88,6 +99,7 @@ public class AvlTree<T extends Comparable<T>> implements Collection<T> {
 
     }
 
+    /** A method that return avl tree iterator */
     @Override
     public Iterator<T> iterator() {
         return new AvlTreeIterator();
@@ -116,6 +128,7 @@ public class AvlTree<T extends Comparable<T>> implements Collection<T> {
         }
     }
 
+    /** A method that add element in avl tree */
     @Override
     public boolean add(T value) {
         if (root == null) {
@@ -128,6 +141,7 @@ public class AvlTree<T extends Comparable<T>> implements Collection<T> {
         return true;
     }
 
+    /** A method that remove element from avl tree */
     @Override
     public boolean remove(Object delValue) {
         if (root == null)
@@ -146,11 +160,13 @@ public class AvlTree<T extends Comparable<T>> implements Collection<T> {
         return false;
     }
 
+    /** A method that return avl tree in string */
     @Override
     public String toString() {
         return isEmpty() ? "null" : root.toString();
     }
 
+    /** A class that represent avl tree node */
     private class Node {
         private T value;
         private int balance;
@@ -164,6 +180,7 @@ public class AvlTree<T extends Comparable<T>> implements Collection<T> {
             this.parent = parent;
         }
 
+        /** A method that adds element in avl tree */
         public void add(T value) {
             if (root == null) {
                 root = new Node(value, null);
@@ -189,6 +206,7 @@ public class AvlTree<T extends Comparable<T>> implements Collection<T> {
             }
         }
 
+        /** A method that checks if the value is in the tree */
         public boolean contains(T value) {
             if (value.equals(this.value)) {
                 return true;
@@ -201,6 +219,7 @@ public class AvlTree<T extends Comparable<T>> implements Collection<T> {
             }
         }
 
+        /** A method that removes element from avl tree */
         private void removeNode(Node node) {
             if (node.left == null && node.right == null) {
                 if (node.parent == null) {
@@ -230,6 +249,7 @@ public class AvlTree<T extends Comparable<T>> implements Collection<T> {
             }
         }
 
+        /** A method that */
         private void rebalance(Node n) {
             setBalance(n);
 
@@ -253,6 +273,7 @@ public class AvlTree<T extends Comparable<T>> implements Collection<T> {
             }
         }
 
+        /** A method that make left rotate of node */
         private Node rotateLeft(Node a) {
 
             Node b = a.right;
@@ -279,6 +300,7 @@ public class AvlTree<T extends Comparable<T>> implements Collection<T> {
             return b;
         }
 
+        /** A method that make right rotate of node */
         private Node rotateRight(Node a) {
 
             Node b = a.left;
@@ -305,22 +327,27 @@ public class AvlTree<T extends Comparable<T>> implements Collection<T> {
             return b;
         }
 
+        /** A method that make left rotate and then right rotate of node */
         private Node rotateLeftThenRight(Node n) {
             n.left = rotateLeft(n.left);
             return rotateRight(n);
         }
 
+        /** A method that make right rotate and then left rotate of node */
         private Node rotateRightThenLeft(Node n) {
             n.right = rotateRight(n.right);
             return rotateLeft(n);
         }
 
+        /** A method that return height of node */
         private int height(Node n) {
-            if (n == null)
+            if (n == null) {
                 return -1;
+            }
             return n.height;
         }
 
+        /** A method that set the balance of nodes */
         private void setBalance(Node... nodes) {
             for (Node n : nodes) {
                 reheight(n);
@@ -328,12 +355,14 @@ public class AvlTree<T extends Comparable<T>> implements Collection<T> {
             }
         }
 
+        /** A method that updates a height of the element   */
         private void reheight(Node node) {
             if (node != null) {
                 node.height = 1 + Math.max(height(node.left), height(node.right));
             }
         }
 
+        /** A method that converts node to string */
         public String toString() {
             String result = "(" + value.toString() + " ";
             result += left != null ? left.toString() : "null";
@@ -343,6 +372,7 @@ public class AvlTree<T extends Comparable<T>> implements Collection<T> {
             return result;
         }
 
+        /** A method that adds all elements from tree to ArrayList */
         private void addAll(ArrayList<T> elements, Node current) {
             if (current == null) {
                 return;
