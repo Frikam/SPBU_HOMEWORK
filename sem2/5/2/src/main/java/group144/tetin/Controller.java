@@ -23,8 +23,8 @@ public class Controller {
 
     /** A method that initializes spinners (numbers), choice box (operation) and text field (answer) */
     public void initialize() {
-        firstNumber.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(-10,10,0));
-        secondNumber.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(-10,10,0));
+        firstNumber.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(-10, 10, 0));
+        secondNumber.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(-10, 10, 0));
 
         firstNumber.valueProperty().addListener((observable, oldValue, newValue) -> calculate());
         secondNumber.valueProperty().addListener((observable, oldValue, newValue) -> calculate());
@@ -42,7 +42,7 @@ public class Controller {
     private void calculate() {
         switch (operation.getValue()) {
             case '+' :
-                text.setText(" " + (firstNumber.getValue() + secondNumber.getValue()));
+                text.setText("" + (firstNumber.getValue() + secondNumber.getValue()));
                 break;
             case '-' :
                 text.setText("" + (firstNumber.getValue() - secondNumber.getValue()));
