@@ -1,0 +1,163 @@
+package group144.tetin;
+
+import java.util.EmptyStackException;
+import java.util.Iterator;
+import java.util.Stack;
+
+public class Calculator {
+    private Stack<Character> stackSign;
+    String postfixForm = "";
+    int index = 0;
+
+    /** A method that calculate expression using sort station */
+    public String calculateExpression(String expression) {
+        infixToPostfix(expression.toCharArray());
+        return "" + calculate(postfixForm);
+    }
+
+    /** A method that create stack by sort station*/
+    private void infixToPostfix(char[] line) {
+        this.stackSign = new Stack<>();
+
+        for (int i = 0; i < line.length; i++) {
+            addElementInStack(line, i);
+        }
+
+        Iterator<Character> iterator = stackSign.iterator();
+
+        while (!stackSign.isEmpty()) {
+            postfixForm += stackSign.pop() + " "    ;
+            index++;
+        }
+    }
+
+    /** A method that return priority of sign */
+    private int priorityOfSign(char sign) {
+        switch (sign) {
+            case '*':
+            case '/':
+            case '%':
+                return 2;
+
+            case '+':
+            case '-':
+                return 1;
+        }
+        return 0;
+    }
+
+    /** A method that pop element from stack while priority of symbol less than elements from stack */
+    private void deleteUntilOpenedBracketOrPriorityLower(char symbol, int index) {
+        char sign;
+        if (!stackSign.isEmpty()) {
+            sign = stackSign.pop();
+            while (sign != '(' && (priorityOfSign(symbol) <= priorityOfSign(sign))) {
+                postfixForm += sign + " ";
+                index++;
+                if (!stackSign.isEmpty()) {
+                    sign = stackSign.pop();
+                } else {
+                    break;
+                }
+            }
+        }
+    }
+
+    /** A method that add element in stack from expression */
+    private void addElementInStack(char[] line, int i) {
+        if (line[i] != ' ') {
+            if (priorityOfSign(line[i]) == 0) {
+                int j = i + 1;
+                postfixForm += line[i];
+                index++;
+                while (j < line.length && priorityOfSign(line[j]) == 0 && line[j] != ' ') {
+                    postfixForm += line[j];
+                    line[j] = ' ';
+                    j++;
+                }
+                postfixForm += " ";
+
+            } else if (stackSign.isEmpty() || stackSign.peek() == '(') {
+                stackSign.push(line[i]);
+            } else if (priorityOfSign(line[i]) > priorityOfSign(stackSign.peek())) {
+                stackSign.push(line[i]);
+            } else {
+                deleteUntilOpenedBracketOrPriorityLower(line[i], index);
+                stackSign.push(line[i]);
+            }
+        }
+    }
+
+    /** Calculate using the sorting station algorithm */
+    private int calculate(String string) {
+        Stack<Integer> stack = new Stack<>();
+        String[] array = string.split(" ");
+        for (String expression : array) {
+            if (expression.equals("")) {
+                continue;
+            }
+            if (isNumber(expression)) {
+                stack.push(Integer.parseInt(expression));
+            }
+            else {
+                try {
+                    Integer firstNumber = stack.pop();
+                    Integer secondNumber = stack.pop();
+                    stack.push(calculate(secondNumber, firstNumber, expression));
+                }
+                catch (EmptyStackException e) {
+                }
+            }
+        }
+
+        int answer = 0;
+
+        try{
+            answer = stack.pop();
+        }
+        catch (EmptyStackException e){
+        }
+
+        return answer;
+    }
+
+    /** Calculate expression */
+    private static Integer calculate(Integer firstNumber, Integer secondNumber, String symbol) {
+        switch (symbol) {
+            case "*":
+                return firstNumber * secondNumber;
+            case "/":
+                try {
+                    return firstNumber / secondNumber;
+                } catch (Exception e ) {
+                    throw e;
+                }
+            case "+":
+                return firstNumber + secondNumber;
+            case "-":
+                return firstNumber - secondNumber;
+            default:
+                return 0;
+        }
+    }
+
+    /** Checks if a string is a number */
+    private static boolean isNumber(String expression){
+        int length = expression.length();
+        if (length == 0) {
+            return false;
+        }
+        char symbol;
+        for (int i = 1; i < length; i++) {
+            symbol = expression.charAt(i);
+            if (!(Character.isDigit(symbol))) {
+                return false;
+            }
+        }
+        symbol = expression.charAt(0);
+        return symbol == '-' && length > 1 || Character.isDigit(symbol);
+    }
+}
+
+
+
