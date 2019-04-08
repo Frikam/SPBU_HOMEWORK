@@ -7,8 +7,6 @@ import java.util.Stack;
 public class Calculator {
     private Stack<Character> stackSign;
     String postfixForm = "";
-    int index = 0;
-
     /** A method that calculate expression using sort station */
     public String calculateExpression(String expression) {
         infixToPostfix(expression.toCharArray());
@@ -23,11 +21,8 @@ public class Calculator {
             addElementInStack(line, i);
         }
 
-        Iterator<Character> iterator = stackSign.iterator();
-
         while (!stackSign.isEmpty()) {
             postfixForm += stackSign.pop() + " "    ;
-            index++;
         }
     }
 
@@ -47,13 +42,12 @@ public class Calculator {
     }
 
     /** A method that pop element from stack while priority of symbol less than elements from stack */
-    private void deleteUntilOpenedBracketOrPriorityLower(char symbol, int index) {
+    private void deleteUntilOpenedBracketOrPriorityLower(char symbol) {
         char sign;
         if (!stackSign.isEmpty()) {
             sign = stackSign.pop();
             while (sign != '(' && (priorityOfSign(symbol) <= priorityOfSign(sign))) {
                 postfixForm += sign + " ";
-                index++;
                 if (!stackSign.isEmpty()) {
                     sign = stackSign.pop();
                 } else {
@@ -66,10 +60,9 @@ public class Calculator {
     /** A method that add element in stack from expression */
     private void addElementInStack(char[] line, int i) {
         if (line[i] != ' ') {
-            if (priorityOfSign(line[i]) == 0) {
+            if (priorityOfSign(line[i]) == 0 || (line[i] == '-' && priorityOfSign(line[i + 1]) == 0)) {
                 int j = i + 1;
                 postfixForm += line[i];
-                index++;
                 while (j < line.length && priorityOfSign(line[j]) == 0 && line[j] != ' ') {
                     postfixForm += line[j];
                     line[j] = ' ';
@@ -82,7 +75,7 @@ public class Calculator {
             } else if (priorityOfSign(line[i]) > priorityOfSign(stackSign.peek())) {
                 stackSign.push(line[i]);
             } else {
-                deleteUntilOpenedBracketOrPriorityLower(line[i], index);
+                deleteUntilOpenedBracketOrPriorityLower(line[i]);
                 stackSign.push(line[i]);
             }
         }
