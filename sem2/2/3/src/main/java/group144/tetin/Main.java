@@ -24,7 +24,7 @@ public class Main {
             writer = new OutputInFile();
         }
 
-        writer.printSpiral(matrix);
+        writer.write(matrix);
     }
 
     private static int[][] inputMatrix(Scanner in) {
