@@ -10,12 +10,13 @@ import javafx.scene.control.Label;
 public class Controller {
     private Button[][] buttons;
 
-    private String textOnButton = "X";
+    private String textOnButton;
 
     private TicTakToe ticTakToe = new TicTakToe();
 
     private int numberOfPressedButtons;
 
+    /** A method that realize press on button */
     public void pressOnButton(ActionEvent event) {
         for (int row = 0; row < 3; row++) {
             for (int column = 0; column < 3; column++) {
@@ -27,6 +28,7 @@ public class Controller {
                         numberOfPressedButtons++;
                         if (ticTakToe.isAnybodyWin(buttons)) {
                             endGame(buttons[row][column].getText());
+                            return;
                         }
                     }
                 }
@@ -38,26 +40,31 @@ public class Controller {
         }
     }
 
+    /** A method that  */
     private void endGame(String winner) {
 
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("Result");
-        if (numberOfPressedButtons == 9) {
+
+        if (winner.equals("Nobody")) {
             alert.setHeaderText("Game result : " + "DRAW");
         }
         else {
             alert.setHeaderText("Game result : " + "Winner : " + winner);
         }
+
         alert.showAndWait();
         startNewGame();
     }
 
+    /** A method that  */
     public void startNewGame() {
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
                 buttons[i][j].setText("");
             }
         }
+
         numberOfPressedButtons = 0;
         textOnButton = "X";
         textField.setText("Now turn X");
@@ -83,6 +90,7 @@ public class Controller {
 
     public void initialize() {
         buttons = new Button[][] {{button1, button2, button3}, {button4, button5, button6}, {button7, button8, button9}};
+        startNewGame();
     }
 
     @FXML
