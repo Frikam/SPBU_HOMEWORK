@@ -13,13 +13,16 @@ public class Contoller {
 
     private Calculator calculator = new Calculator();
 
+    private boolean previousSymbolIsNumber = false;
+
     @FXML
     private TextField textField;
 
     /** Action when press reset button */
     public void pressOnReset() {
-        expression = "0";
-        textField.setText(expression);
+        expression = "";
+        previousSymbolIsNumber = false;
+        updateText();
     }
 
     /** Action when press number button */
@@ -29,10 +32,17 @@ public class Contoller {
                 expression+= "" + i;
             }
         }
+
+        previousSymbolIsNumber = true;
+        updateText();
     }
 
     /** Action when press operation button */
     public void pressOnOperation(ActionEvent event) {
+        if (previousSymbolIsNumber) {
+            expression += " ";
+        }
+
         if (event.getSource().equals(plus)) {
             expression += "+";
         } else if (event.getSource().equals(minus)) {
@@ -42,17 +52,31 @@ public class Contoller {
         } else if (event.getSource().equals(div)) {
             expression += "/";
         }
+
+        if (previousSymbolIsNumber) {
+            expression += " ";
+        }
+
+        previousSymbolIsNumber = false;
+        updateText();
     }
 
     /** Action when press equal button */
     public void pressOnEqual() {
         try {
+            System.out.println(expression);
             expression = calculator.calculateExpression(expression);
-            textField.setText(expression);
+            updateText();
+        } catch (ArithmeticException e) {
+            textField.setText("ERROR DIVIDING BY 0!!!");
         } catch (Exception e) {
-            textField.setText("ERROR DIVIDING BY 0");
-            expression = "";
+            textField.setText("WRONG EXPRESSION!!!");
         }
+    }
+
+    /** A method that updates text field */
+    private void updateText() {
+        textField.setText(expression);
     }
 
     /** Initialization function */

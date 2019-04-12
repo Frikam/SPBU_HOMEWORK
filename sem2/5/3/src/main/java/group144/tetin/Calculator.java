@@ -22,12 +22,12 @@ public class Calculator {
         }
 
         while (!stackSign.isEmpty()) {
-            postfixForm += stackSign.pop() + " "    ;
+            postfixForm += " " + stackSign.pop();
         }
     }
 
     /** A method that return priority of sign */
-    private int priorityOfSign(char sign) {
+    public int priorityOfSign(char sign) {
         switch (sign) {
             case '*':
             case '/':
@@ -60,7 +60,7 @@ public class Calculator {
     /** A method that add element in stack from expression */
     private void addElementInStack(char[] line, int i) {
         if (line[i] != ' ') {
-            if (priorityOfSign(line[i]) == 0 || (line[i] == '-' && priorityOfSign(line[i + 1]) == 0)) {
+            if (priorityOfSign(line[i]) == 0 || (line[i] == '-' && priorityOfSign(line[i + 1]) == 0 && line[i + 1] != ' ')) {
                 int j = i + 1;
                 postfixForm += line[i];
                 while (j < line.length && priorityOfSign(line[j]) == 0 && line[j] != ' ') {
@@ -98,19 +98,23 @@ public class Calculator {
                     Integer secondNumber = stack.pop();
                     stack.push(calculate(secondNumber, firstNumber, expression));
                 }
-                catch (EmptyStackException e) {
+                catch (Exception e) {
+                    throw e;
                 }
             }
         }
+
 
         int answer = 0;
 
         try{
             answer = stack.pop();
         }
-        catch (EmptyStackException e){
+        catch (Exception e){
+            throw e;
         }
 
+        postfixForm = "";
         return answer;
     }
 
