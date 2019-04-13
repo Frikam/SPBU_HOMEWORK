@@ -64,7 +64,6 @@ public class Contoller {
     /** Action when press equal button */
     public void pressOnEqual() {
         try {
-            System.out.println(expression);
             expression = calculator.calculateExpression(expression);
             updateText();
         } catch (ArithmeticException e) {
