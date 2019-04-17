@@ -11,21 +11,21 @@ public class Main {
         Scanner in = new Scanner(System.in);
         HashTable hashTable = new HashTable(200, chooseHashFunction(in));
         printMenu();
-        String command = "1";
+        int command = 1;
 
-        while (command != "0") {
+        while (command != 0) {
             System.out.print("Enter number of command : ");
-            command = in.next();
+            command = in.nextInt();
             switch (command) {
-                case "0":
+                case 0:
                     break;
-                case "1":
+                case 1:
                     System.out.print("Enter word : ");
                     word = in.next();
                     hashTable.add(word);
                     System.out.println("Element added");
                     break;
-                case "2":
+                case 2:
                     System.out.print("Enter word : ");
                     word = in.next();
                     try {
@@ -36,35 +36,34 @@ public class Main {
                         System.out.println("Element not found!");
                     }
                     break;
-
-                case "3":
+                case 3:
                     System.out.println(hashTable.getLoadFactor());
                     break;
-                case "4":
+                case 4:
                     System.out.println(hashTable.getConflictNumber());
                     break;
-                case "5":
+                case 5:
                     System.out.println(hashTable.getMaxLengthOfList());
                     break;
-                case "6":
+                case 6:
                     System.out.println(hashTable.getElementNumber());
                     break;
-                case "7":
+                case 7:
                     hashTable.changeHashFunction(new PolynomialHash());
                     break;
-                case "8":
+                case 8:
                     hashTable.changeHashFunction(new SymbolsMultiplicationHash());
                     break;
-                case "9":
+                case 9:
                     hashTable.changeHashFunction(new SquaredLengthHash());
                     break;
-                case "10":
+                case 10:
                     printFullStatistic(hashTable);
                     break;
-                case "11":
+                case 11:
                     readFile(hashTable);
                     break;
-                case "12" :
+                case 12:
                     System.out.print("Enter word : ");
                     word = in.next();
                     System.out.println("Element in hash table : " + hashTable.contains(word));
