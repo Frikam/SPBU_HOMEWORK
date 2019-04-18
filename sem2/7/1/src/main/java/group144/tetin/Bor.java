@@ -2,11 +2,13 @@ package group144.tetin;
 
 import java.io.*;
 
+/** A class that represent bor data structure */
 public class Bor implements Serializable {
     private final int SIZE_OF_ALPHABET = 26;
     private Node head = new Node();
     private int size = 0;
 
+    /** A method that adds element in bor */
     public boolean add(String word) throws WrongSymbolException {
         boolean isContains = contains(word);
 
@@ -38,6 +40,7 @@ public class Bor implements Serializable {
         return isContains;
     }
 
+    /** A method that removes elements from bor */
     public boolean remove(String word) {
         boolean isContains = contains(word);
 
@@ -70,6 +73,7 @@ public class Bor implements Serializable {
         return isContains;
     }
 
+    /** A method that checks element in bor or no */
     public boolean contains(String word) {
         int size = word.length();
         Node current = head;
@@ -88,6 +92,7 @@ public class Bor implements Serializable {
         return true;
     }
 
+    /** A method that counts how many of words start with given prefix */
     public int howManyStartWithPrefix(String prefix) {
         int result = 0;
         int size = prefix.length();
@@ -104,15 +109,18 @@ public class Bor implements Serializable {
         return current.numberOfPrefix;
     }
 
+    /** A method that return size of bor */
     public int size() {
         return size;
     }
 
+    /** A method that puts object in output stream to save it */
     public void serialize(OutputStream out) throws IOException {
         ObjectOutputStream object = new ObjectOutputStream(out);
         object.writeObject(this);
     }
 
+    /** A method that gets object from input stream and replace current one with it */
     public void deserialize(InputStream in) throws IOException, ClassNotFoundException {
         ObjectInputStream object = new ObjectInputStream(in);
         Bor newTrie = (Bor) object.readObject();
