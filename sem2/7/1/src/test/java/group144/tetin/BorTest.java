@@ -8,7 +8,7 @@ import java.io.IOException;
 
 import static org.junit.Assert.*;
 
-public class BorTest    {
+public class BorTest {
     @Test
     public void addTest() throws WrongSymbolException {
         Bor bor = new Bor();
@@ -80,6 +80,12 @@ public class BorTest    {
         assertFalse(bor.contains("he"));
         assertTrue(bor.remove("her"));
         assertFalse(bor.contains("her"));
+    }
+
+    @Test (expected = WrongSymbolException.class)
+    public void addElementWithWrongSymbol() throws WrongSymbolException {
+        Bor bor = new Bor();
+        bor.add("he1");
     }
 
     @Test

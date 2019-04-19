@@ -23,6 +23,9 @@ public class Bor implements Serializable {
         int size = word.length();
 
         for (int i = 0; i < size; i++) {
+            if (isWrongSymbol(word.charAt(i))) {
+                throw new WrongSymbolException();
+            }
             if (current.next[word.charAt(i) - 'a'] == null) {
                 current.next[word.charAt(i) - 'a'] = new Node();
             }
@@ -41,7 +44,7 @@ public class Bor implements Serializable {
     }
 
     /** A method that removes elements from bor */
-    public boolean remove(String word) {
+    public boolean remove(String word) throws WrongSymbolException {
         boolean isContains = contains(word);
 
         if (isContains) {
@@ -53,9 +56,13 @@ public class Bor implements Serializable {
 
         int size = word.length();
         Node current = head;
-        Node previous = null;
+        Node previous;
 
         for (int i = 0; i < size; i++) {
+            if (isWrongSymbol(word.charAt(i))) {
+                throw new WrongSymbolException();
+            }
+
             if (current.next[word.charAt(i) - 'a'] == null) {
                 return false;
             }
@@ -74,11 +81,15 @@ public class Bor implements Serializable {
     }
 
     /** A method that checks element in bor or no */
-    public boolean contains(String word) {
+    public boolean contains(String word) throws WrongSymbolException {
         int size = word.length();
         Node current = head;
 
         for (int i = 0; i < size; i++) {
+            if (isWrongSymbol(word.charAt(i))) {
+                throw new WrongSymbolException();
+            }
+
             if (current.next[word.charAt(i) - 'a'] == null) {
                 return false;
             }
@@ -93,13 +104,16 @@ public class Bor implements Serializable {
     }
 
     /** A method that counts how many of words start with given prefix */
-    public int howManyStartWithPrefix(String prefix) {
+    public int howManyStartWithPrefix(String prefix) throws WrongSymbolException {
         int result = 0;
         int size = prefix.length();
         Node current = head;
 
-
         for (int i = 0; i < size; i++) {
+            if (isWrongSymbol(prefix.charAt(i))) {
+                throw new WrongSymbolException();
+            }
+
             if (current == null) {
                 return result;
             }
@@ -127,6 +141,9 @@ public class Bor implements Serializable {
         this.head = newTrie.head;
     }
 
+    private boolean isWrongSymbol(char symbol) {
+        return !(symbol >= 'a' && symbol <= 'z');
+    }
 
     private class Node implements Serializable {
         private Node[] next = new Node[SIZE_OF_ALPHABET];
