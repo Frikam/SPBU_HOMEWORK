@@ -7,9 +7,8 @@ import java.util.NoSuchElementException;
 import static org.junit.Assert.*;
 
 public class HashTableTest {
-
     @Test
-    public void addTest() {
+    public void addTest() throws AlreadyInHashTableException {
         HashTable hashTable = new HashTable(200, new PolynomialHash());
         hashTable.add("Spb");
         hashTable.add("Berserk");
@@ -17,7 +16,7 @@ public class HashTableTest {
     }
 
     @Test
-    public void deleteTest() {
+    public void deleteTest() throws AlreadyInHashTableException {
         HashTable hashTable = new HashTable(200, new PolynomialHash());
         hashTable.add("Spb");
         hashTable.add("Berserk");
@@ -26,7 +25,7 @@ public class HashTableTest {
     }
 
     @Test(expected = NoSuchElementException.class)
-    public void deleteExceptionTest() {
+    public void deleteExceptionTest() throws AlreadyInHashTableException {
         HashTable hashTable = new HashTable(200, new PolynomialHash());
         hashTable.add("Spb");
         hashTable.add("Berserk");
@@ -34,7 +33,7 @@ public class HashTableTest {
     }
 
     @Test
-    public void getElementNumberTest() {
+    public void getElementNumberTest() throws AlreadyInHashTableException {
         HashTable hashTable = new HashTable(200, new PolynomialHash());
         hashTable.add("Spb");
         hashTable.add("Berserk");
@@ -46,29 +45,23 @@ public class HashTableTest {
     }
 
     @Test
-    public void getConflictNumberTest() {
+    public void getConflictNumberTest() throws AlreadyInHashTableException {
         HashTable hashTable = new HashTable(200, new PolynomialHash());
         hashTable.add("Berserk");
         hashTable.add("Spb");
         assertEquals(0, hashTable.getConflictNumber());
-        hashTable.add("Berserk");
-        assertEquals(1, hashTable.getConflictNumber());
     }
 
     @Test
-    public void getMaxListSizeTest() throws ElementNotFoundException {
+    public void getMaxListSizeTest() throws ElementNotFoundException, AlreadyInHashTableException {
         HashTable hashTable = new HashTable(200, new PolynomialHash());
         hashTable.add("Berserk");
-        hashTable.add("Berserk");
         hashTable.add("Flower");
-        assertEquals(2, hashTable.getMaxLengthOfList());
-        hashTable.add("Flower");
-        hashTable.add("Flower");
-        assertEquals(3, hashTable.getMaxLengthOfList());
+        assertEquals(1, hashTable.getMaxLengthOfList());
     }
 
     @Test
-    public void containsTest() {
+    public void containsTest() throws AlreadyInHashTableException {
         HashTable hashTable = new HashTable(200, new PolynomialHash());
         hashTable.add("Flower");
         hashTable.add("Berserk");

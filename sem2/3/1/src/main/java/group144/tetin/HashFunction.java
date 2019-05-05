@@ -1,5 +1,7 @@
 package group144.tetin;
 
+/** An interface that describes hash function for hash table */
 public interface HashFunction {
-    public int getHash(String element, int mod);
+    /** A method that calculate hash function */
+    int getHash(String element, int mod);
 }

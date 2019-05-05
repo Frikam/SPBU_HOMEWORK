@@ -6,12 +6,12 @@ public class PolynomialHash implements HashFunction {
     @Override
     public int getHash(String element, int mod) {
         int result = 0;
-        int PrimeNumber = 7;
+        int primeNumber = 7;
         int length = element.length();
 
         for (char symbol : element.toCharArray()) {
-            result = (result + (symbol * PrimeNumber) % mod) % mod;
-            PrimeNumber = (PrimeNumber * PrimeNumber) % mod;
+            result = (result + (symbol * primeNumber) % mod) % mod;
+            primeNumber = (primeNumber * primeNumber) % mod;
         }
 
         return result;

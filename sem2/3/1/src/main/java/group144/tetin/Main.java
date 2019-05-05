@@ -20,10 +20,14 @@ public class Main {
                 case 0:
                     break;
                 case 1:
-                    System.out.print("Enter word : ");
-                    word = in.next();
-                    hashTable.add(word);
-                    System.out.println("Element added");
+                    try {
+                        System.out.print("Enter word : ");
+                        word = in.next();
+                        hashTable.add(word);
+                        System.out.println("Element added");
+                    } catch (AlreadyInHashTableException e) {
+                        System.out.println("Word already in hash table");
+                    }
                     break;
                 case 2:
                     System.out.print("Enter word : ");
@@ -61,7 +65,14 @@ public class Main {
                     printFullStatistic(hashTable);
                     break;
                 case 11:
-                    readFile(hashTable);
+                    try {
+                        readFile(hashTable);
+                    } catch (FileNotFoundException e) {
+                        System.out.println("File not found");
+                    } catch (AlreadyInHashTableException e) {
+                        System.out.println("File has same words");
+                    }
+
                     break;
                 case 12:
                     System.out.print("Enter word : ");
@@ -93,10 +104,11 @@ public class Main {
 
     /** A method where you choose hash function */
     public static HashFunction chooseHashFunction(Scanner in) {
+        final boolean isWrongNumberOfCommand = true;
         System.out.println("1 - choose polynomial hash function");
         System.out.println("2 - choose symbols multiplication hash function");
         System.out.println("3 - choose symbols multiplication hash function");
-        while (false != true) {
+        while (isWrongNumberOfCommand) {
             System.out.print("Enter number of command : ");
             switch (in.next()) {
                 case "1":
@@ -112,7 +124,7 @@ public class Main {
     }
 
     /** A method that adds all words from a file to hash table */
-    public static void readFile(HashTable hashTable) {
+    public static void readFile(HashTable hashTable) throws AlreadyInHashTableException, FileNotFoundException {
         try {
             Scanner file = new Scanner (new File("input.txt"));
 
@@ -120,7 +132,9 @@ public class Main {
                 hashTable.add(file.next());
             }
         } catch (FileNotFoundException e) {
-            System.out.println("File not found");
+            throw new FileNotFoundException();
+        } catch (AlreadyInHashTableException e) {
+            throw new AlreadyInHashTableException();
         }
     }
 

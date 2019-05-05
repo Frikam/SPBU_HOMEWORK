@@ -28,8 +28,14 @@ public class HashTable {
         this.hashFunction = hashFunction;
     }
 
-    /** A method that adds the element in hash table */
-    public void add(String element) {
+    /** A method that adds the element in hash table
+     * @throws AlreadyInHashTableException when adds element that already in hash table
+     * */
+    public void add(String element) throws AlreadyInHashTableException {
+        if (contains(element)) {
+            throw new AlreadyInHashTableException();
+        }
+
         int hash = hashFunction.getHash(element, hashTable.size());
         elementNumber++;
 
@@ -38,6 +44,24 @@ public class HashTable {
         }
 
         hashTable.get(hash).add(element);
+
+        if (getLoadFactor() >= 0.75) {
+            rebuildHashTable();
+        }
+    }
+
+    /** A method that rebuild hash table */
+    private void rebuildHashTable() throws AlreadyInHashTableException {
+        int size = hashTable.size();
+        for (int i = 0; i < size; i++) {
+            hashTable.add(new LinkedList<>());
+        }
+
+        for (int i = 0; i < size; i++) {
+            while (!hashTable.get(i).isEmpty()) {
+                add(hashTable.get(i).pop());
+            }
+        }
     }
 
     /** A method that checks element in a hash table or no */
@@ -58,7 +82,9 @@ public class HashTable {
         return false;
     }
 
-    /** A method that deletes the element from hash table */
+    /** A method that deletes the element from hash table
+     * @throws NoSuchElementException when try we try delete word which is not in hash table
+     * */
     public void delete(String element) {
         int hashP = hashFunction.getHash(element, hashTable.size());
         if (hashTable.get(hashP).contains(element)) {
@@ -89,7 +115,7 @@ public class HashTable {
 
     /** A method that returns load factor */
     public double getLoadFactor() {
-        return (double) hashTable.size() / elementNumber;
+        return (double) elementNumber / hashTable.size();
     }
 
     /** A method that returns number of conflicts */
