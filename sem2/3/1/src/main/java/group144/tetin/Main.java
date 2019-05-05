@@ -72,7 +72,6 @@ public class Main {
                     } catch (AlreadyInHashTableException e) {
                         System.out.println("File has same words");
                     }
-
                     break;
                 case 12:
                     System.out.print("Enter word : ");
