@@ -31,7 +31,7 @@ public class AvlTree<T extends Comparable<T>> implements Collection<T> {
     @Override
     public Object[] toArray() {
         ArrayList<T> elements = new ArrayList<>();
-        root.addAll(elements, root);
+        root.addElementsToArray(elements, root);
 
         return elements.toArray();
     }
@@ -110,7 +110,7 @@ public class AvlTree<T extends Comparable<T>> implements Collection<T> {
 
         AvlTreeIterator() {
             elements = new ArrayList<>();
-            root.addAll(elements, root);
+            root.addElementsToArray(elements, root);
 
         }
         @Override
@@ -373,14 +373,14 @@ public class AvlTree<T extends Comparable<T>> implements Collection<T> {
         }
 
         /** A method that adds all elements from tree to ArrayList */
-        private void addAll(ArrayList<T> elements, Node current) {
+        private void addElementsToArray(ArrayList<T> elements, Node current) {
             if (current == null) {
                 return;
             }
 
-            current.addAll(elements, current.left);
+            current.addElementsToArray(elements, current.left);
             elements.add(current.value);
-            current.addAll(elements, current.right);
+            current.addElementsToArray(elements, current.right);
         }
     }
 }
