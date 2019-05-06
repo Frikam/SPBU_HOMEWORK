@@ -19,7 +19,7 @@ public class Main extends Application {
         try {
             Parent root = FXMLLoader.load(getClass().getResource("GUI.fxml"));
             stage.setTitle("Slider and progress bar");
-            stage.setScene(new Scene(root, 400, 250));
+            stage.setScene(new Scene(root, 150, 150));
             stage.centerOnScreen();
             stage.show();
         } catch (IOException e) {

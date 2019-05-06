@@ -4,9 +4,9 @@
 <?import javafx.scene.control.Slider?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane prefHeight="250.0" prefWidth="400.0" style="-fx-background-color: grey;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="group144.tetin.Controller">
+<AnchorPane prefHeight="150.0" prefWidth="150.0" style="-fx-background-color: grey;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="group144.tetin.Controller">
    <children>
-      <Slider fx:id="slider" blockIncrement="0.01" layoutX="44.0" layoutY="162.0" max="1.0" onKeyReleased="#initialize" onKeyTyped="#initialize" onSwipeLeft="#initialize" prefHeight="16.0" prefWidth="313.0" />
-      <ProgressBar fx:id="progressBar" layoutX="45.0" layoutY="59.0" prefHeight="20.0" prefWidth="307.0" progress="0.0" />
+      <Slider fx:id="slider" blockIncrement="0.01" layoutX="25.0" layoutY="95.0" max="1.0" onKeyReleased="#initialize" onKeyTyped="#initialize" onSwipeLeft="#initialize" prefHeight="41.0" prefWidth="100.0" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="95.0" />
+      <ProgressBar fx:id="progressBar" layoutX="25.0" layoutY="46.0" prefHeight="20.0" prefWidth="100.0" progress="0.0" AnchorPane.bottomAnchor="84.0" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="46.0" />
    </children>
 </AnchorPane>
