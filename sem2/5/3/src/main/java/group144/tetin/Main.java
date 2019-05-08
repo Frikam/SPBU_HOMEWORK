@@ -1,6 +1,5 @@
 package group144.tetin;
 
-import com.sun.javafx.fxml.FXMLLoaderHelper;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -18,10 +17,12 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("GUI.fxml"));
-        Scene scene = new Scene(root, 300, 300);
+        Scene scene = new Scene(root, 275, 300);
         primaryStage.setTitle("Calculator");
         primaryStage.setScene(scene);
         primaryStage.centerOnScreen();
+        primaryStage.setMinHeight(300);
+        primaryStage.setMinWidth(275);
         primaryStage.show();
     }
 }

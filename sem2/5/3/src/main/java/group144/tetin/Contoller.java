@@ -3,7 +3,6 @@ package group144.tetin;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
-
 import javafx.event.ActionEvent;
 
 public class Contoller {
@@ -14,7 +13,7 @@ public class Contoller {
     private Calculator calculator = new Calculator();
 
     private boolean previousSymbolIsNumber = false;
-
+    
     @FXML
     private TextField textField;
 
@@ -29,12 +28,12 @@ public class Contoller {
     public void pressOnNumber(ActionEvent event) {
         for (int i = 0; i < 10; i++) {
             if (event.getSource().equals(buttons[i])) {
-                expression+= "" + i;
+                expression += "" + i;
             }
         }
 
         previousSymbolIsNumber = true;
-        updateText();
+        calculate();
     }
 
     /** Action when press operation button */
@@ -59,10 +58,15 @@ public class Contoller {
 
         previousSymbolIsNumber = false;
         updateText();
+
     }
 
     /** Action when press equal button */
     public void pressOnEqual() {
+        calculate();
+    }
+
+    private void calculate() {
         try {
             expression = calculator.calculateExpression(expression);
             updateText();
