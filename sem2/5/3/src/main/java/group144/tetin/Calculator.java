@@ -7,6 +7,7 @@ import java.util.Stack;
 public class Calculator {
     private Stack<Character> stackSign;
     private String postfixForm;
+
     /** A method that calculate expression using sort station */
     public String calculateExpression(String expression) {
         this.postfixForm = "";

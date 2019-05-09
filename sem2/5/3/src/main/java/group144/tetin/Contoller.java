@@ -6,14 +6,15 @@ import javafx.scene.control.TextField;
 import javafx.event.ActionEvent;
 
 public class Contoller {
-
     /** Array that keep number buttons */
     private Button[] buttons;
 
     private Calculator calculator = new Calculator();
 
     private boolean previousSymbolIsNumber = false;
-    
+
+    private String expression = "";
+
     @FXML
     private TextField textField;
 
@@ -66,6 +67,7 @@ public class Contoller {
         calculate();
     }
 
+    /** A method that calculate answer */
     private void calculate() {
         try {
             expression = calculator.calculateExpression(expression);
@@ -86,9 +88,6 @@ public class Contoller {
     public void initialize() {
         buttons = new Button[]{button0, button1, button2, button3, button4, button5, button6, button7, button8, button9};
     }
-
-
-    private String expression = "";
 
     @FXML
     private Button button0;
