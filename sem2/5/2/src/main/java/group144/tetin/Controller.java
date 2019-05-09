@@ -6,7 +6,6 @@ import javafx.scene.control.ChoiceBox;
 import javafx.scene.control.Spinner;
 import javafx.scene.control.SpinnerValueFactory;
 import javafx.scene.control.TextField;
-import javafx.scene.text.Text;
 
 public class Controller {
     @FXML
@@ -26,40 +25,41 @@ public class Controller {
         firstNumber.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(-10, 10, 0));
         secondNumber.setValueFactory(new SpinnerValueFactory.IntegerSpinnerValueFactory(-10, 10, 0));
 
-        firstNumber.valueProperty().addListener((observable, oldValue, newValue) -> calculate());
-        secondNumber.valueProperty().addListener((observable, oldValue, newValue) -> calculate());
+        firstNumber.valueProperty().addListener((observable, oldValue, newValue) -> setAnswer());
+        secondNumber.valueProperty().addListener((observable, oldValue, newValue) -> setAnswer());
 
         operation.setItems(FXCollections.observableArrayList('+', '-', '*', '/', '%'));
         operation.valueProperty().setValue('+');
 
-        operation.valueProperty().addListener((observable, oldValue, newValue) -> calculate());
+        operation.valueProperty().addListener((observable, oldValue, newValue) -> setAnswer());
 
         text.setText("0");
 
     }
 
     /** A method that calculate expression */
-    private void calculate() {
+    private String calculate() {
         switch (operation.getValue()) {
             case '+' :
-                text.setText("" + (firstNumber.getValue() + secondNumber.getValue()));
-                break;
+                return "" + (firstNumber.getValue() + secondNumber.getValue());
             case '-' :
-                text.setText("" + (firstNumber.getValue() - secondNumber.getValue()));
-                break;
+                return "" + (firstNumber.getValue() - secondNumber.getValue());
             case '/' :
                 if (secondNumber.getValue() == 0) {
-                    text.setText("ERROR");
-                    break;
+                    return "ERROR";
                 }
-                text.setText("" + (firstNumber.getValue() / secondNumber.getValue()));
-                break;
+                return "" + (firstNumber.getValue() / secondNumber.getValue());
             case '*' :
-                text.setText("" + (firstNumber.getValue() * secondNumber.getValue()));
-                break;
+                return "" + (firstNumber.getValue() * secondNumber.getValue());
             case '%' :
-                text.setText("" + (firstNumber.getValue() % secondNumber.getValue()));
-                break;
+                return "" + (firstNumber.getValue() % secondNumber.getValue());
+            default:
+                return "Incorrect expression";
         }
+    }
+
+    private void setAnswer() {
+        String answer = calculate();
+        text.setText(answer);
     }
 }
