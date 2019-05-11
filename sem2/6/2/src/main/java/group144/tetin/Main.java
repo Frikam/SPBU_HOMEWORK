@@ -21,7 +21,8 @@ public class Main extends Application {
         primaryStage.setTitle("Tic Tac Toe");
         primaryStage.setScene(scene);
         primaryStage.centerOnScreen();
-        primaryStage.setResizable(false);
+        primaryStage.setMinHeight(250);
+        primaryStage.setMinWidth(300);
         primaryStage.show();
     }
 }
