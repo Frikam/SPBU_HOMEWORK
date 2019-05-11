@@ -7,10 +7,9 @@ import java.io.IOException;
 /** Class represent spiral writer output to the file */
 public class OutputInFile extends SpriralOutputter implements SpiralWriter {
     @Override
-    public String printSpiral(int[][] matrix) {
+    public void printSpiral(int[][] matrix) {
         String result = getPrintSpiral(matrix);
         FileWriter writer;
-
         try {
             writer = new FileWriter("output.txt");
             writer.write(result);
@@ -19,6 +18,5 @@ public class OutputInFile extends SpriralOutputter implements SpiralWriter {
             e.printStackTrace();
             System.out.println("File not found");
         }
-        return result;
     }
 }

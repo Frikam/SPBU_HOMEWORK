@@ -24,7 +24,7 @@ public class Main {
             writer = new OutputInFile();
         }
 
-        writer.write(matrix);
+        writer.printSpiral(matrix);
     }
 
     private static int[][] inputMatrix(Scanner in) {
@@ -40,6 +40,7 @@ public class Main {
             n = in.nextInt();
         }
 
+        System.out.println("Array : ");
         for (int i = 0; i < n; i++) {
             for (int j = 0; j < n; j++) {
                 matrix[i][j] = number;
