@@ -2,11 +2,20 @@
 
 <?import javafx.scene.control.ProgressBar?>
 <?import javafx.scene.control.Slider?>
-<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.RowConstraints?>
 
-<AnchorPane prefHeight="150.0" prefWidth="150.0" style="-fx-background-color: grey;" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="group144.tetin.Controller">
+<GridPane accessibleHelp="" prefHeight="150.0" prefWidth="200.0" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="group144.tetin.Controller">
+   <columnConstraints>
+      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+   </columnConstraints>
+   <rowConstraints>
+      <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" prefHeight="57.2302360534668" vgrow="SOMETIMES" />
+      <RowConstraints maxHeight="1.7976931348623157E308" minHeight="10.0" prefHeight="92.7697639465332" vgrow="SOMETIMES" />
+   </rowConstraints>
    <children>
-      <Slider fx:id="slider" blockIncrement="0.01" layoutX="25.0" layoutY="95.0" max="1.0" onKeyReleased="#initialize" onKeyTyped="#initialize" onSwipeLeft="#initialize" prefHeight="41.0" prefWidth="100.0" AnchorPane.bottomAnchor="14.0" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="95.0" />
-      <ProgressBar fx:id="progressBar" layoutX="25.0" layoutY="46.0" prefHeight="20.0" prefWidth="100.0" progress="0.0" AnchorPane.bottomAnchor="84.0" AnchorPane.leftAnchor="25.0" AnchorPane.rightAnchor="25.0" AnchorPane.topAnchor="46.0" />
+      <Slider fx:id="slider" blockIncrement="0.01" max="1.0" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" onKeyReleased="#initialize" onKeyTyped="#initialize" onSwipeLeft="#initialize" prefHeight="41.0" prefWidth="100.0" GridPane.hgrow="SOMETIMES" GridPane.rowIndex="1" GridPane.vgrow="SOMETIMES" />
+      <ProgressBar fx:id="progressBar" maxHeight="1.7976931348623157E308" maxWidth="1.7976931348623157E308" prefHeight="20.0" prefWidth="202.0" progress="0.0" GridPane.halignment="CENTER" GridPane.hgrow="SOMETIMES" GridPane.valignment="CENTER" GridPane.vgrow="SOMETIMES" />
    </children>
-</AnchorPane>
+</GridPane>
