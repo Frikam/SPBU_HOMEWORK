@@ -22,6 +22,8 @@ public class Main extends Application {
             primaryStage.setScene(scene);
             primaryStage.setTitle("Simple calculator");
             primaryStage.centerOnScreen();
+            primaryStage.setMinHeight(200);
+            primaryStage.setMinWidth(338);
             primaryStage.show();
         } catch (IOException e) {
             e.printStackTrace();
