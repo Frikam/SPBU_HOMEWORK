@@ -12,7 +12,7 @@ public class Main {
         QuickSorter parallelSorter = new ParallelQuickSort();
         long usualSorterTime = 0;
         long parallelSorterTime = 0;
-        
+
         for (int i = 0; i < NUMBER_OF_TESTS; i++) {
             Integer[] usualSortArray = initializeArray();
             Integer[] parallelSortArray = usualSortArray.clone();

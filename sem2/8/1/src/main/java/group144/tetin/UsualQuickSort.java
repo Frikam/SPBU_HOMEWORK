@@ -1,10 +1,12 @@
 package group144.tetin;
 
+/** A class that represent usual quick sort */
 public class UsualQuickSort implements QuickSorter {
     private Integer[] array;
     private int startIndex;
     private int endIndex;
 
+    /** A method that calls recursively sorting array */
     public void sort(Integer[] array) {
         this.array = array;
         startIndex = 0;
@@ -12,6 +14,7 @@ public class UsualQuickSort implements QuickSorter {
         doSort(startIndex, endIndex);
     }
 
+    /** A method that recursively sorts array */
     private void doSort(int startIndex, int endIndex) {
         if (startIndex >= endIndex) {
             return;

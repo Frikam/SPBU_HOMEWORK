@@ -3,6 +3,7 @@ package group144.tetin;
 import java.util.concurrent.ForkJoinPool;
 import java.util.concurrent.RecursiveAction;
 
+/** A class that represent parallel quick sort */
 public class ParallelQuickSort implements QuickSorter {
     @Override
     public void sort(Integer[] array) {
