@@ -29,6 +29,10 @@ public class OperatorNode implements Node {
         }
     }
 
+    private void OperatorNode(Node left, Node right) {
+
+    }
+
     /** Checks if a string is a number */
     private boolean isNumber(String expression){
         int length = expression.length();
