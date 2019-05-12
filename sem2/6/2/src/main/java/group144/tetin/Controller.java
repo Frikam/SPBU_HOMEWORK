@@ -10,6 +10,8 @@ import javafx.scene.control.Label;
 public class Controller {
     private Button[][] buttons;
 
+    private String[][] textOnButtons;
+
     private String textOnButton;
 
     private TicTakToe ticTakToe = new TicTakToe();
@@ -23,10 +25,11 @@ public class Controller {
                 if (event.getSource().equals(buttons[row][column])) {
                     if ("".equals(buttons[row][column].getText())) {
                         buttons[row][column].setText(textOnButton);
+                        textOnButtons[row][column] = textOnButton;
                         nextTurn();
                         changeText();
                         numberOfPressedButtons++;
-                        if (ticTakToe.isAnybodyWin(buttons)) {
+                        if (ticTakToe.isAnybodyWin(textOnButtons)) {
                             endGame(buttons[row][column].getText());
                             return;
                         }
@@ -35,12 +38,12 @@ public class Controller {
             }
         }
 
-        if (numberOfPressedButtons == 9) {
+        if (numberOfPressedButtons == buttons.length * buttons.length) {
             endGame("Nobody");
         }
     }
 
-    /** A method that  */
+    /** A method that show window with result */
     private void endGame(String winner) {
 
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
@@ -57,11 +60,13 @@ public class Controller {
         startNewGame();
     }
 
-    /** A method that  */
+    /** A method that return all buttons to started condition */
     public void startNewGame() {
+        textOnButtons = new String[3][3];
         for (int i = 0; i < 3; i++) {
             for (int j = 0; j < 3; j++) {
                 buttons[i][j].setText("");
+                textOnButtons[i][j] = "";
             }
         }
 
@@ -80,12 +85,7 @@ public class Controller {
     }
 
     private void changeText() {
-        if ("X".equals(textOnButton)) {
-            textField.setText("Now turn X");
-        }
-        else {
-            textField.setText("Now turn O");
-        }
+        textField.setText("Now turn " + textOnButton);
     }
 
     public void initialize() {

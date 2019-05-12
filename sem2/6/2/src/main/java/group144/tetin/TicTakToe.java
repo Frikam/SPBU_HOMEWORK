@@ -4,13 +4,13 @@ package group144.tetin;
 import javafx.scene.control.Button;
 
 public class TicTakToe {
-    public boolean isAnybodyWin(Button[][] buttons) {
-        int numberOfButtons = buttons.length;
-        boolean result = true;
+    public boolean isAnybodyWin(String[][] textOnButtons) {
+        int numberOfButtons = textOnButtons.length;
+        boolean result;
         for (int j = 0; j < numberOfButtons; j++) {
             result = true;
             for (int i = 0; i < numberOfButtons - 1; i++) {
-                if (!(!buttons[i][j].getText().equals("") && buttons[i][j].getText().equals(buttons[i + 1][j].getText()))) {
+                if (!(!textOnButtons[i][j].equals("") && textOnButtons[i][j].equals(textOnButtons[i + 1][j]))) {
                     result = false;
                 }
             }
@@ -21,7 +21,7 @@ public class TicTakToe {
 
             result = true;
             for (int i = 0; i < numberOfButtons - 1; i++) {
-                if (!(!buttons[j][i].getText().equals("") && buttons[j][i].getText().equals(buttons[j][i + 1].getText()))) {
+                if (!(!textOnButtons[j][i].equals("") && textOnButtons[j][i].equals(textOnButtons[j][i + 1]))) {
                     result = false;
                 }
             }
@@ -33,7 +33,7 @@ public class TicTakToe {
 
         result = true;
         for (int i = 0; i < numberOfButtons - 1; i++) {
-            if (!(!buttons[i][i].getText().equals("") && buttons[i][i].getText().equals(buttons[i + 1][i + 1].getText()))) {
+            if (!(!textOnButtons[i][i].equals("") && textOnButtons[i][i].equals(textOnButtons[i + 1][i + 1]))) {
                 result = false;
             }
         }
@@ -44,8 +44,7 @@ public class TicTakToe {
 
         result = true;
         for (int i = numberOfButtons - 1; i > 0; i--) {
-            if (!(!buttons[numberOfButtons - 1 - i][i].getText().equals("") && buttons[numberOfButtons - 1 - i][i].getText().equals(buttons[numberOfButtons - i][i - 1].getText()))) {
-                System.out.print("Text : " + buttons[i][i].getText());
+            if (!(!textOnButtons[numberOfButtons - 1 - i][i].equals("") && textOnButtons[numberOfButtons - 1 - i][i].equals(textOnButtons[numberOfButtons - i][i - 1]))) {
                 result = false;
             }
         }
