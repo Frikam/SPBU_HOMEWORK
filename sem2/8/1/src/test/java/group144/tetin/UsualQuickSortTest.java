@@ -1,8 +1,6 @@
 package group144.tetin;
 
 import org.junit.Test;
-import org.junit.runner.manipulation.Sorter;
-
 import java.util.Random;
 import java.util.stream.Stream;
 

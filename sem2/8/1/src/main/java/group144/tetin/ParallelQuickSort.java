@@ -5,6 +5,8 @@ import java.util.concurrent.RecursiveAction;
 
 /** A class that represent parallel quick sort */
 public class ParallelQuickSort implements QuickSorter {
+
+    /** A method that call recursive sort */
     @Override
     public void sort(Integer[] array) {
         ForkJoinPool forkJoinPool = new ForkJoinPool();
