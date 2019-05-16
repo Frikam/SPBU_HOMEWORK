@@ -4,7 +4,7 @@ import org.junit.Test;
 
 import java.util.Scanner;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static junit.framework.TestCase.assertEquals;
 
 public class ArithmeticTreeTest {
     @Test

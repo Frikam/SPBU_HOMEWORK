@@ -6,45 +6,11 @@ import java.util.Scanner;
 /** A class that represent operator from Arithmetic tree */
 public class OperatorNode implements Node {
     private char operation;
-    private Node left;
-    private Node right;
+    public Node left;
+    public Node right;
 
-    OperatorNode(Scanner scanner, String expression) {
+    OperatorNode(String expression) {
         operation = expression.charAt(expression.length() - 1); // "(+"
-
-        if (scanner.hasNextInt()) {
-            left = new OperandNode(scanner.next());
-        } else {
-            left = new OperatorNode(scanner, scanner.next());
-        }
-
-        if (scanner.hasNext()) {
-            expression = scanner.next();
-            if (isNumber(expression)) {
-                right = new OperandNode(expression);
-            }
-            else {
-                right = new OperatorNode(scanner, expression);
-            }
-        }
-    }
-
-    private void OperatorNode(Node left, Node right) {
-
-    }
-
-    /** Checks if a string is a number */
-    private boolean isNumber(String expression){
-        int length = expression.length();
-        char symbol;
-        for (int i = 1; i < length; i++) {
-            symbol = expression.charAt(i);
-            if (!(Character.isDigit(symbol)) &&  symbol != ')') { // "1)"
-                return false;
-            }
-        }
-        symbol = expression.charAt(0);
-        return symbol == '-' && length > 1 || Character.isDigit(symbol);
     }
 
     /** A method that calculate expression Node */
