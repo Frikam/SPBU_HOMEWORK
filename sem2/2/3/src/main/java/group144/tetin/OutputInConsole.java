@@ -6,6 +6,6 @@ import java.io.PrintStream;
 public class OutputInConsole extends SpriralOutputter implements SpiralWriter {
     @Override
     public void printSpiral(int[][] matrix) {
-        getPrintSpiral(matrix, new PrintStream(System.out));
+        spiralPrinter(matrix, new PrintStream(System.out));
     }
 }

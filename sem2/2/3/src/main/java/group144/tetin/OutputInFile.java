@@ -7,6 +7,6 @@ import java.io.PrintStream;
 public class OutputInFile extends SpriralOutputter implements SpiralWriter {
     @Override
     public void printSpiral(int[][] matrix) throws FileNotFoundException {
-        getPrintSpiral(matrix, new PrintStream("output.txt"));
+        spiralPrinter(matrix, new PrintStream("output.txt"));
     }
 }

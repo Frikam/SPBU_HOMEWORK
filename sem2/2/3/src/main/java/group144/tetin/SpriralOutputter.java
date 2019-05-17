@@ -4,7 +4,7 @@ import java.io.PrintStream;
 
 /** Class represents spiral writer as string */
 public class SpriralOutputter {
-    public void getPrintSpiral(int[][] matrix, PrintStream stream) {
+    public void spiralPrinter(int[][] matrix, PrintStream stream) {
         int num = matrix.length;
         int step = 0;
         int index1 = num / 2;
