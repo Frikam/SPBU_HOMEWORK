@@ -30,16 +30,17 @@ public class Main {
 
     private static int[][] inputMatrix(Scanner in) {
         int number = 1;
-        System.out.println("Array NxN, N should be a prime number");
+        System.out.println("Array NxN, N should be a odd number");
         System.out.print("Enter N : ");
         int n = in.nextInt();
-        int[][] matrix = new int [n][n];
 
         while (n % 2 == 0) {
-            System.out.println("N should be a prime number, try again");
+            System.out.println("N should be a odd number, try again");
             System.out.print("Enter N : ");
             n = in.nextInt();
         }
+
+        int[][] matrix = new int [n][n];
 
         System.out.println("Array : ");
         for (int i = 0; i < n; i++) {
