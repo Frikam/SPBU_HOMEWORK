@@ -30,11 +30,10 @@ public class AvlTree<T extends Comparable<T>> implements Collection<T> {
     /** A method that turns a avl tree into an array */
     @Override
     public Object[] toArray() {
-        ArrayList<T> elements = new ArrayList<>();
-        root.addElementsToArray(elements, root);
-
+        ArrayList<T> elements = root.treeToArray(new ArrayList<>(), root);
         return elements.toArray();
     }
+
 
     /** A method that turns a avl tree into an array */
     @Override
@@ -110,7 +109,7 @@ public class AvlTree<T extends Comparable<T>> implements Collection<T> {
 
         AvlTreeIterator() {
             elements = new ArrayList<>();
-            root.addElementsToArray(elements, root);
+            root.treeToArray(elements, root);
 
         }
         @Override
@@ -355,7 +354,7 @@ public class AvlTree<T extends Comparable<T>> implements Collection<T> {
             }
         }
 
-        /** A method that updates a height of the element   */
+        /** A method that updates a height of the element */
         private void reheight(Node node) {
             if (node != null) {
                 node.height = 1 + Math.max(height(node.left), height(node.right));
@@ -373,14 +372,13 @@ public class AvlTree<T extends Comparable<T>> implements Collection<T> {
         }
 
         /** A method that adds all elements from tree to ArrayList */
-        private void addElementsToArray(ArrayList<T> elements, Node current) {
-            if (current == null) {
-                return;
+        private ArrayList<T> treeToArray(ArrayList<T> elements, Node current) {
+            if (current != null) {
+                current.treeToArray(elements, current.left);
+                elements.add(current.value);
+                current.treeToArray(elements, current.right);
             }
-
-            current.addElementsToArray(elements, current.left);
-            elements.add(current.value);
-            current.addElementsToArray(elements, current.right);
+            return elements;
         }
     }
 }
