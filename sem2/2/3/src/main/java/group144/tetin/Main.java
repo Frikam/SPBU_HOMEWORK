@@ -1,9 +1,10 @@
 package group144.tetin;
 
+import java.io.FileNotFoundException;
 import java.util.Scanner;
 
 public class Main {
-    public static void main(String[] abs) {
+    public static void main(String[] abs) throws FileNotFoundException {
         Scanner in = new Scanner(System.in);
         System.out.println("If you want print in file, enter \"F\", else enter \"C\".");
         System.out.print("Enter \"F\" or \"C\" : ");
