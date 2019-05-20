@@ -69,4 +69,12 @@ public class HashTableTest {
         hashTable.delete("Berserk");
         assertFalse(hashTable.contains("Berserk"));
     }
+
+    @Test
+    public void changeHashFunctionTest() throws AlreadyInHashTableException {
+        HashTable hashTable = new HashTable(200, new PolynomialHash());
+        hashTable.add("Hello");
+        hashTable.changeHashFunction(new SquaredLengthHash());
+        assertTrue(hashTable.contains("Hello"));
+    }
 }

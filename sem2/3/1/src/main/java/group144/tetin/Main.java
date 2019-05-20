@@ -6,7 +6,7 @@ import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 public class Main {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws AlreadyInHashTableException {
         String word;
         Scanner in = new Scanner(System.in);
         HashTable hashTable = new HashTable(200, chooseHashFunction(in));

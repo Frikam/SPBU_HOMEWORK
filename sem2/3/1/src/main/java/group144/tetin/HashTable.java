@@ -24,8 +24,9 @@ public class HashTable {
     }
 
     /** A method that changes the hash function */
-    public void changeHashFunction(HashFunction hashFunction) {
+    public void changeHashFunction(HashFunction hashFunction) throws AlreadyInHashTableException {
         this.hashFunction = hashFunction;
+        rebuildHashTable(0);
     }
 
     /** A method that adds the element in hash table
@@ -46,16 +47,18 @@ public class HashTable {
         hashTable.get(hash).add(element);
 
         if (getLoadFactor() >= 0.75) {
-            rebuildHashTable();
+            rebuildHashTable(hashTable.size());
         }
     }
 
     /** A method that rebuild hash table */
-    private void rebuildHashTable() throws AlreadyInHashTableException {
-        int size = hashTable.size();
-        for (int i = 0; i < size; i++) {
+    private void rebuildHashTable(int numberOfNewСell) throws AlreadyInHashTableException {
+
+        for (int i = 0; i < numberOfNewСell; i++) {
             hashTable.add(new LinkedList<>());
         }
+
+        int size = hashTable.size();
 
         for (int i = 0; i < size; i++) {
             while (!hashTable.get(i).isEmpty()) {
@@ -66,19 +69,10 @@ public class HashTable {
 
     /** A method that checks element in a hash table or no */
     public boolean contains(String element) {
-        int hashP = hashFunction.getHash(element, hashTable.size());
-        if (hashTable.get(hashP).contains(element)) {
+        int hash = hashFunction.getHash(element, hashTable.size());
+        if (hashTable.get(hash).contains(element)) {
             return true;
         }
-        int hashM = new SymbolsMultiplicationHash().getHash(element, hashTable.size());
-        if (hashTable.get(hashM).contains(element)) {
-            return true;
-        }
-        int hashD = new SquaredLengthHash().getHash(element, hashTable.size());
-        if (hashTable.get(hashD).contains(element)) {
-            return true;
-        }
-
         return false;
     }
 
@@ -86,24 +80,12 @@ public class HashTable {
      * @throws NoSuchElementException when try we try delete word which is not in hash table
      * */
     public void delete(String element) {
-        int hashP = hashFunction.getHash(element, hashTable.size());
-        if (hashTable.get(hashP).contains(element)) {
-            hashTable.get(hashP).remove(element);
+        int hash = hashFunction.getHash(element, hashTable.size());
+        if (hashTable.get(hash).contains(element)) {
+            hashTable.get(hash).remove(element);
         }
         else {
-            int hashM = new SymbolsMultiplicationHash().getHash(element, hashTable.size());
-            if (hashTable.get(hashM).contains(element)) {
-                hashTable.get(hashM).remove(element);
-            }
-            else {
-                int hashD = new SquaredLengthHash().getHash(element, hashTable.size());
-                if (hashTable.get(hashD).contains(element)) {
-                    hashTable.get(hashD).remove(element);
-                }
-                else {
-                    throw new NoSuchElementException();
-                }
-            }
+            throw new NoSuchElementException();
         }
         elementNumber--;
     }
@@ -127,7 +109,7 @@ public class HashTable {
     public int getMaxLengthOfList() {
         int result = 0;
 
-        for (LinkedList list : hashTable) {
+        for (LinkedList<String> list : hashTable) {
             result = Math.max(result, list.size());
         }
 
