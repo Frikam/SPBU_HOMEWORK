@@ -3,7 +3,11 @@ package group144.tetin;
 import java.io.*;
 import java.lang.reflect.*;
 
+/** A class that build a new file with methods, fields, constructors from inputted file */
 public class Reflector {
+    /** A method that build a new file from inputted class
+     * @param someClass - a class that should be build in the file
+     * */
     public String printStructure(Class<?> someClass) throws IOException {
         StringBuilder newClass = new StringBuilder();
         FileWriter fileWriter = new FileWriter( "src//test//java//group144//tetin//ResultOfReflection//" + someClass.getSimpleName() + ".java");
@@ -15,7 +19,9 @@ public class Reflector {
         return newClass.toString();
     }
 
-    /** A method that print a package */
+    /** A method that print a package
+     * @param newClass - a class that should be built
+     */
     private void printPackage(Class<?> someClass, StringBuilder newClass) {
         newClass.append("package " + someClass.getPackage().getName() + ".ResultOfReflection;" + "\n\n" );
     }
@@ -222,6 +228,9 @@ public class Reflector {
         newClass.append("}");
     }
 
+    /** A method that print difference between two classes
+     * @return true if methods are equals, else return false
+     * */
     public boolean diffClasses(Class<?> firstClass, Class<?> secondClass) {
         StringBuilder diffBetweenClasses = new StringBuilder();
         getDifference(firstClass, secondClass, diffBetweenClasses);
@@ -240,6 +249,7 @@ public class Reflector {
         getDifferenceInMethods(firstClass, secondClass, diffBetweenClasses);
     }
 
+    /** A method that prints difference between fields of classes */
     private void getDifferenceInFields(Class<?> firstClass, Class<?> secondClass, StringBuilder diffBetweenClasses) {
         Field[] fieldsFromFirst = firstClass.getDeclaredFields();
         Field[] fieldsFromSecond = secondClass.getDeclaredFields();
@@ -261,6 +271,7 @@ public class Reflector {
         }
     }
 
+    /** A method that contains field in other class */
     private boolean contains(Field[] fields, Field field) {
         if (Modifier.isFinal(field.getModifiers()) && field.getName().equals("this$0$")) {
             return true;
@@ -276,6 +287,7 @@ public class Reflector {
         return false;
     }
 
+    /** A method that prints difference between methods of classes */
     private void getDifferenceInMethods(Class<?> firstClass, Class<?> secondClass, StringBuilder diffBetweenClasses) {
         Method[] methodsFromFirst = firstClass.getDeclaredMethods();
         Method[] methodsFromSecond = secondClass.getDeclaredMethods();
@@ -297,6 +309,7 @@ public class Reflector {
         }
     }
 
+    /** A method that contains method in other class */
     private boolean contains(Method[] methods, Method method) {
         StringBuilder firstMethod = new StringBuilder();
         printSomeMethod(method, firstMethod);
