@@ -1,7 +1,5 @@
 package group144.tetin;
 
-import java.util.EmptyStackException;
-import java.util.Iterator;
 import java.util.Stack;
 
 public class Calculator {
@@ -100,21 +98,13 @@ public class Calculator {
                     Integer secondNumber = stack.pop();
                     stack.push(calculate(secondNumber, firstNumber, expression));
                 }
-                catch (Exception e) {
+                catch (ArithmeticException e){
                     throw e;
                 }
             }
         }
 
-
-        int answer = 0;
-
-        try{
-            answer = stack.pop();
-        }
-        catch (ArithmeticException e){
-            throw e;
-        }
+        int answer = stack.pop();
 
         postfixForm = "";
         return answer;

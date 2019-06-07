@@ -34,11 +34,12 @@ public class Contoller {
         }
 
         previousSymbolIsNumber = true;
-        calculate();
+        updateText();
     }
 
     /** Action when press operation button */
     public void pressOnOperation(ActionEvent event) {
+        calculate();
         if (previousSymbolIsNumber) {
             expression += " ";
         }
@@ -59,7 +60,6 @@ public class Contoller {
 
         previousSymbolIsNumber = false;
         updateText();
-
     }
 
     /** Action when press equal button */
@@ -120,9 +120,6 @@ public class Contoller {
     private Button button9;
 
     @FXML
-    private Button reset;
-
-    @FXML
     private Button multiply;
 
     @FXML
@@ -133,7 +130,4 @@ public class Contoller {
 
     @FXML
     private Button minus;
-
-    @FXML
-    private Button equal;
 }
