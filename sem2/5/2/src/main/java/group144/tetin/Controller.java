@@ -38,28 +38,28 @@ public class Controller {
     }
 
     /** A method that calculate expression */
-    private String calculate() {
-        switch (operation.getValue()) {
+    private String calculate(int firstNumber, int secondNumber, char operation) {
+        switch (operation) {
             case '+' :
-                return "" + (firstNumber.getValue() + secondNumber.getValue());
+                return "" + (firstNumber + secondNumber);
             case '-' :
-                return "" + (firstNumber.getValue() - secondNumber.getValue());
+                return "" + (firstNumber - secondNumber);
             case '/' :
-                if (secondNumber.getValue() == 0) {
+                if (secondNumber == 0) {
                     return "ERROR";
                 }
-                return "" + (firstNumber.getValue() / secondNumber.getValue());
+                return "" + (firstNumber / secondNumber);
             case '*' :
-                return "" + (firstNumber.getValue() * secondNumber.getValue());
+                return "" + (firstNumber * secondNumber);
             case '%' :
-                return "" + (firstNumber.getValue() % secondNumber.getValue());
+                return "" + (firstNumber % secondNumber);
             default:
                 return "Incorrect expression";
         }
     }
 
     private void setAnswer() {
-        String answer = calculate();
+        String answer = calculate(firstNumber.getValue(), secondNumber.getValue(), operation.getValue());
         text.setText(answer);
     }
 }
