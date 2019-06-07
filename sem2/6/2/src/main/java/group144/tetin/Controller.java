@@ -8,20 +8,22 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 
 public class Controller {
+    private final int SIZE_OF_BOARD = 3;
+
     private Button[][] buttons;
 
-    private String[][] textOnButtons;
+    private String[][] textOnButtons = new String[SIZE_OF_BOARD][SIZE_OF_BOARD];
 
     private String textOnButton;
 
-    private TicTakToe ticTakToe = new TicTakToe();
+    private TicTacToe ticTacToe = new TicTacToe();
 
     private int numberOfPressedButtons;
 
     /** A method that realize press on button */
     public void pressOnButton(ActionEvent event) {
-        for (int row = 0; row < 3; row++) {
-            for (int column = 0; column < 3; column++) {
+        for (int row = 0; row < SIZE_OF_BOARD; row++) {
+            for (int column = 0; column < SIZE_OF_BOARD; column++) {
                 if (event.getSource().equals(buttons[row][column])) {
                     if ("".equals(buttons[row][column].getText())) {
                         buttons[row][column].setText(textOnButton);
@@ -29,7 +31,7 @@ public class Controller {
                         nextTurn();
                         changeText();
                         numberOfPressedButtons++;
-                        if (ticTakToe.isAnybodyWin(textOnButtons)) {
+                        if (ticTacToe.isAnybodyWin(textOnButtons)) {
                             endGame(buttons[row][column].getText());
                             return;
                         }
@@ -62,9 +64,8 @@ public class Controller {
 
     /** A method that return all buttons to started condition */
     public void startNewGame() {
-        textOnButtons = new String[3][3];
-        for (int i = 0; i < 3; i++) {
-            for (int j = 0; j < 3; j++) {
+        for (int i = 0; i < SIZE_OF_BOARD; i++) {
+            for (int j = 0; j < SIZE_OF_BOARD; j++) {
                 buttons[i][j].setText("");
                 textOnButtons[i][j] = "";
             }
@@ -95,9 +96,6 @@ public class Controller {
 
     @FXML
     private Label textField;
-
-    @FXML
-    private Button startNewGame;
 
     @FXML
     private Button button1;
