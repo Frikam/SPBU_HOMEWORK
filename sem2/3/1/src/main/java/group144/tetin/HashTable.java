@@ -53,7 +53,6 @@ public class HashTable {
 
     /** A method that rebuild hash table */
     private void rebuildHashTable(int numberOfNewСell) throws AlreadyInHashTableException {
-
         for (int i = 0; i < numberOfNewСell; i++) {
             hashTable.add(new LinkedList<>());
         }
@@ -61,7 +60,8 @@ public class HashTable {
         int size = hashTable.size();
 
         for (int i = 0; i < size; i++) {
-            while (!hashTable.get(i).isEmpty()) {
+            int sizeOfCell = hashTable.get(i).size();
+            for (int j = 0; j < sizeOfCell; j++) {
                 add(hashTable.get(i).pop());
             }
         }
