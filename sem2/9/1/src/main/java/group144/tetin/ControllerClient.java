@@ -23,11 +23,16 @@ public class ControllerClient extends Controller implements Initializable {
 
                 int[] opponentTurn;
                 opponentTurn = game.opponentTurn();
+
                 Platform.runLater(() -> {
-                        Button button = super.getButtonByLocation(opponentTurn[0], opponentTurn[1]);
-                        button.setText(opponent);
-                        setDisableAll(false);
-                        changeText();
+
+                    Button button = super.getButtonByLocation(opponentTurn[0], opponentTurn[1]);
+                    if (game.hasPlayerDisconnected()) {
+                        showMessageAboutDisconnect(button);
+                    }
+                    button.setText(opponent);
+                    setDisableAll(false);
+                    changeText();
                 });
             } catch (IOException e) {
                 System.out.println("Run Server first");

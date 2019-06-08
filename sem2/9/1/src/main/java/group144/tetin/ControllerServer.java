@@ -20,7 +20,7 @@ public class ControllerServer extends Controller implements Initializable {
                 setDisableAll(false);
                 System.out.println("Connected, game is on");
             } catch (IOException e) {
-                System.out.println("Incorrect port");
+                System.out.println("You run several servers, try again");
                 return;
             }
         };

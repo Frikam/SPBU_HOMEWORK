@@ -19,11 +19,10 @@ public class Game {
     }
 
     /**
-     * Method put a symbol of Player whose clientTurn is on empty position of field
+     * Method put a symbol
      *
      * @param row first coordinate of pos
      * @param column second coordinate of pos
-     * @return true if symbol put and false if looking position is not empty
      */
     public void turn(int row, int column) {
         numberOfPressedButtons++;
@@ -41,6 +40,9 @@ public class Game {
         return state.toString();
     }
 
+    /** A method that checks anybody win or no
+     * @return true - if anybody win, else return false
+     */
     private boolean isAnybodyWin() {
         int numberOfButtons = field.length;
         boolean result;
@@ -52,8 +54,8 @@ public class Game {
                 }
             }
 
-            if (result == true) {
-                return result;
+            if (result) {
+                return true;
             }
 
             result = true;
@@ -63,8 +65,8 @@ public class Game {
                 }
             }
 
-            if (result == true) {
-                return result;
+            if (result) {
+                return true;
             }
         }
 
@@ -75,8 +77,8 @@ public class Game {
             }
         }
 
-        if (result == true) {
-            return result;
+        if (result) {
+            return true;
         }
 
         result = true;
@@ -86,8 +88,8 @@ public class Game {
             }
         }
 
-        if (result == true) {
-            return result;
+        if (result) {
+            return true;
         }
 
         return false;

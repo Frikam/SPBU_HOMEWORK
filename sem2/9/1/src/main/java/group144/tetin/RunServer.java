@@ -6,7 +6,10 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+import java.io.IOException;
+
 public class RunServer extends Application {
+    ControllerClient controller;
 
     @Override
     public void start(Stage primaryStage) throws Exception{
@@ -18,6 +21,10 @@ public class RunServer extends Application {
         primaryStage.setMinWidth(325);
     }
 
+    @Override
+    public void stop() throws IOException {
+        controller.sendMessageAboutDisconnect();
+    }
 
     public static void main(String[] args) {
         launch(args);

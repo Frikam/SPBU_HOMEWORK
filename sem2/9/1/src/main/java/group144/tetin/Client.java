@@ -15,8 +15,24 @@ public class Client implements Adapter {
     }
 
     @Override
+    public void sendMessageAboutDisconnect() throws IOException {
+        ByteBuffer serverTurn = ByteBuffer.allocate(Encoder.PLAYER_TURN_LENGTH);
+        serverTurn.put((byte) 0);
+        serverTurn.put((byte) 0);
+        serverTurn.put((byte) -1);
+        socketChannel.write(serverTurn);
+        socketChannel.read(serverTurn);
+        state = "EXCEPTION";
+    }
+
+    @Override
+    public boolean hasPlayerDisconnected() {
+        return state.equals("EXCEPTION");
+    }
+
+    @Override
     public void turn(int row, int column) throws IOException {
-        ByteBuffer clientTurn = Encoder.clientTurn(row, column);
+        ByteBuffer clientTurn = Encoder.encode(row, column, state);
         socketChannel.write(clientTurn);
         ByteBuffer answer = ByteBuffer.allocate(Encoder.SHORT_LENGTH);
         socketChannel.read(answer);
@@ -30,7 +46,7 @@ public class Client implements Adapter {
 
     @Override
     public int[] opponentTurn() throws IOException {
-        ByteBuffer serverTurn = ByteBuffer.allocate(Encoder.SERVER_TURN_LENGTH);
+        ByteBuffer serverTurn = ByteBuffer.allocate(Encoder.PLAYER_TURN_LENGTH);
         socketChannel.read(serverTurn);
         state = Encoder.getState(serverTurn);
         return Encoder.getServerTurn(serverTurn);

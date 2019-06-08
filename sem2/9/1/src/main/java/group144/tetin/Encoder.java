@@ -3,8 +3,7 @@ package group144.tetin;
 import java.nio.ByteBuffer;
 
 public class Encoder {
-    public static final int SERVER_TURN_LENGTH = 3;
-    public static final int CLIENT_TURN_LENGTH = 2;
+    public static final int PLAYER_TURN_LENGTH = 3;
     public static final int SHORT_LENGTH = 1;
 
     /**
@@ -15,17 +14,18 @@ public class Encoder {
         ByteBuffer byteBuffer = ByteBuffer.allocate(SHORT_LENGTH);
         switch (state) {
             case "PLAYING":
-                byteBuffer.put((byte) 0);
-                break;
-            case "X_WON":
                 byteBuffer.put((byte) 1);
                 break;
-            case "O_WON":
+            case "X_WON":
                 byteBuffer.put((byte) 2);
                 break;
-
-            default:
+            case "O_WON":
                 byteBuffer.put((byte) 3);
+                break;
+            case "DRAW":
+                byteBuffer.put((byte) 4);
+            default:
+                byteBuffer.put((byte) 5);
         }
 
         byteBuffer.flip();
@@ -41,13 +41,15 @@ public class Encoder {
      */
     public static String getStateShort(ByteBuffer byteBuffer) {
         switch (byteBuffer.get(0)) {
-            case 0:
-                return "PLAYING";
             case 1:
-                return "X_WON";
+                return "PLAYING";
             case 2:
+                return "X_WON";
+            case 3:
                 return "O_WON";
-            default: return "DRAW";
+            case 4:
+                return "DRAW";
+            default: return "EXCEPTION";
         }
     }
 
@@ -95,17 +97,18 @@ public class Encoder {
         byteBuffer.put((byte) lastTurnY);
         switch (state) {
             case "PLAYING":
-            byteBuffer.put((byte) 0);
+            byteBuffer.put((byte) 1);
             break;
             case "X_WON":
-                byteBuffer.put((byte) 1);
-                break;
-            case "O_WON":
                 byteBuffer.put((byte) 2);
                 break;
-
-            default:
+            case "O_WON":
                 byteBuffer.put((byte) 3);
+                break;
+            case "DRAW":
+                byteBuffer.put((byte) 4);
+            default:
+                byteBuffer.put((byte) 5);
         }
 
         byteBuffer.flip();
@@ -122,13 +125,15 @@ public class Encoder {
      */
     public static String getState(ByteBuffer byteBuffer) {
         switch (byteBuffer.get(2)) {
-            case 0:
-                return "PLAYING";
             case 1:
-                return "X_WON";
+                return "PLAYING";
             case 2:
+                return "X_WON";
+            case 3:
                 return "O_WON";
-            default: return "DRAW";
+            case 4:
+                return "DRAW";
+            default: return "EXCEPTION";
         }
     }
 
@@ -142,6 +147,5 @@ public class Encoder {
     public static int[] getServerTurn(ByteBuffer byteBuffer) {
         return new int[]{byteBuffer.get(0), byteBuffer.get(1)};
     }
-
 
 }
