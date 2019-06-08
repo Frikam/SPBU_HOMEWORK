@@ -8,7 +8,7 @@ import java.util.Scanner;
 public class ArithmeticTree {
     private Node head;
 
-    ArithmeticTree(Scanner scanner){
+    ArithmeticTree(Scanner scanner) {
         head = new OperatorNode(scanner.next());
         readExpression(scanner, (OperatorNode) head);
     }
