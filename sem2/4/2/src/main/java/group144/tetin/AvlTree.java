@@ -30,8 +30,7 @@ public class AvlTree<T extends Comparable<T>> implements Collection<T> {
     /** A method that turns a avl tree into an array */
     @Override
     public Object[] toArray() {
-        ArrayList<T> elements = root.treeToArray(new ArrayList<>(), root);
-        return elements.toArray();
+        return toArray(new Object[size]);
     }
 
 
@@ -109,8 +108,7 @@ public class AvlTree<T extends Comparable<T>> implements Collection<T> {
 
         AvlTreeIterator() {
             elements = new ArrayList<>();
-            root.treeToArray(elements, root);
-
+            root.treeToArray(elements);
         }
         @Override
         public boolean hasNext() {
@@ -371,14 +369,15 @@ public class AvlTree<T extends Comparable<T>> implements Collection<T> {
             return result;
         }
 
-        /** A method that adds all elements from tree to ArrayList */
-        private ArrayList<T> treeToArray(ArrayList<T> elements, Node current) {
-            if (current != null) {
-                current.treeToArray(elements, current.left);
-                elements.add(current.value);
-                current.treeToArray(elements, current.right);
+        /** A method that adds elements from tree to array list */
+        public void treeToArray(ArrayList<T> list) {
+            if (left != null) {
+                left.treeToArray(list);
             }
-            return elements;
+            list.add(this.value);
+            if (right != null) {
+                right.treeToArray(list);
+            }
         }
     }
 }
