@@ -43,7 +43,7 @@ public class Game {
     /** A method that checks anybody win or no
      * @return true - if anybody win, else return false
      */
-    private boolean isAnybodyWin() {
+    public boolean isAnybodyWin() {
         int numberOfButtons = field.length;
         boolean result;
         for (int j = 0; j < numberOfButtons; j++) {
