@@ -8,8 +8,12 @@ import java.util.Scanner;
 public class ArithmeticTree {
     private Node head;
 
+    ArithmeticTree(Node head) {
+        this.head = head;
+    }
+
     ArithmeticTree(Scanner scanner) {
-        head = new OperatorNode(scanner.next());
+        head = new OperatorNode(scanner.next().charAt(1)); //(+
         readExpression(scanner, (OperatorNode) head);
     }
 
@@ -28,7 +32,7 @@ public class ArithmeticTree {
         if (scanner.hasNextInt()) {
             current.left = new OperandNode(scanner.next());
         } else {
-            current.left = new OperatorNode(scanner.next());
+            current.left = new OperatorNode(scanner.next().charAt(1));
             readExpression(scanner, (OperatorNode) current.left);
         }
 
@@ -38,7 +42,7 @@ public class ArithmeticTree {
                 current.right = new OperandNode(expression);
             }
             else {
-                current.right = new OperatorNode(expression);
+                current.right = new OperatorNode(expression.charAt(1));
                 readExpression(scanner, (OperatorNode) current.right);
             }
         }

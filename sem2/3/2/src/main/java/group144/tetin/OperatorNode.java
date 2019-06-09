@@ -9,8 +9,22 @@ public class OperatorNode implements Node {
     public Node left;
     public Node right;
 
-    OperatorNode(String expression) {
-        operation = expression.charAt(expression.length() - 1); // "(+"
+    OperatorNode(char operation) {
+        this.operation = operation;
+    }
+
+    OperatorNode(Node leftChild, Node rightChild, char operation) {
+        operation = operation;
+        left = leftChild;
+        right = rightChild;
+    }
+
+    public void setLeftChild(Node leftChild) {
+        left = leftChild;
+    }
+
+    public void setRightChild(Node rightChild) {
+        right = rightChild;
     }
 
     /** A method that calculate expression Node */
