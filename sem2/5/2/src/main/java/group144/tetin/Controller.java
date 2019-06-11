@@ -38,7 +38,7 @@ public class Controller {
     }
 
     /** A method that calculate expression */
-    private String calculate(int firstNumber, int secondNumber, char operation) {
+    public String calculate(int firstNumber, int secondNumber, char operation) {
         switch (operation) {
             case '+' :
                 return "" + (firstNumber + secondNumber);
