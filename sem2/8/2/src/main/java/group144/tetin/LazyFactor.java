@@ -4,9 +4,15 @@ import java.util.function.Supplier;
 
 public class LazyFactor {
 
-    /** A method that represent one thread lazy calculation */
+    /**
+     * A method that represent one thread lazy calculation
+     */
     public static <T> Lazy<T> createOneThreadLazy(Supplier<T> supplier) {
-        return new Lazy<T>() {
+        return createOneThread(supplier);
+    }
+
+    private static <T> Lazy<T> createOneThread(Supplier<T> supplier) {
+        Lazy<T> thread = new Lazy<T>() {
             private boolean wasCalculated = false;
             private T value;
 
@@ -19,11 +25,19 @@ public class LazyFactor {
                 return value;
             }
         };
+
+        return thread;
     }
 
-    /** A method that represent multi threads lazy calculation */
+    /**
+     * A method that represent multi threads lazy calculation
+     */
     public static <T> Lazy<T> createMultiThreadLazy(Supplier<T> supplier) {
-        return new Lazy<T>() {
+        return createMultiThread(supplier);
+    }
+
+    private static <T> Lazy<T> createMultiThread(Supplier<T> supplier) {
+        Lazy<T> thread = new Lazy<T>() {
             private volatile boolean wasCalculated = false;
             private volatile T value;
 
@@ -38,5 +52,7 @@ public class LazyFactor {
                 return value;
             }
         };
+
+        return thread;
     }
 }
