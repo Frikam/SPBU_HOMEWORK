@@ -10,7 +10,8 @@ public class Reflector {
      * */
     public String printStructure(Class<?> someClass) throws IOException {
         StringBuilder newClass = new StringBuilder();
-        FileWriter fileWriter = new FileWriter( "src//test//java//group144//tetin//ResultOfReflection//" + someClass.getSimpleName() + ".java");
+        String fileName = "src//test//java//group144//tetin//ResultOfReflection//";
+        FileWriter fileWriter = new FileWriter( fileName + someClass.getSimpleName() + ".java");
         printPackage(someClass, newClass);
         printClass(someClass, newClass);
 
@@ -23,7 +24,8 @@ public class Reflector {
      * @param newClass - a class that should be built
      */
     private void printPackage(Class<?> someClass, StringBuilder newClass) {
-        newClass.append("package " + someClass.getPackage().getName() + ".ResultOfReflection;" + "\n\n" );
+        String line = "package " + someClass.getPackage().getName() + ".ResultOfReflection;" + "\n\n";
+        newClass.append(line);
     }
 
     private void printClass(Class<?> someClass, StringBuilder newClass) {
@@ -37,7 +39,8 @@ public class Reflector {
     /** A method that writing information about class */
     private void writeInfo(Class<?> someClass, StringBuilder newClass) {
         newClass.append(Modifier.toString(someClass.getModifiers()));
-        newClass.append(" class " + someClass.getSimpleName());
+        String line = " class " + someClass.getSimpleName();
+        newClass.append(line);
 
         TypeVariable[] parameters = someClass.getTypeParameters();
         printTypeParameters(parameters, newClass);
@@ -49,7 +52,8 @@ public class Reflector {
     /** A method that print super class if he exists */
     private void printSuperclass(Class<?> someClass, StringBuilder newClass) {
         if (someClass.getSuperclass() != null) {
-            newClass.append(" extends " + someClass.getSuperclass().getSimpleName() + " ");
+            String line = " extends " + someClass.getSuperclass().getSimpleName() + " ";
+            newClass.append(line);
             printTypeParameters(someClass.getSuperclass().getTypeParameters(), newClass);
         }
     }
@@ -112,9 +116,7 @@ public class Reflector {
     /** A method that prints methods of class */
     private void printMethods(Class<?> someClass, StringBuilder newClass) {
         if (someClass.getDeclaredMethods().length != 0) {
-            Method[] methods = someClass.getDeclaredMethods();
-
-            for (Method method : methods) {
+            for (Method method : someClass.getDeclaredMethods()) {
                 printSomeMethod(method, newClass);
             }
         }
@@ -124,9 +126,12 @@ public class Reflector {
         if (method.getName().contains("$")) {
             return;
         }
-        newClass.append("\t" + Modifier.toString(method.getModifiers()) + " ");
-        newClass.append(method.getReturnType().getSimpleName() + " ");
-        newClass.append(method.getName() + " ");
+        String line = "\t" + Modifier.toString(method.getModifiers()) + " ";
+        newClass.append(line);
+        line = method.getReturnType().getSimpleName() + " ";
+        newClass.append(line);
+        line = method.getName() + " ";
+        newClass.append(line);
 
         Parameter[] parameters = method.getParameters();
         printParametrs(parameters, newClass);
@@ -176,7 +181,7 @@ public class Reflector {
 
     /** A method that prints returned value of method */
     private void printReturnedValue(Type returnType, StringBuilder newClass) {
-        String value = "";
+        String value;
         switch (returnType.getTypeName()) {
             case "Integer":
                 value = "0";
@@ -206,7 +211,6 @@ public class Reflector {
     /** A method that prints constructors of class */
     private void printConstructors(Class<?> someClass, StringBuilder newClass) {
         Constructor[] constructors = someClass.getDeclaredConstructors();
-        int length = constructors.length;
         for (Constructor constructor : constructors) {
             newClass.append("\t" + someClass.getSimpleName() + " ");
             printParametrs(constructor.getParameters(), newClass);
@@ -261,12 +265,14 @@ public class Reflector {
         for (Field field : fieldsFromFirst) {
             if (!contains(fieldsFromSecond, field)) {
                 diffBetweenClasses.append(getField(field));
+                diffBetweenClasses.append(";\n");
             }
         }
 
         for (Field field : fieldsFromSecond) {
             if (!contains(fieldsFromFirst, field)) {
                 diffBetweenClasses.append(getField(field));
+                diffBetweenClasses.append(";\n");
             }
         }
     }
