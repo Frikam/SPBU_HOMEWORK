@@ -55,7 +55,7 @@ public class HashTable {
     private void rebuildHashTable(int numberOfNewСell) throws AlreadyInHashTableException {
         HashTable newHashTable = new HashTable(this.hashTable.size() + numberOfNewСell, hashFunction);
         int size = hashTable.size();
-        
+
         for (int i = 0; i < size; i++) {
             int sizeOfCell = hashTable.get(i).size();
             for (int j = 0; j < sizeOfCell; j++) {
@@ -64,6 +64,7 @@ public class HashTable {
         }
 
         this.hashTable = newHashTable.hashTable;
+        this.conflictNumber = newHashTable.conflictNumber;
     }
 
     /** A method that checks element in a hash table or no */
