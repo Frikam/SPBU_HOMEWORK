@@ -15,6 +15,11 @@ public class Contoller {
 
     private String expression = "";
 
+    private int numberOfOperation = 0; // number of operation pressed one after another
+
+    boolean previousIsMinus = true;
+
+
     @FXML
     private TextField textField;
 
@@ -39,9 +44,25 @@ public class Contoller {
 
     /** Action when press operation button */
     public void pressOnOperation(ActionEvent event) {
-        calculate();
+        boolean isMinus = false;
+        if (event.getSource().equals(minus)) {
+            numberOfOperation++;
+            isMinus = true;
+        }
+
+        if (!isMinus && numberOfOperation < 3) {
+            if (!calculate()) {
+                numberOfOperation = 0;
+                return;
+            }
+        }
+
         if (previousSymbolIsNumber) {
+            numberOfOperation = 1;
             expression += " ";
+        }
+        else {
+            numberOfOperation++;
         }
 
         if (event.getSource().equals(plus)) {
@@ -67,16 +88,21 @@ public class Contoller {
         calculate();
     }
 
-    /** A method that calculate answer */
-    private void calculate() {
+    /** A method that calculate answer
+     * @return true - if expression entered right, else return false
+     * */
+    private boolean calculate() {
         try {
             expression = calculator.calculateExpression(expression);
             updateText();
+            return true;
         } catch (ArithmeticException e) {
             textField.setText("ERROR DIVIDING BY 0!!!");
         } catch (WrongExpressionException e) {
             textField.setText("WRONG EXPRESSION!!!");
         }
+        expression = "";
+        return false;
     }
 
     /** A method that updates text field */

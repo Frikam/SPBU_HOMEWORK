@@ -11,13 +11,15 @@ public class Calculator {
     /** A method that calculate expression using sort station */
     public String calculateExpression(String expression) throws WrongExpressionException {
         this.postfixForm = "";
-        infixToPostfix(expression.toCharArray());
         try {
+            infixToPostfix(expression.toCharArray());
             return "" + calculate(postfixForm);
         }
         catch (ArithmeticException e) {
             throw e;
-        } catch (Exception e) {
+        } catch (EmptyStackException e) {
+            throw new WrongExpressionException();
+        } catch (RuntimeException e) {
             throw new WrongExpressionException();
         }
     }
@@ -91,7 +93,7 @@ public class Calculator {
     }
 
     /** Calculate using the sorting station algorithm */
-    private int calculate(String string) throws WrongExpressionException {
+    private int calculate(String string) {
         Stack<Integer> stack = new Stack<>();
         String[] array = string.split(" ");
         for (String expression : array) {
@@ -109,13 +111,20 @@ public class Calculator {
                 }
                 catch (ArithmeticException e){
                     throw e;
-                } catch (Exception e) {
+                } catch (EmptyStackException e) {
+                    throw e;
+                } catch (RuntimeException e) {
                     throw e;
                 }
             }
         }
 
-        int answer = stack.pop();
+        int answer;
+        try {
+            answer = stack.pop();
+        } catch (EmptyStackException e) {
+            throw e;
+        }
 
         postfixForm = "";
         return answer;
