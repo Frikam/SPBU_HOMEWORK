@@ -61,4 +61,22 @@ public class LazyFactor {
 
         return thread;
     }
+
+    public class oneThread <T> implements Lazy {
+        private boolean wasCalculated = false;
+        private T value;
+
+        oneThread(Supplier<T> supplier) {
+
+        }
+
+        @Override
+        public T get() {
+            if (!wasCalculated) {
+                value = supplier.get();
+                wasCalculated = true;
+            }
+            return value;
+        }
+    }
 }

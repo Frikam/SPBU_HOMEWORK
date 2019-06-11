@@ -98,6 +98,10 @@ public class LazyFactorTest {
             this.value = value;
         }
 
+        public boolean wasCalled() {
+            return numberOfCalls == 0;
+        }
+
         @Override
         public T get() {
             numberOfCalls++;
