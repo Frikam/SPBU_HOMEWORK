@@ -1,5 +1,7 @@
 package group144.tetin;
 
+import java.io.IOException;
+import java.util.EmptyStackException;
 import java.util.Stack;
 
 public class Calculator {
@@ -7,10 +9,17 @@ public class Calculator {
     private String postfixForm;
 
     /** A method that calculate expression using sort station */
-    public String calculateExpression(String expression) {
+    public String calculateExpression(String expression) throws WrongExpressionException {
         this.postfixForm = "";
         infixToPostfix(expression.toCharArray());
-        return "" + calculate(postfixForm);
+        try {
+            return "" + calculate(postfixForm);
+        }
+        catch (ArithmeticException e) {
+            throw e;
+        } catch (Exception e) {
+            throw new WrongExpressionException();
+        }
     }
 
     /** A method that create stack by sort station*/
@@ -82,7 +91,7 @@ public class Calculator {
     }
 
     /** Calculate using the sorting station algorithm */
-    private int calculate(String string) {
+    private int calculate(String string) throws WrongExpressionException {
         Stack<Integer> stack = new Stack<>();
         String[] array = string.split(" ");
         for (String expression : array) {
@@ -99,6 +108,8 @@ public class Calculator {
                     stack.push(calculate(secondNumber, firstNumber, expression));
                 }
                 catch (ArithmeticException e){
+                    throw e;
+                } catch (Exception e) {
                     throw e;
                 }
             }

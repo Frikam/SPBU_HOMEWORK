@@ -74,7 +74,7 @@ public class Contoller {
             updateText();
         } catch (ArithmeticException e) {
             textField.setText("ERROR DIVIDING BY 0!!!");
-        } catch (Exception e) {
+        } catch (WrongExpressionException e) {
             textField.setText("WRONG EXPRESSION!!!");
         }
     }
