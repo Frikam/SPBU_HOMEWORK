@@ -46,10 +46,6 @@ public class TicTacToe {
             }
         }
 
-        if (isAnybodyWin) {
-            return true;
-        }
-
-        return false;
+        return isAnybodyWin;
     }
 }
