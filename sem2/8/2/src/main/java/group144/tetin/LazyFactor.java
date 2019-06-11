@@ -22,7 +22,7 @@ public class LazyFactor {
      * A class that represent one thread lazy calculation
      */
     private static class OneThreadLazy<T> implements Lazy<T> {
-        private T value = null;
+        private T value;
         private Supplier<T> supplier;
 
         @Override
@@ -43,7 +43,7 @@ public class LazyFactor {
      * A class that represent multi threads lazy calculation
      */
     private static class MultiThreadLazy<T> implements Lazy<T> {
-        private volatile T value = null;
+        private T value;
         private volatile Supplier<T> supplier;
 
         @Override
