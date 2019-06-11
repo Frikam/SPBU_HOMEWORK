@@ -17,9 +17,6 @@ public class Contoller {
 
     private int numberOfOperation = 0; // number of operation pressed one after another
 
-    boolean previousIsMinus = true;
-
-
     @FXML
     private TextField textField;
 
@@ -44,11 +41,15 @@ public class Contoller {
 
     /** Action when press operation button */
     public void pressOnOperation(ActionEvent event) {
-        boolean isMinus = false;
-        if (event.getSource().equals(minus)) {
-            numberOfOperation++;
-            isMinus = true;
+        if (previousSymbolIsNumber) {
+            numberOfOperation = 1;
+            expression += " ";
         }
+        else {
+            numberOfOperation++;
+        }
+
+        boolean isMinus = event.getSource().equals(minus);
 
         if (!isMinus && numberOfOperation < 3) {
             if (!calculate()) {
@@ -57,13 +58,7 @@ public class Contoller {
             }
         }
 
-        if (previousSymbolIsNumber) {
-            numberOfOperation = 1;
-            expression += " ";
-        }
-        else {
-            numberOfOperation++;
-        }
+
 
         if (event.getSource().equals(plus)) {
             expression += "+";
