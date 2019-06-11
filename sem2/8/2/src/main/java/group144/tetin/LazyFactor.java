@@ -5,7 +5,7 @@ import java.util.function.Supplier;
 public class LazyFactor {
 
     /**
-     * A method that represent create thread lazy calculation
+     * A method that create thread lazy calculation
      */
     public static <T> Lazy<T> createOneThreadLazy(Supplier<T> supplier) {
         return new OneThreadLazy<>(supplier);
