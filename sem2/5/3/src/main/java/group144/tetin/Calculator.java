@@ -1,7 +1,5 @@
 package group144.tetin;
 
-import java.io.IOException;
-import java.util.EmptyStackException;
 import java.util.Stack;
 
 public class Calculator {
@@ -17,8 +15,6 @@ public class Calculator {
         }
         catch (ArithmeticException e) {
             throw e;
-        } catch (EmptyStackException e) {
-            throw new WrongExpressionException();
         } catch (RuntimeException e) {
             throw new WrongExpressionException();
         }
@@ -93,54 +89,37 @@ public class Calculator {
     }
 
     /** Calculate using the sorting station algorithm */
-    private int calculate(String string) {
+    private int calculate(String string) throws RuntimeException {
         Stack<Integer> stack = new Stack<>();
         String[] array = string.split(" ");
         for (String expression : array) {
-            if (expression.equals("")) {
+            if (expression.isEmpty()) {
                 continue;
             }
             if (isNumber(expression)) {
                 stack.push(Integer.parseInt(expression));
             }
             else {
-                try {
-                    Integer firstNumber = stack.pop();
-                    Integer secondNumber = stack.pop();
-                    stack.push(calculate(secondNumber, firstNumber, expression));
-                }
-                catch (ArithmeticException e){
-                    throw e;
-                } catch (EmptyStackException e) {
-                    throw e;
-                } catch (RuntimeException e) {
-                    throw e;
-                }
+                Integer firstNumber = stack.pop();
+                Integer secondNumber = stack.pop();
+                stack.push(calculate(secondNumber, firstNumber, expression));
             }
         }
 
         int answer;
-        try {
-            answer = stack.pop();
-        } catch (EmptyStackException e) {
-            throw e;
-        }
+        answer = stack.pop();
 
         postfixForm = "";
         return answer;
     }
 
     /** Calculate expression */
-    private static Integer calculate(Integer firstNumber, Integer secondNumber, String symbol) {
+    private static Integer calculate(Integer firstNumber, Integer secondNumber, String symbol) throws ArithmeticException {
         switch (symbol) {
             case "*":
                 return firstNumber * secondNumber;
             case "/":
-                try {
-                    return firstNumber / secondNumber;
-                } catch (ArithmeticException e ) {
-                    throw e;
-                }
+                return firstNumber / secondNumber;
             case "+":
                 return firstNumber + secondNumber;
             case "-":
