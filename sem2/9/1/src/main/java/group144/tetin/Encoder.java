@@ -12,21 +12,7 @@ public class Encoder {
      */
     public static ByteBuffer encodeShort(String state) {
         ByteBuffer byteBuffer = ByteBuffer.allocate(SHORT_LENGTH);
-        switch (state) {
-            case "PLAYING":
-                byteBuffer.put((byte) 1);
-                break;
-            case "X_WON":
-                byteBuffer.put((byte) 2);
-                break;
-            case "O_WON":
-                byteBuffer.put((byte) 3);
-                break;
-            case "DRAW":
-                byteBuffer.put((byte) 4);
-            default:
-                byteBuffer.put((byte) 5);
-        }
+        byteBuffer.put(getEncodedState(state));
 
         byteBuffer.flip();
         return byteBuffer;
@@ -54,24 +40,6 @@ public class Encoder {
     }
 
     /**
-     * Method generate byteBuffer with info about last client's turn
-     * it use on client to sent this byteBuffer to server
-     *
-     * @param turnX row
-     * @param turnY column
-     * @return byteBuffer that you can decode
-     */
-    public static ByteBuffer clientTurn(int turnX, int turnY) {
-        ByteBuffer byteBuffer = ByteBuffer.allocate(2);
-        byteBuffer.put((byte) turnX);
-        byteBuffer.put((byte) turnY);
-
-        byteBuffer.flip();
-
-        return byteBuffer;
-    }
-
-    /**
      * Method decode byteBuffer that was encoded as ClientTurn byteBuffer
      * use on server
      *
@@ -95,25 +63,25 @@ public class Encoder {
         ByteBuffer byteBuffer = ByteBuffer.allocate(3);
         byteBuffer.put((byte) lastTurnX);
         byteBuffer.put((byte) lastTurnY);
-        switch (state) {
-            case "PLAYING":
-            byteBuffer.put((byte) 1);
-            break;
-            case "X_WON":
-                byteBuffer.put((byte) 2);
-                break;
-            case "O_WON":
-                byteBuffer.put((byte) 3);
-                break;
-            case "DRAW":
-                byteBuffer.put((byte) 4);
-            default:
-                byteBuffer.put((byte) 5);
-        }
-
+        byteBuffer.put(getEncodedState(state));
         byteBuffer.flip();
 
         return byteBuffer;
+    }
+
+    private static byte getEncodedState(String state) {
+        switch (state) {
+            case "PLAYING":
+                return ((byte) 1);
+            case "X_WON":
+                return ((byte) 2);
+            case "O_WON":
+                return ((byte) 3);
+            case "DRAW":
+                return ((byte) 4);
+            default:
+                return ((byte) 5);
+        }
     }
 
     /**
