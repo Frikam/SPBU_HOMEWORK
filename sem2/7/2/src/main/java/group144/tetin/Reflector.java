@@ -2,6 +2,7 @@ package group144.tetin;
 
 import java.io.*;
 import java.lang.reflect.*;
+import java.util.Arrays;
 
 /** A class that build a new file with methods, fields, constructors from inputted file */
 public class Reflector {
@@ -153,7 +154,8 @@ public class Reflector {
         newClass.append("(");
 
         for (int i = 0; i < length; i++) {
-            newClass.append(parameters[i].getParameterizedType().getTypeName() + " ");
+            newClass.append(parameters[i].getParameterizedType().getTypeName());
+            newClass.append(" ");
             newClass.append(parameters[i].getName());
             if (i < length - 1) {
                 newClass.append(", ");
@@ -204,15 +206,16 @@ public class Reflector {
             default:
                 value = "null";
         }
-
-        newClass.append(value + ";" + "\n");
+        String result = value + ";" + "\n";
+        newClass.append(result);
     }
 
     /** A method that prints constructors of class */
     private void printConstructors(Class<?> someClass, StringBuilder newClass) {
         Constructor[] constructors = someClass.getDeclaredConstructors();
         for (Constructor constructor : constructors) {
-            newClass.append("\t" + someClass.getSimpleName() + " ");
+            String result = "\t" + someClass.getSimpleName() + " ";
+            newClass.append(result);
             printParametrs(constructor.getParameters(), newClass);
             newClass.append(" {" + "");
         }
@@ -258,7 +261,7 @@ public class Reflector {
         Field[] fieldsFromFirst = firstClass.getDeclaredFields();
         Field[] fieldsFromSecond = secondClass.getDeclaredFields();
 
-        if (fieldsFromFirst.equals(fieldsFromSecond)) {
+        if (Arrays.equals(fieldsFromFirst, fieldsFromSecond)) {
             return;
         }
 
@@ -298,7 +301,7 @@ public class Reflector {
         Method[] methodsFromFirst = firstClass.getDeclaredMethods();
         Method[] methodsFromSecond = secondClass.getDeclaredMethods();
 
-        if (methodsFromFirst.equals(methodsFromSecond)) {
+        if (Arrays.equals(methodsFromFirst, methodsFromSecond)) {
             return;
         }
 
