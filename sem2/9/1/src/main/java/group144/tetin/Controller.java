@@ -63,7 +63,7 @@ public abstract class Controller {
      * if game end, method call a method that show result of game
      * */
     private void checkGameState() {
-        if (game.state().equals("PLAYING")) {
+        if (!game.state().equals("PLAYING")) {
             endGame(game.state());
             setDisableAll(true);
         }
