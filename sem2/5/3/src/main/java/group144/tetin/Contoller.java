@@ -11,9 +11,9 @@ public class Contoller {
 
     private Calculator calculator = new Calculator();
 
-    private boolean previousSymbolIsNumber = false;
+    private boolean previousSymbolIsNumber = true;
 
-    private String expression = "";
+    private String expression = "0";
 
     private int numberOfOperation = 0; // number of operation pressed one after another
 
@@ -22,13 +22,16 @@ public class Contoller {
 
     /** Action when press reset button */
     public void pressOnReset() {
-        expression = "";
+        expression = "0";
         previousSymbolIsNumber = false;
         updateText();
     }
 
     /** Action when press number button */
     public void pressOnNumber(ActionEvent event) {
+        if (expression.equals("0")) {
+            expression = "";
+        }
         for (int i = 0; i < 10; i++) {
             if (event.getSource().equals(buttons[i])) {
                 expression += "" + i;
@@ -43,7 +46,6 @@ public class Contoller {
     public void pressOnOperation(ActionEvent event) {
         if (previousSymbolIsNumber) {
             numberOfOperation = 1;
-            expression += " ";
         }
         else {
             numberOfOperation++;
@@ -61,13 +63,13 @@ public class Contoller {
 
 
         if (event.getSource().equals(plus)) {
-            expression += "+";
+            expression += " +";
         } else if (event.getSource().equals(minus)) {
-            expression += "-";
+            expression += " -";
         } else if (event.getSource().equals(multiply)) {
-            expression += "*";
+            expression += " *";
         } else if (event.getSource().equals(div)) {
-            expression += "/";
+            expression += " /";
         }
 
         if (previousSymbolIsNumber) {
