@@ -22,8 +22,12 @@ public class RunServer extends Application {
     }
 
     @Override
-    public void stop() throws IOException {
-        controller.sendMessageAboutDisconnect();
+    public void stop() {
+        try {
+            controller.sendMessageAboutDisconnect();
+        } catch (IOException e) {
+            System.out.println("ASDaD");
+        }
     }
 
     public static void main(String[] args) {

@@ -67,6 +67,9 @@ public abstract class Controller {
             endGame(game.state());
             setDisableAll(true);
         }
+        else {
+            System.out.println("Error");
+        }
     }
 
     /** A method that after move write whose turn */
