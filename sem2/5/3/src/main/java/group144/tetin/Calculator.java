@@ -12,8 +12,7 @@ public class Calculator {
         try {
             infixToPostfix(expression.toCharArray());
             return "" + calculate(postfixForm);
-        }
-        catch (ArithmeticException e) {
+        } catch (ArithmeticException e) {
             throw e;
         } catch (RuntimeException e) {
             throw new WrongExpressionException();
@@ -45,6 +44,7 @@ public class Calculator {
             case '-':
                 return 1;
         }
+
         return 0;
     }
 
@@ -98,8 +98,7 @@ public class Calculator {
             }
             if (isNumber(expression)) {
                 stack.push(Integer.parseInt(expression));
-            }
-            else {
+            } else {
                 Integer firstNumber = stack.pop();
                 Integer secondNumber = stack.pop();
                 stack.push(calculate(secondNumber, firstNumber, expression));
@@ -132,9 +131,11 @@ public class Calculator {
     /** Checks if a string is a number */
     private static boolean isNumber(String expression){
         int length = expression.length();
+
         if (length == 0) {
             return false;
         }
+
         char symbol;
         for (int i = 1; i < length; i++) {
             symbol = expression.charAt(i);
@@ -142,6 +143,7 @@ public class Calculator {
                 return false;
             }
         }
+        
         symbol = expression.charAt(0);
         return symbol == '-' && length > 1 || Character.isDigit(symbol);
     }

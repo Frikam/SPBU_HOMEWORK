@@ -23,7 +23,7 @@ public class Contoller {
     /** Action when press reset button */
     public void pressOnReset() {
         expression = "0";
-        previousSymbolIsNumber = false;
+        previousSymbolIsNumber = true;
         updateText();
     }
 
@@ -46,8 +46,7 @@ public class Contoller {
     public void pressOnOperation(ActionEvent event) {
         if (previousSymbolIsNumber) {
             numberOfOperation = 1;
-        }
-        else {
+        } else {
             numberOfOperation++;
         }
 
@@ -59,8 +58,6 @@ public class Contoller {
                 return;
             }
         }
-
-
 
         if (event.getSource().equals(plus)) {
             expression += " +";
