@@ -127,6 +127,7 @@ public class Reflector {
         if (method.getName().contains("$")) {
             return;
         }
+
         String line = "\t" + Modifier.toString(method.getModifiers()) + " ";
         newClass.append(line);
         line = method.getReturnType().getSimpleName() + " ";
@@ -206,6 +207,7 @@ public class Reflector {
             default:
                 value = "null";
         }
+
         String result = value + ";" + "\n";
         newClass.append(result);
     }
@@ -213,12 +215,14 @@ public class Reflector {
     /** A method that prints constructors of class */
     private void printConstructors(Class<?> someClass, StringBuilder newClass) {
         Constructor[] constructors = someClass.getDeclaredConstructors();
+
         for (Constructor constructor : constructors) {
             String result = "\t" + someClass.getSimpleName() + " ";
             newClass.append(result);
             printParametrs(constructor.getParameters(), newClass);
             newClass.append(" {" + "");
         }
+
         newClass.append("\n\t}\n");
     }
 
@@ -232,6 +236,7 @@ public class Reflector {
             printClass(innerClass, newClass);
             newClass.append("\n");
         }
+
         newClass.append("}");
     }
 
@@ -241,6 +246,7 @@ public class Reflector {
     public boolean diffClasses(Class<?> firstClass, Class<?> secondClass) {
         StringBuilder diffBetweenClasses = new StringBuilder();
         getDifference(firstClass, secondClass, diffBetweenClasses);
+
         if (diffBetweenClasses.length() == 0) {
             System.out.println("Classes are equals");
             return true;
@@ -287,12 +293,14 @@ public class Reflector {
         }
         
         String secondField = getField(field);
+
         for (Field i : fields) {
             String firstField = getField(i);
             if (secondField.equals(firstField)) {
                 return true;
             }
         }
+
         return false;
     }
 
@@ -322,13 +330,16 @@ public class Reflector {
     private boolean contains(Method[] methods, Method method) {
         StringBuilder firstMethod = new StringBuilder();
         printSomeMethod(method, firstMethod);
+
         for (Method i : methods) {
             StringBuilder secondMethod = new StringBuilder();
             printSomeMethod(i, secondMethod);
+
             if (firstMethod.toString().equals(secondMethod.toString())) {
                 return true;
             }
         }
+
         return false;
     }
 }
