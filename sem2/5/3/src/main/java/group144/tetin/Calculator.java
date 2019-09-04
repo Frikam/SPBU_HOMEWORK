@@ -143,7 +143,7 @@ public class Calculator {
                 return false;
             }
         }
-        
+
         symbol = expression.charAt(0);
         return symbol == '-' && length > 1 || Character.isDigit(symbol);
     }
