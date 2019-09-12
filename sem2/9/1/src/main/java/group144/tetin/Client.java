@@ -8,8 +8,10 @@ import java.nio.channels.SocketChannel;
 public class Client implements Adapter {
     private SocketChannel socketChannel;
     private String state;
+    private boolean playerDisconnected;
 
     public Client(int port) throws IOException {
+        playerDisconnected = false;
         socketChannel = SocketChannel.open();
         socketChannel.connect(new InetSocketAddress(port));
     }
@@ -27,7 +29,7 @@ public class Client implements Adapter {
 
     @Override
     public boolean hasPlayerDisconnected() {
-        return state.equals("EXCEPTION");
+        return playerDisconnected;
     }
 
     @Override
@@ -49,6 +51,13 @@ public class Client implements Adapter {
         ByteBuffer serverTurn = ByteBuffer.allocate(Encoder.PLAYER_TURN_LENGTH);
         socketChannel.read(serverTurn);
         state = Encoder.getState(serverTurn);
-        return Encoder.getServerTurn(serverTurn);
+        int[] coords = Encoder.getServerTurn(serverTurn);
+
+        if (state.equals("EXCEPTION")) {
+            playerDisconnected = true;
+            return new int[] {0, 0};
+        }
+
+        return coords;
     }
 }

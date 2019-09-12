@@ -26,12 +26,8 @@ public class RunClient extends Application {
     }
 
     @Override
-    public void stop() throws IOException {
-        try {
-            controller.sendMessageAboutDisconnect();
-        } catch (IOException e) {
-            System.out.println("ASDaD");
-        }
+    public void stop() throws Exception {
+        controller.sendMessageAboutDisconnect();
     }
 
     public static void main(String[] args) {

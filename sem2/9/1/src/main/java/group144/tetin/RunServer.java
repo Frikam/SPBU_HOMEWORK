@@ -9,11 +9,13 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class RunServer extends Application {
-    ControllerClient controller;
+    ControllerServer controller;
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        Parent root = FXMLLoader.load(getClass().getResource("Server.fxml"));
+        FXMLLoader loader = new FXMLLoader (getClass().getResource("Server.fxml"));
+        Parent root = loader.load();
+        controller = loader.getController();
         primaryStage.setTitle("You play as X");
         primaryStage.setScene(new Scene(root, 350, 300));
         primaryStage.show();
@@ -22,12 +24,8 @@ public class RunServer extends Application {
     }
 
     @Override
-    public void stop() {
-        try {
-            controller.sendMessageAboutDisconnect();
-        } catch (IOException e) {
-            System.out.println("ASDaD");
-        }
+    public void stop() throws Exception {
+        controller.sendMessageAboutDisconnect();
     }
 
     public static void main(String[] args) {

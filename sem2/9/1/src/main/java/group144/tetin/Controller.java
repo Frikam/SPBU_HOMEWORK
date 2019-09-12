@@ -6,7 +6,6 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.stage.Stage;
 import java.io.IOException;
 import java.util.function.Consumer;
 
@@ -20,9 +19,11 @@ public abstract class Controller {
     Adapter game;
     public void clicked(ActionEvent actionEvent) throws IOException {
         Button button = (Button) actionEvent.getSource();
+
         if (buttonWasPressed(button)) {
             return;
         }
+
         int[] coords = getLocation(button);
         game.turn(coords[0], coords[1]);
         button.setText(me);
@@ -34,10 +35,14 @@ public abstract class Controller {
             } catch (IOException e) {
                 e.printStackTrace();
             }
+
             Button opponentTurn = buttons[location[0]][location[1]];
+
             Platform.runLater(() -> {
                 if (game.hasPlayerDisconnected()) {
-                    showMessageAboutDisconnect(button);
+                    if (game.state().equals("PLAYING")) {
+                        showMessageAboutDisconnect();
+                    }
                     return;
                 }
                 opponentTurn.setText(opponent);
@@ -51,7 +56,6 @@ public abstract class Controller {
         thread.start();
         checkGameState();
         changeText();
-
     }
 
     /** A method that return was button pressed or no */
@@ -64,11 +68,12 @@ public abstract class Controller {
      * */
     private void checkGameState() {
         if (!game.state().equals("PLAYING")) {
-            endGame(game.state());
+            if (game.hasPlayerDisconnected()) {
+                showMessageAboutDisconnect();
+            } else {
+                endGame(game.state());
+            }
             setDisableAll(true);
-        }
-        else {
-            System.out.println("Error");
         }
     }
 
@@ -88,8 +93,7 @@ public abstract class Controller {
         alert.setTitle("Result");
         alert.setHeaderText("Game result : " + winner);
         alert.showAndWait();
-        Stage stage = (Stage) button_0_0.getScene().getWindow();
-        stage.close();
+        System.exit(0);
     }
 
     /** A method that return row and column at table of button */
@@ -106,18 +110,17 @@ public abstract class Controller {
 
     /** A method that send message that player was disconnected */
     public void sendMessageAboutDisconnect() throws IOException {
-        game.sendMessageAboutDisconnect();
+            game.sendMessageAboutDisconnect();
     }
 
     /** A method that shows window with text about what the opponent has disconnected
      * and after close the game */
-    protected void showMessageAboutDisconnect(Button button) {
+    protected void showMessageAboutDisconnect() {
         Alert alert = new Alert(Alert.AlertType.INFORMATION);
         alert.setTitle("ERROR");
         alert.setHeaderText("Your opponent disconnected, YOU WIN");
         alert.showAndWait();
-        Stage stage = (Stage) button.getScene().getWindow();
-        stage.close();
+        System.exit(0);
     }
 
     /** A method that disable all buttons */
@@ -145,7 +148,6 @@ public abstract class Controller {
     Button button_2_1;
     @FXML
     Button button_2_2;
-
 
     private void forAllButtons(Consumer<Button> consumer) {
         for (int i = 0; i < 3; i++) {

@@ -25,11 +25,12 @@ public class ControllerClient extends Controller implements Initializable {
                 opponentTurn = game.opponentTurn();
 
                 Platform.runLater(() -> {
-
                     Button button = super.getButtonByLocation(opponentTurn[0], opponentTurn[1]);
+
                     if (game.hasPlayerDisconnected()) {
-                        showMessageAboutDisconnect(button);
+                        showMessageAboutDisconnect();
                     }
+
                     button.setText(opponent);
                     setDisableAll(false);
                     changeText();
@@ -43,5 +44,4 @@ public class ControllerClient extends Controller implements Initializable {
         wait.start();
 
     }
-
 }

@@ -13,7 +13,6 @@ public class Encoder {
     public static ByteBuffer encodeShort(String state) {
         ByteBuffer byteBuffer = ByteBuffer.allocate(SHORT_LENGTH);
         byteBuffer.put(getEncodedState(state));
-
         byteBuffer.flip();
         return byteBuffer;
     }
@@ -101,7 +100,8 @@ public class Encoder {
                 return "O_WON";
             case 4:
                 return "DRAW";
-            default: return "EXCEPTION";
+            default:
+                return "EXCEPTION";
         }
     }
 

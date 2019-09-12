@@ -10,10 +10,11 @@ public class Game {
 
     public Game() {
         field = new Cell[FIELD_SIZE][FIELD_SIZE];
-        for (int i = 0; i < FIELD_SIZE; i++)
-            for (int j = 0; j < FIELD_SIZE; j++)
+        for (int i = 0; i < FIELD_SIZE; i++) {
+            for (int j = 0; j < FIELD_SIZE; j++) {
                 field[i][j] = Cell.NOTHING;
-
+            }
+        }
         turn = Player.X;
         state = State.PLAYING;
     }
@@ -28,9 +29,11 @@ public class Game {
         numberOfPressedButtons++;
         field[row][column] = turn.toCell();
         boolean isAnybodyWin = isAnybodyWin();
+
         if (numberOfPressedButtons == 9) {
             state = State.DRAW;
         }
+
         setState(isAnybodyWin);
         turn = turn.opposite();
     }

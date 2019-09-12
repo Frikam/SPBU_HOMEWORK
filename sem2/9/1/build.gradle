@@ -19,4 +19,5 @@ javafx {
     version = '11.0.2'
 }
 
-mainClassName = 'group144.tetin.RunClient'
+//mainClassName = 'group144.tetin.RunClient'
+mainClassName = 'group144.tetin.RunServer'
