@@ -13,28 +13,26 @@ public class Contoller {
 
     private boolean previousSymbolIsNumber = true;
 
-    private String expression = "0";
-
-    private int numberOfOperation = 0; // number of operation pressed one after another
+    private StringBuilder expression = new StringBuilder().append("0");
 
     @FXML
     private TextField textField;
 
     /** Action when press reset button */
     public void pressOnReset() {
-        expression = "0";
+        expression.delete(0, expression.length()).append("0");
         previousSymbolIsNumber = true;
         updateText();
     }
 
     /** Action when press number button */
     public void pressOnNumber(ActionEvent event) {
-        if (expression.equals("0")) {
-            expression = "";
+        if (expression.toString().equals("0") || expression.toString().equals("-0")) {
+            expression.deleteCharAt(expression.length() - 1);
         }
         for (int i = 0; i < 10; i++) {
             if (event.getSource().equals(buttons[i])) {
-                expression += "" + i;
+                expression.append(i);
             }
         }
 
@@ -44,36 +42,48 @@ public class Contoller {
 
     /** Action when press operation button */
     public void pressOnOperation(ActionEvent event) {
-        if (previousSymbolIsNumber) {
-            numberOfOperation = 1;
-        } else {
-            numberOfOperation++;
+        if (!previousSymbolIsNumber) {
+            pressOnReset();
+            textField.setText("WRONG EXPRESSION!!!");
+            return;
         }
 
-        boolean isMinus = event.getSource().equals(minus);
-
-        if (!isMinus && numberOfOperation < 3) {
-            if (!calculate()) {
-                numberOfOperation = 0;
-                return;
-            }
-        }
-
+        calculate();
         if (event.getSource().equals(plus)) {
-            expression += " +";
+            expression.append(" +");
         } else if (event.getSource().equals(minus)) {
-            expression += " -";
+            expression.append(" -");
         } else if (event.getSource().equals(multiply)) {
-            expression += " *";
+            expression.append(" *");
         } else if (event.getSource().equals(div)) {
-            expression += " /";
+            expression.append(" /");
         }
 
         if (previousSymbolIsNumber) {
-            expression += " ";
+            expression.append(" ");
         }
 
         previousSymbolIsNumber = false;
+        updateText();
+    }
+
+    /** Action whe press change sign button */
+    public void pressOnChangeSign() {
+        int indexOfChangedSign = 0;
+        if (!previousSymbolIsNumber) {
+            indexOfChangedSign = expression.length() - 1;
+        }
+
+        if (expression.charAt(indexOfChangedSign) == '-') {
+            expression.deleteCharAt(indexOfChangedSign);
+        } else {
+            if (indexOfChangedSign == 0) {
+                expression.replace(0, 0, "-");
+            } else {
+                expression.append("-");
+            }
+        }
+
         updateText();
     }
 
@@ -87,7 +97,7 @@ public class Contoller {
      * */
     private boolean calculate() {
         try {
-            expression = calculator.calculateExpression(expression);
+            expression = calculator.calculateExpression(expression.toString());
             updateText();
             return true;
         } catch (ArithmeticException e) {
@@ -95,13 +105,13 @@ public class Contoller {
         } catch (WrongExpressionException e) {
             textField.setText("WRONG EXPRESSION!!!");
         }
-        expression = "";
+        expression.delete(0, expression.length());
         return false;
     }
 
     /** A method that updates text field */
     private void updateText() {
-        textField.setText(expression);
+        textField.setText(expression.toString());
     }
 
     /** Initialization function */

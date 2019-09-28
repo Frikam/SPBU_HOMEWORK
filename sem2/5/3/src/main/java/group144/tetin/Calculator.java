@@ -4,14 +4,14 @@ import java.util.Stack;
 
 public class Calculator {
     private Stack<Character> stackSign;
-    private String postfixForm;
+    private StringBuilder postfixForm;
 
     /** A method that calculate expression using sort station */
-    public String calculateExpression(String expression) throws WrongExpressionException {
-        this.postfixForm = "";
+    public StringBuilder calculateExpression(String expression) throws WrongExpressionException {
+        postfixForm = new StringBuilder();
         try {
             infixToPostfix(expression.toCharArray());
-            return "" + calculate(postfixForm);
+            return new StringBuilder(Integer.toString(calculate(postfixForm.toString())));
         } catch (ArithmeticException e) {
             throw e;
         } catch (RuntimeException e) {
@@ -21,19 +21,20 @@ public class Calculator {
 
     /** A method that create stack by sort station*/
     private void infixToPostfix(char[] line) {
-        this.stackSign = new Stack<>();
+        stackSign = new Stack<>();
 
         for (int i = 0; i < line.length; i++) {
             addElementInStack(line, i);
         }
 
         while (!stackSign.isEmpty()) {
-            postfixForm += " " + stackSign.pop();
+            postfixForm.append(" ");
+            postfixForm.append(stackSign.pop());
         }
     }
 
     /** A method that return priority of sign */
-    public int priorityOfSign(char sign) {
+    private int priorityOfSign(char sign) {
         switch (sign) {
             case '*':
             case '/':
@@ -54,7 +55,8 @@ public class Calculator {
         if (!stackSign.isEmpty()) {
             sign = stackSign.pop();
             while (sign != '(' && (priorityOfSign(symbol) <= priorityOfSign(sign))) {
-                postfixForm += sign + " ";
+                postfixForm.append(" ");
+                postfixForm.append(stackSign.pop());
                 if (!stackSign.isEmpty()) {
                     sign = stackSign.pop();
                 } else {
@@ -69,14 +71,13 @@ public class Calculator {
         if (line[i] != ' ') {
             if (priorityOfSign(line[i]) == 0 || (line[i] == '-' && priorityOfSign(line[i + 1]) == 0 && line[i + 1] != ' ')) {
                 int j = i + 1;
-                postfixForm += line[i];
+                postfixForm.append(line[i]);
                 while (j < line.length && priorityOfSign(line[j]) == 0 && line[j] != ' ') {
-                    postfixForm += line[j];
+                    postfixForm.append(line[j]);
                     line[j] = ' ';
                     j++;
                 }
-                postfixForm += " ";
-
+                postfixForm.append(" ");
             } else if (stackSign.isEmpty() || stackSign.peek() == '(') {
                 stackSign.push(line[i]);
             } else if (priorityOfSign(line[i]) > priorityOfSign(stackSign.peek())) {
@@ -105,11 +106,7 @@ public class Calculator {
             }
         }
 
-        int answer;
-        answer = stack.pop();
-
-        postfixForm = "";
-        return answer;
+        return stack.pop();
     }
 
     /** Calculate expression */
