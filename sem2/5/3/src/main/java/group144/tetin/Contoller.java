@@ -27,7 +27,9 @@ public class Contoller {
 
     /** Action when press number button */
     public void pressOnNumber(ActionEvent event) {
-        if (expression.toString().equals("0") || expression.toString().equals("-0")) {
+        if (expression.toString().equals("0") ||
+                (expression.charAt(expression.length() - 2) == '-' &&
+                        expression.charAt(expression.length() - 1) == '0')) {
             expression.deleteCharAt(expression.length() - 1);
         }
         for (int i = 0; i < 10; i++) {
