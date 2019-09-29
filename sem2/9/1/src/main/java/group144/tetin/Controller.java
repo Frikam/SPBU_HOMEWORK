@@ -11,12 +11,12 @@ import java.util.function.Consumer;
 
 public abstract class Controller {
     @FXML
-    Label text;
-    String me;
-    String opponent;
-    Button[][] buttons;
+    private Label text;
+    protected String me;
+    protected  String opponent;
+    protected  Button[][] buttons;
 
-    Adapter game;
+    protected Adapter game;
     public void clicked(ActionEvent actionEvent) throws IOException {
         Button button = (Button) actionEvent.getSource();
 
@@ -40,7 +40,7 @@ public abstract class Controller {
 
             Platform.runLater(() -> {
                 if (game.hasPlayerDisconnected()) {
-                    if (game.state().equals("PLAYING")) {
+                    if (game.state().equals("PLAYING") || game.state().equals("EXCEPTION")) {
                         showMessageAboutDisconnect();
                     }
                     return;
@@ -129,25 +129,25 @@ public abstract class Controller {
     }
 
     @FXML
-    Button button_0_0;
+    protected  Button button_0_0;
     @FXML
-    Button button_0_1;
+    protected  Button button_0_1;
     @FXML
-    Button button_0_2;
+    protected  Button button_0_2;
 
     @FXML
-    Button button_1_0;
+    protected  Button button_1_0;
     @FXML
-    Button button_1_1;
+    protected  Button button_1_1;
     @FXML
-    Button button_1_2;
+    protected  Button button_1_2;
 
     @FXML
-    Button button_2_0;
+    protected  Button button_2_0;
     @FXML
-    Button button_2_1;
+    protected  Button button_2_1;
     @FXML
-    Button button_2_2;
+    protected  Button button_2_2;
 
     private void forAllButtons(Consumer<Button> consumer) {
         for (int i = 0; i < 3; i++) {

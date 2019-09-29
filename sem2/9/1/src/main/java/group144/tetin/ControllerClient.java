@@ -37,7 +37,6 @@ public class ControllerClient extends Controller implements Initializable {
                 });
             } catch (IOException e) {
                 System.out.println("Run Server first");
-                return;
             }
         };
         Thread wait = new Thread(waitConnection);

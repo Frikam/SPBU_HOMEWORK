@@ -9,15 +9,13 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 public class RunClient extends Application {
-    ControllerClient controller;
-    Stage stage;
+    private ControllerClient controller;
 
     @Override
     public void start(Stage primaryStage) throws IOException {
         FXMLLoader loader = new FXMLLoader (getClass().getResource("Client.fxml"));
         Parent root = loader.load();
         controller = loader.getController();
-        stage = primaryStage;
         primaryStage.setTitle("You play as O");
         primaryStage.setScene(new Scene(root, 350, 300));
         primaryStage.show();

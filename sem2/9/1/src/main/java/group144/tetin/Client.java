@@ -23,7 +23,6 @@ public class Client implements Adapter {
         serverTurn.put((byte) 0);
         serverTurn.put((byte) -1);
         socketChannel.write(serverTurn);
-        socketChannel.read(serverTurn);
         state = "EXCEPTION";
     }
 

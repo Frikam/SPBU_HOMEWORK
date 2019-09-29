@@ -21,7 +21,6 @@ public class ControllerServer extends Controller implements Initializable {
                 System.out.println("Connected, game is on");
             } catch (IOException e) {
                 System.out.println("You run several servers, try again");
-                return;
             }
         };
 

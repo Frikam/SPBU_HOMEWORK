@@ -54,6 +54,7 @@ public class Game {
             for (int i = 0; i < numberOfButtons - 1; i++) {
                 if (!(!field[i][j].equals(Cell.NOTHING) && field[i][j].equals(field[i + 1][j]))) {
                     result = false;
+                    break;
                 }
             }
 
@@ -65,6 +66,7 @@ public class Game {
             for (int i = 0; i < numberOfButtons - 1; i++) {
                 if (!(!field[j][i].equals(Cell.NOTHING) && field[j][i].equals(field[j][i + 1]))) {
                     result = false;
+                    break;
                 }
             }
 
@@ -88,14 +90,11 @@ public class Game {
         for (int i = numberOfButtons - 1; i > 0; i--) {
             if (!(!field[numberOfButtons - 1 - i][i].equals(Cell.NOTHING) && field[numberOfButtons - 1 - i][i].equals(field[numberOfButtons - i][i - 1]))) {
                 result = false;
+                break;
             }
         }
 
-        if (result) {
-            return true;
-        }
-
-        return false;
+        return result;
     }
 
     /**
