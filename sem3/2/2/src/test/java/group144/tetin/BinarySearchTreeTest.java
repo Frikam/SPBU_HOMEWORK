@@ -128,7 +128,7 @@ public class BinarySearchTreeTest {
     }
 
     @Test
-    public void iteratorForEach() {
+    public void treeForEach() {
         BinarySearchTree<String> tree = new BinarySearchTree<>();
         LinkedList<String> list = new LinkedList<>();
         tree.add("Jake");
@@ -146,5 +146,26 @@ public class BinarySearchTreeTest {
         assertTrue(iterator.hasNext());
         assertEquals("Mike", iterator.next());
         assertFalse(iterator.hasNext());
+    }
+
+    @Test
+    public void twoIteratorTest() {
+        BinarySearchTree<Integer> tree = new BinarySearchTree<>();
+        tree.add(5);
+        tree.add(3);
+        tree.add(9);
+        tree.add(1);
+
+        Iterator<Integer> firstIterator = tree.iterator();
+        Iterator<Integer> secondIterator = tree.iterator();
+        assertTrue(firstIterator.hasNext());
+        assertTrue(secondIterator.hasNext());
+        assertEquals(firstIterator.next(), secondIterator.next());
+        firstIterator.remove();
+        assertEquals((Integer) 5, secondIterator.next());
+        assertEquals((Integer) 5, firstIterator.next());
+        secondIterator.remove();
+        assertEquals(null, firstIterator.next());
+
     }
 }

@@ -74,8 +74,13 @@ public class BinarySearchTree<T extends Comparable<T>> implements Iterable<T> {
 
         @Override
         public T next() {
-            if (isEmpty()) {
+            if (elements.isEmpty()) {
                 return null;
+            }
+
+            if (!root.containsNode(elements.get(0))) {
+                elements.remove(0);
+                return next();
             }
 
             return elements.remove(0);
