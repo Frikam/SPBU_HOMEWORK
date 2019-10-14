@@ -44,12 +44,6 @@ public class Computer {
         }
     }
 
-    private boolean willBeInfected(Computer computer) {
-
-        OS computerOS = computer.getOS();
-        return computerOS.willBeInfected();
-    }
-
     private boolean tryInfect() {
         numberOfInfectionAttempts++;
         return os.willBeInfected();

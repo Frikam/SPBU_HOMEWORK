@@ -46,7 +46,6 @@ public class Network {
             networkStatus.append(" OS is infected: ");
             networkStatus.append(computer.isInfected());
             networkStatus.append("\n");
-
         }
 
         return networkStatus.toString();
