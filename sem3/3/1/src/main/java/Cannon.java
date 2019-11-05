@@ -1,0 +1,104 @@
+import javax.imageio.ImageIO;
+import java.awt.*;
+import java.awt.geom.AffineTransform;
+import java.awt.image.AffineTransformOp;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+
+public class Cannon {
+    private Image cannonImage;
+    private Image wheelImage;
+    private Bullet bullet;
+    private int wheelWidth;
+    private int x = Config.START_X_COORDINATE_OF_CANNON;
+    private int y = Config.Y_COORDINATE_OF_GROUND;
+    private int rotationAngle = 0;
+
+    Cannon() {
+        loadImage();
+        wheelWidth = wheelImage.getWidth(null);
+        bullet = new Bullet();
+    }
+
+    public void goLeft() {
+        if (x > 0) {
+            x = x - 2;
+            if (Mountains.standsOnMountain(x + 7 + wheelWidth / 2)) {
+                if (Mountains.isLeftFromTop(x + 7 + wheelWidth / 2)) {
+                    y = y + 2;
+                } else {
+                    y = y - 2;
+                }
+            }
+        }
+    }
+
+    public void goRight() {
+        if (x + Config.WIDTH_OF_CANNON <= Config.WIDTH_OF_WINDOW) {
+            if (Mountains.standsOnMountain(x + 7 + wheelWidth / 2)) {
+                if (Mountains.isLeftFromTop(x + 7 + wheelWidth / 2)) {
+                    y = y - 2;
+                } else {
+                    y = y + 2;
+                }
+            }
+            x = x + 2;
+        }
+    }
+
+    public void pushUp() {
+        if (rotationAngle > Config.MAX_ANGLE) {
+            rotationAngle--;
+        }
+    }
+
+    public void pushDown() {
+        if (rotationAngle < Config.MIN_ANGLE) {
+            rotationAngle++;
+        }
+    }
+
+    public void shoot() {
+        if (!bulletIsFly()) {
+            bullet.makeShoot(rotationAngle, getX(), getY());
+        }
+    }
+
+    public boolean bulletIsFly() {
+        return bullet.isFly();
+    }
+
+    public void paintComponent(Graphics g) {
+        drawRotation(g);
+        bullet.drawBullet(g);
+        g.drawImage(wheelImage, getX() + 9,getY() + 14, null);
+    }
+
+    public void drawRotation(Graphics g) {
+        BufferedImage image = (BufferedImage) cannonImage;
+        double locationX = image.getWidth() / 2;
+        double locationY = image.getHeight() / 2;
+
+        AffineTransform tx = AffineTransform.getRotateInstance(Math.toRadians(rotationAngle), locationX, locationY);
+        AffineTransformOp op = new AffineTransformOp(tx, AffineTransformOp.TYPE_BILINEAR);
+        g.drawImage(op.filter(image, null), getX(), getY(), null);
+    }
+
+    public int getX() {
+        return x;
+    }
+
+    public int getY() {
+        return y;
+    }
+
+    private void loadImage() {
+        try {
+            cannonImage = ImageIO.read(new File("src/main/resources/cannon.png"));
+            wheelImage = ImageIO.read(new File("src/main/resources/wheel.png"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+}
