@@ -21,6 +21,7 @@ public class Cannon {
         bullet = new Bullet();
     }
 
+    /** A method that moves cannon to the left */
     public void goLeft() {
         if (x > 0) {
             x = x - 2;
@@ -34,6 +35,7 @@ public class Cannon {
         }
     }
 
+    /** A method that moves cannon to the right */
     public void goRight() {
         if (x + Config.WIDTH_OF_CANNON <= Config.WIDTH_OF_WINDOW) {
             if (Mountains.standsOnMountain(x + 7 + wheelWidth / 2)) {
@@ -47,34 +49,40 @@ public class Cannon {
         }
     }
 
+    /** A method that push up cannon */
     public void pushUp() {
         if (rotationAngle > Config.MAX_ANGLE) {
             rotationAngle--;
         }
     }
 
+    /** A method that push down cannon */
     public void pushDown() {
         if (rotationAngle < Config.MIN_ANGLE) {
             rotationAngle++;
         }
     }
 
+    /** A method that give coordinates of cannon and angle to bullet */
     public void shoot() {
         if (!bulletIsFly()) {
-            bullet.makeShoot(rotationAngle, getX(), getY());
+            bullet.prepareForShooting(rotationAngle, getX(), getY());
         }
     }
 
+    /** A method that checks bullet if fly or no */
     public boolean bulletIsFly() {
         return bullet.isFly();
     }
 
+    /** A method that paints cannon */
     public void paintComponent(Graphics g) {
         drawRotation(g);
-        bullet.drawBullet(g);
+        bullet.paintBullet(g);
         g.drawImage(wheelImage, getX() + 9,getY() + 14, null);
     }
 
+    /** A method that rotate cannon */
     public void drawRotation(Graphics g) {
         BufferedImage image = (BufferedImage) cannonImage;
         double locationX = image.getWidth() / 2;

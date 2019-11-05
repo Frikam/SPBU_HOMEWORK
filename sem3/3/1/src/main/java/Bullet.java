@@ -23,35 +23,45 @@ public class Bullet {
         }
     }
 
-    public void makeShoot(int angle, int positionOfBulletX, int positionOfBulletY) {
+    public void prepareForShooting(int angle, int positionOfCannonX, int positionOfCannonY) {
         isFly = true;
         currentTime = 0;
-        this.angle = -angle + 35;
-        this.positionOfBulletX = positionOfBulletX + 25;
-        this.positionOfBulletY = positionOfBulletY - 3;
+        this.angle = -angle + Config.START_ANGLE;
+        this.positionOfBulletX = positionOfCannonX + 25; // 25 is the difference between the width of a cannon and a bullet
+        this.positionOfBulletY = positionOfCannonY - 3; // 3 is difference between the height of a cannon and a bullet
     }
 
     public boolean isFly() {
         return isFly;
     }
 
-    public void drawBullet(Graphics g) {
+    public void paintBullet(Graphics g) {
         if (!isFly) {
             return;
         }
 
-        currentX = (int) (SPEED * Math.cos(Math.toRadians(angle)) * currentTime);
-        currentY = (int) (-SPEED * Math.sin(Math.toRadians(angle)) * currentTime
-                + GRAVITIONAL_CONSTANT * currentTime * currentTime);
-
-        if (currentY + positionOfBulletY > Config.Y_COORDINATE_OF_GROUND
-                || currentX + positionOfBulletX > Config.WIDTH_OF_WINDOW ) {
+        calculateCoordinatesOfBullet();
+        if (bulletFlyFromBounds()) {
             isFly = false;
             return;
         }
-
-        currentTime += 1;
-
         g.drawImage(bullet, positionOfBulletX + currentX, positionOfBulletY + currentY, null);
+    }
+
+    /** A method that calculates coordinates of bullet that fly on parabola */
+    private void calculateCoordinatesOfBullet() {
+        currentX = (int) (SPEED * Math.cos(Math.toRadians(angle)) * currentTime);
+        currentY = (int) (-SPEED * Math.sin(Math.toRadians(angle)) * currentTime
+                + GRAVITIONAL_CONSTANT * currentTime * currentTime);
+        currentTime += 1;
+    }
+
+    private boolean bulletFlyFromBounds() {
+        if (currentY + positionOfBulletY > Config.Y_COORDINATE_OF_GROUND
+                || currentX + positionOfBulletX > Config.WIDTH_OF_WINDOW ) {
+            return true;
+        }
+
+        return false;
     }
 }

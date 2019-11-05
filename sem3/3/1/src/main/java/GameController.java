@@ -23,6 +23,7 @@ public class GameController extends JPanel implements ActionListener {
         setFocusable(true);
     }
 
+    /** A method that called every 15 millisecond and checks need to paints components or no */
     @Override
     public void actionPerformed(ActionEvent e) {
         if (needToPaintComponents || cannon.bulletIsFly()) {
@@ -31,6 +32,7 @@ public class GameController extends JPanel implements ActionListener {
         }
     }
 
+    /** A method that paints background and cannon */
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
@@ -48,7 +50,9 @@ public class GameController extends JPanel implements ActionListener {
         }
     }
 
+    /** A class that represent key listener */
     private class KeyListener extends KeyAdapter {
+        /** A method that checks what button was pressed */
         @Override
         public void keyPressed(KeyEvent e) {
             needToPaintComponents = true;
