@@ -14,6 +14,7 @@ public class Contoller {
     private boolean previousSymbolIsNumber = true;
 
     private StringBuilder expression = new StringBuilder().append("0");
+    private int indexOfChangedSign = 0;
 
     @FXML
     private TextField textField;
@@ -23,11 +24,12 @@ public class Contoller {
         expression.delete(0, expression.length()).append("0");
         previousSymbolIsNumber = true;
         updateText();
+        indexOfChangedSign = 0;
     }
 
     /** Action when press number button */
     public void pressOnNumber(ActionEvent event) {
-
+        indexOfChangedSign++;
         if (expression.toString().equals("0") ||
                 (expression.charAt(expression.length() - 1) == '0') && expression.charAt(expression.length() - 2) == '-') {
             expression.deleteCharAt(expression.length() - 1);
@@ -44,6 +46,7 @@ public class Contoller {
 
     /** Action when press operation button */
     public void pressOnOperation(ActionEvent event) {
+        indexOfChangedSign = 0;
         if (!previousSymbolIsNumber) {
             pressOnReset();
             textField.setText("WRONG EXPRESSION!!!");
@@ -71,19 +74,22 @@ public class Contoller {
 
     /** Action whe press change sign button */
     public void pressOnChangeSign() {
-        int indexOfChangedSign = 0;
-        if (!previousSymbolIsNumber) {
-            indexOfChangedSign = expression.length() - 1;
-        }
 
-        if (expression.charAt(indexOfChangedSign) == '-') {
-            expression.deleteCharAt(indexOfChangedSign);
-        } else {
-            if (indexOfChangedSign == 0) {
-                expression.replace(0, 0, "-");
-            } else {
-                expression.append("-");
+        if (expression.toString().equals("0")) {
+            expression.replace(0, 0, "-");
+            indexOfChangedSign++;
+        } else if (indexOfChangedSign == 0) {
+            expression.append("-");
+            indexOfChangedSign++;
+        } else if (expression.charAt(expression.length() - indexOfChangedSign) == '-') {
+            expression.deleteCharAt(expression.length() - indexOfChangedSign);
+            if (indexOfChangedSign > 0) {
+                indexOfChangedSign--;
             }
+        } else {
+            System.out.println(expression.charAt(expression.length() - indexOfChangedSign));
+            expression.replace(expression.length() - indexOfChangedSign, expression.length() - indexOfChangedSign, "-");
+            indexOfChangedSign++;
         }
 
         updateText();
@@ -92,7 +98,7 @@ public class Contoller {
     /** Action when press equal button */
     public void pressOnEqual() {
         if (!calculate()) {
-            System.out.println("Dadasd");
+            System.out.println("ERROR!!!!!!!!!");
         }
     }
 
@@ -101,6 +107,7 @@ public class Contoller {
      * */
     private boolean calculate() {
         try {
+            System.out.println(expression.toString());
             expression = calculator.calculateExpression(expression.toString());
             updateText();
             return true;
