@@ -27,9 +27,9 @@ public class Contoller {
 
     /** Action when press number button */
     public void pressOnNumber(ActionEvent event) {
+
         if (expression.toString().equals("0") ||
-                (expression.charAt(expression.length() - 2) == '-' &&
-                        expression.charAt(expression.length() - 1) == '0')) {
+                (expression.charAt(expression.length() - 1) == '0') && expression.charAt(expression.length() - 2) == '-') {
             expression.deleteCharAt(expression.length() - 1);
         }
         for (int i = 0; i < 10; i++) {
@@ -91,7 +91,9 @@ public class Contoller {
 
     /** Action when press equal button */
     public void pressOnEqual() {
-        calculate();
+        if (!calculate()) {
+            System.out.println("Dadasd");
+        }
     }
 
     /** A method that calculate answer
@@ -107,7 +109,7 @@ public class Contoller {
         } catch (WrongExpressionException e) {
             textField.setText("WRONG EXPRESSION!!!");
         }
-        expression.delete(0, expression.length());
+        expression.delete(0, expression.length()).append("0");
         return false;
     }
 
