@@ -23,30 +23,21 @@ public class Cannon {
 
     /** A method that moves cannon to the left */
     public void goLeft() {
-        if (x > 0) {
-            x = x - 2;
-            if (Mountains.standsOnMountain(x + 7 + wheelWidth / 2)) {
-                if (Mountains.isLeftFromTop(x + 7 + wheelWidth / 2)) {
-                    y = y + 2;
-                } else {
-                    y = y - 2;
-                }
-            }
+        x = Ground.coordinatesCannonAfterMovingLeft(x);
+        int wheelCoordinateX = x + 7 + wheelWidth / 2;
+
+        if (Mountains.standsOnMountain(wheelCoordinateX)) {
+            y = Mountains.coordinatesCannonAfterMovingLeft(wheelCoordinateX, y);
         }
     }
 
     /** A method that moves cannon to the right */
     public void goRight() {
-        if (x + Config.WIDTH_OF_CANNON <= Config.WIDTH_OF_WINDOW) {
-            if (Mountains.standsOnMountain(x + 7 + wheelWidth / 2)) {
-                if (Mountains.isLeftFromTop(x + 7 + wheelWidth / 2)) {
-                    y = y - 2;
-                } else {
-                    y = y + 2;
-                }
-            }
-            x = x + 2;
+        int wheelCoordinateX = x + 7 + wheelWidth / 2;
+        if (Mountains.standsOnMountain(wheelCoordinateX)) {
+            y = Mountains.coordinatesCannonAfterMovingRight(wheelCoordinateX, y);
         }
+        x = Ground.coordinatesCannonAfterMovingRight(x);
     }
 
     /** A method that push up cannon */

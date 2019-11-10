@@ -41,7 +41,7 @@ public class Bullet {
         }
 
         calculateCoordinatesOfBullet();
-        if (bulletFlyFromBounds()) {
+        if (Ground.isOutFromBounds(currentX + positionOfBulletX, currentY + positionOfBulletY)) {
             isFly = false;
             return;
         }
@@ -54,14 +54,5 @@ public class Bullet {
         currentY = (int) (-SPEED * Math.sin(Math.toRadians(angle)) * currentTime
                 + GRAVITIONAL_CONSTANT * currentTime * currentTime);
         currentTime += 1;
-    }
-
-    private boolean bulletFlyFromBounds() {
-        if (currentY + positionOfBulletY > Config.Y_COORDINATE_OF_GROUND
-                || currentX + positionOfBulletX > Config.WIDTH_OF_WINDOW ) {
-            return true;
-        }
-
-        return false;
     }
 }
