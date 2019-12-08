@@ -46,7 +46,8 @@ public class GameController extends JPanel implements ActionListener {
         try {
             backGround = ImageIO.read(new File("src/main/resources/background.png"));
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.print("Не удалось загрузить модель фона," +
+                    " проверьте что она лежат в папке resources с названиям background.png");
         }
     }
 

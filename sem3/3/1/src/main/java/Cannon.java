@@ -14,30 +14,27 @@ public class Cannon {
     private int x = Config.START_X_COORDINATE_OF_CANNON;
     private int y = Config.Y_COORDINATE_OF_GROUND;
     private int rotationAngle = 0;
+    private Ground ground;
 
     Cannon() {
         loadImage();
         wheelWidth = wheelImage.getWidth(null);
         bullet = new Bullet();
+        ground = new Ground();
     }
 
     /** A method that moves cannon to the left */
     public void goLeft() {
-        x = Ground.coordinatesCannonAfterMovingLeft(x);
+        x = ground.coordinateXCannonAfterMovingLeft(x);
         int wheelCoordinateX = x + 7 + wheelWidth / 2;
-
-        if (Mountains.standsOnMountain(wheelCoordinateX)) {
-            y = Mountains.coordinatesCannonAfterMovingLeft(wheelCoordinateX, y);
-        }
+        y = ground.coordinateYCannonAfterMovingLeft(wheelCoordinateX, y);
     }
 
     /** A method that moves cannon to the right */
     public void goRight() {
         int wheelCoordinateX = x + 7 + wheelWidth / 2;
-        if (Mountains.standsOnMountain(wheelCoordinateX)) {
-            y = Mountains.coordinatesCannonAfterMovingRight(wheelCoordinateX, y);
-        }
-        x = Ground.coordinatesCannonAfterMovingRight(x);
+        y = ground.coordinateYCannonAfterMovingRight(wheelCoordinateX, y);
+        x = ground.coordinateXCannonAfterMovingRight(x);
     }
 
     /** A method that push up cannon */
@@ -63,7 +60,7 @@ public class Cannon {
 
     /** A method that checks bullet if fly or no */
     public boolean bulletIsFly() {
-        return bullet.isFly();
+        return bullet.isFlying();
     }
 
     /** A method that paints cannon */
@@ -97,7 +94,8 @@ public class Cannon {
             cannonImage = ImageIO.read(new File("src/main/resources/cannon.png"));
             wheelImage = ImageIO.read(new File("src/main/resources/wheel.png"));
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println("Не удалось загрузить модели колеса и пушки," +
+                    " проверьте что они лежат в папке resources с названиями cannon.png и wheel.png");
         }
     }
 }

@@ -10,39 +10,42 @@ public class Bullet {
     private int currentY;
     private int positionOfBulletX;
     private int positionOfBulletY;
-    private boolean isFly = false;
+    private boolean isFlying  = false;
     private double currentTime = 0;
     private final double GRAVITIONAL_CONSTANT = 0.1;
     private final double SPEED = 8;
+    private Ground ground;
 
     Bullet() {
         try {
             bullet = ImageIO.read(new File("src/main/resources/cannonBall.png"));
         } catch (IOException e) {
-            e.printStackTrace();
+            System.out.println("Не удалось загрузить модель пули," +
+                    " проверьте что она лежат в папке resources с названием cannonBall.png");
         }
+        ground = new Ground();
     }
 
     public void prepareForShooting(int angle, int positionOfCannonX, int positionOfCannonY) {
-        isFly = true;
+        isFlying = true;
         currentTime = 0;
         this.angle = -angle + Config.START_ANGLE;
         this.positionOfBulletX = positionOfCannonX + 25; // 25 is the difference between the width of a cannon and a bullet
         this.positionOfBulletY = positionOfCannonY - 3; // 3 is difference between the height of a cannon and a bullet
     }
 
-    public boolean isFly() {
-        return isFly;
+    public boolean isFlying() {
+        return isFlying ;
     }
 
     public void paintBullet(Graphics g) {
-        if (!isFly) {
+        if (!isFlying ) {
             return;
         }
 
         calculateCoordinatesOfBullet();
-        if (Ground.isOutFromBounds(currentX + positionOfBulletX, currentY + positionOfBulletY)) {
-            isFly = false;
+        if (ground.isOutFromBounds(currentX + positionOfBulletX, currentY + positionOfBulletY)) {
+            isFlying = false;
             return;
         }
         g.drawImage(bullet, positionOfBulletX + currentX, positionOfBulletY + currentY, null);
