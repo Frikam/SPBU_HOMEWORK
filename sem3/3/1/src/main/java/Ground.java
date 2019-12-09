@@ -37,4 +37,8 @@ public class Ground {
         }
         return y;
     }
+
+    public boolean isBulletInMountain(int x, int y) {
+        return mountains.isBulletInMountain(x, y);
+    }
 }

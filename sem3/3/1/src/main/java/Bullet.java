@@ -44,7 +44,8 @@ public class Bullet {
         }
 
         calculateCoordinatesOfBullet();
-        if (ground.isOutFromBounds(currentX + positionOfBulletX, currentY + positionOfBulletY)) {
+        if (ground.isOutFromBounds(currentX + positionOfBulletX, currentY + positionOfBulletY) ||
+                ground.isBulletInMountain(currentX + positionOfBulletX, currentY + positionOfBulletY)) {
             isFlying = false;
             return;
         }
