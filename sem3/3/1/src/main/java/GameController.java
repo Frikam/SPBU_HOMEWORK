@@ -11,7 +11,7 @@ import java.io.IOException;
 public class GameController extends JPanel implements ActionListener {
     private Image backGround;
     private Timer timer;
-    Cannon cannon;
+    private Cannon cannon;
     private boolean needToPaintComponents = true;
 
     GameController() {
