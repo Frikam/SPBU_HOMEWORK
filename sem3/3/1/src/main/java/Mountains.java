@@ -19,7 +19,7 @@ public class Mountains {
     private void getMountainsCoordinates() {
         int y = 440;
         boolean isLeftPartOfMountain = true;
-        for (int x = 497; x <= 849; x++) {
+        for (int x = 497    ; x <= 849; x++) {
             coordinatesOfSecondMountain.put(x, y);
             if (isLeftPartOfMountain) {
                 y--;

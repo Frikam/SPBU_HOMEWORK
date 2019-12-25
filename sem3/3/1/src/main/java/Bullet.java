@@ -30,8 +30,11 @@ public class Bullet {
         isFlying = true;
         currentTime = 0;
         this.angle = -angle + Config.START_ANGLE;
-        this.positionOfBulletX = positionOfCannonX + 27 + (int) (Math.sin(Math.toRadians(angle))* 35); // 27 is the difference between the width of a cannon and a bullet
-        this.positionOfBulletY = positionOfCannonY - 8 - (int) (Math.cos(Math.toRadians(angle)) * 12); // 8  is difference between the height of a cannon and a bullet
+
+        this.positionOfBulletX = positionOfCannonX + 28 + (int) (Math.sin(Math.toRadians(angle))* 35); // 27 is the difference between the width of a cannon and a bullet
+        this.positionOfBulletY = positionOfCannonY - 10
+                - (int) (Math.cos(Math.toRadians(angle)) * 4); // 8  is difference between the height of a cannon and a bullet
+
     }
 
     public boolean isFlying() {
