@@ -19,7 +19,7 @@ public class Mountains {
     private void getMountainsCoordinates() {
         int y = 440;
         boolean isLeftPartOfMountain = true;
-        for (int x = 497    ; x <= 849; x++) {
+        for (int x = 497; x <= 849; x++) {
             coordinatesOfSecondMountain.put(x, y);
             if (isLeftPartOfMountain) {
                 y--;
@@ -41,7 +41,7 @@ public class Mountains {
     public boolean standsOnMountain(int coordinatesX) {
         int length = START_X.length;
         for (int i = 0; i < length; i++) {
-            if (coordinatesX >= START_X[i] && coordinatesX <= END_X[i]  ) {
+            if (coordinatesX >= START_X[i] && coordinatesX <= END_X[i]) {
                 return true;
             }
         }
