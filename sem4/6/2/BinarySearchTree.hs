@@ -1,3 +1,6 @@
+import Control.Monad
+import System.Random
+
 data BinTree a = Null | Leaf a | Branch a (BinTree a) (BinTree a) deriving (Show, Eq)
 
 add :: Ord a => a -> BinTree a -> BinTree a
@@ -31,6 +34,15 @@ treeSize :: BinTree a -> Integer
 treeSize Null = 0
 treeSize (Leaf a) = 1
 treeSize (Branch a left right) = 1 + treeSize left + treeSize right
+
+getTreeWithRandomValues :: BinTree a -> IO (BinTree Integer)
+getTreeWithRandomValues Null = return Null
+getTreeWithRandomValues (Leaf a) = do value <- randomIO :: IO Integer
+                                      return (Leaf value) 
+getTreeWithRandomValues (Branch a left right) = do value <- randomIO :: IO Integer
+                                                   l <- getTreeWithRandomValues left
+                                                   r <- getTreeWithRandomValues right
+                                                   return $ Branch value l r
 
 treeHeight Null = 0
 treeHeight (Leaf a) = 1
@@ -67,3 +79,7 @@ main = do putStrLn ("Tree : " ++  show testTree2)
           putStrLn ""
           putStrLn ("Tree : " ++ show testTree3)
           putStrLn ("Tree height : " ++ show (treeHeight testTree3))
+
+          putStrLn ""
+          putStrLn ("Tree : " ++ show testTree3)
+          putStrLn ("Tree with random values : " ++ show (getTreeWithRandomValues testTree3))
